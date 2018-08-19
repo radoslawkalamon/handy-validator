@@ -7,9 +7,9 @@
 - `Float|<25` - Should be Float smaller than 25.
 
 ## Roadmap:
-[] Undefined
-[] Boolean
-[] Number
-[] String
-[] Float
-[] Groups
+- [] Undefined
+- [] Boolean
+- [] Number
+- [] String
+- [] Float
+- [] Groups
