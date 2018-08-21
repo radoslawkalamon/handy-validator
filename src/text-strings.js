@@ -1,0 +1,10 @@
+export default {
+  ARGUMENTS: {
+    VALIDATOR: {
+      IS_UNDEFINED: 'ARGUMENTS_VALIDATOR_IS_UNDEFINED | [...]',
+      IS_NOT_A_STRING: 'ARGUMENTS_VALIDATOR_IS_NOT_A_STRING | [...]',
+      IS_EMPTY: 'ARGUMENTS_VALIDATOR_IS_EMPTY | [...]',
+      ERROR: 'ARGUMENTS_VALIDATOR_ERROR | [...]',
+    },
+  },
+};

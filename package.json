@@ -1,0 +1,36 @@
+{
+  "name": "handy-validator",
+  "version": "1.0.0",
+  "description": "Handy value validator",
+  "main": "handy-validator.min.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "build": "npx babel ./src/handy-validator.js --out-file ./dist/handy-validator.js --source-maps",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radoslawkuswik/handy-validator.git"
+  },
+  "keywords": [
+    "validator",
+    "javascript"
+  ],
+  "author": "Radosław Kuświk (@radoslawkuswik)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/radoslawkuswik/handy-validator/issues"
+  },
+  "homepage": "https://github.com/radoslawkuswik/handy-validator#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-jest": "^23.4.2",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^5.4.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "jest": "^23.5.0"
+  }
+}
