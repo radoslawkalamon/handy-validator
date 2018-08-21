@@ -160,11 +160,12 @@ describe('Types', () => {
       const value = [1, 2, 3, 4, 5, 6, 7, 8];
       handyValidator(validator, value);
 
-      expect(console.warn).toBeCalled();
+      expect(console.warn).toHaveBeenCalledTimes(1);
+      jest.restoreAllMocks();
     });
 
-    it('should return true if passed value is an 8 elements Array with abnormal validator [VAL: Array|=8|>20]', () => {
-      const validator = 'Array|=8|<20';
+    it('should return false if passed value is an 8 elements Array with abnormal validator [VAL: Array|=8|>20]', () => {
+      const validator = 'Array|=8|>20';
       const value = [1, 2, 3, 4, 5, 6, 7, 8];
       expect(handyValidator(validator, value)).toEqual(false);
     });
@@ -176,8 +177,26 @@ describe('Types', () => {
       const value = [1, 2, 3, 4, 5, 6, 7, 8];
       handyValidator(validator, value);
 
-      expect(console.warn).toBeCalled();
+      expect(console.warn).toHaveBeenCalledTimes(1);
+      jest.restoreAllMocks();
     });
+
+    it('should return false if passed an unknown validator [VAL:Array|THIS_IS_BAD_VALIDATOR|<5]', () => {
+      const validator = 'Array|THIS_IS_BAD_VALIDATOR|<5';
+      const value = [1,2,3,4];
+      expect(handyValidator(validator, value)).toEqual(false);
+    })
+
+    it('should console.warn be called once if passed an unknown validator [VAL:Array|THIS_IS_BAD_VALIDATOR|<5]', () => {
+      jest.spyOn(global.console, 'warn');
+
+      const validator = 'Array|THIS_IS_BAD_VALIDATOR|<5';
+      const value = [1,2,3,4];
+      handyValidator(validator, value);
+
+      expect(console.warn).toHaveBeenCalledTimes(1);
+      jest.restoreAllMocks();
+    })
   });
 
   describe('Object', () => {

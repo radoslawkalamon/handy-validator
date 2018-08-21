@@ -7,4 +7,8 @@ export default {
       ERROR: 'ARGUMENTS_VALIDATOR_ERROR | [...]',
     },
   },
+  VALIDATOR: {
+    UNKNOWN: 'VALIDATOR_UNKNOWN | %s | [...]',
+    RETHINK: 'VALIDATOR_RETHINK | [...]'
+  }
 };
