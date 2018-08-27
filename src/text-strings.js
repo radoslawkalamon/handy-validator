@@ -9,6 +9,6 @@ export default {
   },
   VALIDATOR: {
     UNKNOWN: 'VALIDATOR_UNKNOWN | %s | [...]',
-    RETHINK: 'VALIDATOR_RETHINK | [...]'
-  }
+    RETHINK: 'VALIDATOR_RETHINK | [...]',
+  },
 };

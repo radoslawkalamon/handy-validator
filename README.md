@@ -5,18 +5,10 @@
 ### `String` type:
 
 - `String` - value is String
-- `<[Number]` - value is shorter than [Number] characters
-- `>[Number]` - value is longer than [Number] characters
-- `=[String]` - value equals to [String]
-- `!=[String]` - value do not equal to [String]
-- `~[String]` - value contains [String]
-- `!~[String]` - value do not contains [String]
-- `^[String]` - value starts with [String]
-- `!^[String]` - value do not starts with [String]
-- `$[String]` - value ends with [String]
-- `!$[String]` - value do not ends with [String]
+- `='[String]'` - value equals to [String]
+- `!='[String]'` - value do not equal to [String]
 
-Use example: `String|<30|^Hello|$World`
+Use example: `String|!='Hello'|='World'`
 
 ### `Number` type:
 
@@ -25,14 +17,16 @@ Use example: `String|<30|^Hello|$World`
 - `>[Number]` - value is bigger than [Number]
 - `=[Number]` - value equals to [Number]
 
+Use example: `Number|>15|<30`
+
 ### `Array` type:
 
 - `Array` - value is Array
-- `<[Number]` - Array have more than [Number] elements
-- `>[Number]` - Array have less than [Number] elements
+- `<[Number]` - Array have less than [Number] elements
+- `>[Number]` - Array have more than [Number] elements
 - `=[Number]` - Array have exactly [Number] elements
 
-Use example: `Array`
+Use example: `Array|<10`
 
 ### `Object` type:
 
@@ -66,13 +60,6 @@ Use example: `Boolean`
 
 Use example: `isEqualTo|Value1|Value2|Value3`
 
-## Use Example:
-
-- `Number|<20|>10` - Should be Number smaller than 20 and higher than 10.
-- `String|!='Hello World'|<20` - Should be String, not equal to Hello World, and shorter than 20 chars.
-- `(String|Number)|^1<20|^2>=20` - Should be String or Number. If Number smaller than 20, if String longer or equal to 20 chars.
-- `Float|<25` - Should be Float smaller than 25.
-
 ## Roadmap:
 
 - [x] Undefined
@@ -83,4 +70,21 @@ Use example: `isEqualTo|Value1|Value2|Value3`
 - [ ] Array
 - [x] Object
 - [ ] isEqualTo special type
+
+## Plan for v2:
+
+- [ ] New String validators
+  - [ ] `=[Number]` - value length is equal to [Number]
+  - [ ] `~'[String]'` - value contains [String]
+  - [ ] `!~'[String]'` - value do not contains [String]
+  - [ ] `^'[String]'` - value starts with [String]
+  - [ ] `!^'[String]'` - value do not starts with [String]
+  - [ ] `$'[String]'` - value ends with [String]
+  - [ ] `!$'[String]'` - value do not ends with [String]
+- [ ] New Number validators
+  - [ ] `<=[Number]` / `=<[Number]` - value is equal or smaller than [Number]
+  - [ ] `>=[Number]` / `=>[Number]` - value is equal or bigger than [Number]
+- [ ] New Array validators
+  - [ ] `<=[Number]` / `=<[Number]` - Array have exactly or less than [Number] elements
+  - [ ] `>=[Number]` / `=>[Number]` - Array have exactly or more than [Number] elements
 - [ ] Groups

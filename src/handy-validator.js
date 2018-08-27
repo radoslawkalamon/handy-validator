@@ -2,10 +2,13 @@ import txt from './text-strings';
 import createValidator from './helpers/createValidatorArray';
 
 import validatorArray from './typeFunction/array';
-import validatorObject from './typeFunction/object';
-import validatorUndefined from './typeFunction/undefined';
-import validatorNull from './typeFunction/null';
 import validatorBoolean from './typeFunction/boolean';
+import validatorIsEqualTo from './typeFunction/isequalto';
+import validatorNumber from './typeFunction/number';
+import validatorNull from './typeFunction/null';
+import validatorObject from './typeFunction/object';
+import validatorString from './typeFunction/string';
+import validatorUndefined from './typeFunction/undefined';
 
 /**
  * Run validator against value
@@ -24,10 +27,10 @@ export default function(_validator, _value, _falseOnObject = false) {
 
   switch (validator[0].toLowerCase()) {
     case 'string': {
-      return false;
+      return validatorString(validator, _value);
     }
     case 'number': {
-      return false;
+      return validatorNumber(validator, _value);
     }
     case 'array': {
       return validatorArray(validator, _value);
@@ -45,7 +48,7 @@ export default function(_validator, _value, _falseOnObject = false) {
       return validatorBoolean(validator, _value);
     }
     case 'isequalto': {
-      return false;
+      return validatorIsEqualTo(validator, _value);
     }
     default: {
       throw new Error(txt.ARGUMENTS.VALIDATOR.ERROR);

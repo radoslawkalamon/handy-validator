@@ -5,5 +5,6 @@
  */
 
 export default function(_validator) {
+  // ToDo: String escaping
   return _validator.split('|');
 }
