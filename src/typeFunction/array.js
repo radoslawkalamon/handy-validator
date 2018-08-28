@@ -12,19 +12,49 @@ export default function(_validatorArray, _value) {
   const validatorArray = _validatorArray.map((_element, _index) => {
     if (_index === 0) return Array.isArray(_value);
 
-    const shorterThan = _element.match(regExp.numbers.smallerThan);
-    if (shorterThan !== null) {
-      return _value.length < parseFloat(shorterThan[1]);
+    // SmallerThan
+    if (_element[0] === regExp.operators.smallerThan) {
+      const elementNumber = _element.slice(1);
+
+      const NumberMatch = elementNumber.match(regExp.numbers.real);
+      if (NumberMatch !== null) {
+        return _value.length < parseFloat(NumberMatch[0]);
+      }
+
+      const InfinityMatch = elementNumber.match(regExp.numbers.infinity);
+      if (InfinityMatch !== null) {
+        return _value.length < parseFloat(InfinityMatch[0]);
+      }
     }
 
-    const longerThan = _element.match(regExp.numbers.biggerThan);
-    if (longerThan !== null) {
-      return _value.length > parseFloat(longerThan[1]);
+    // BiggerThan
+    if (_element[0] === regExp.operators.biggerThan) {
+      const elementNumber = _element.slice(1);
+
+      const NumberMatch = elementNumber.match(regExp.numbers.real);
+      if (NumberMatch !== null) {
+        return _value.length > parseFloat(NumberMatch[0]);
+      }
+
+      const InfinityMatch = elementNumber.match(regExp.numbers.infinity);
+      if (InfinityMatch !== null) {
+        return _value.length > parseFloat(InfinityMatch[0]);
+      }
     }
 
-    const equalTo = _element.match(regExp.numbers.equalTo);
-    if (equalTo !== null) {
-      return _value.length === parseFloat(equalTo[1]);
+    // EqualTo
+    if (_element[0] === regExp.operators.equalTo) {
+      const elementNumber = _element.slice(1);
+
+      const NumberMatch = elementNumber.match(regExp.numbers.real);
+      if (NumberMatch !== null) {
+        return _value.length === parseFloat(NumberMatch[0]);
+      }
+
+      const InfinityMatch = elementNumber.match(regExp.numbers.infinity);
+      if (InfinityMatch !== null) {
+        return _value.length === parseFloat(InfinityMatch[0]);
+      }
     }
 
     console.warn(txt.VALIDATOR.UNKNOWN, _element);

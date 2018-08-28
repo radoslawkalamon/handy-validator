@@ -3,6 +3,8 @@
 
 import handyValidator from '../../src/handy-validator';
 
-it('ToDo', () => {
-  expect(true).toEqual(false);
+describe('TYPE: isEqualTo', () => {
+  it('ToDo', () => {
+    expect(true).toEqual(false);
+  });
 });

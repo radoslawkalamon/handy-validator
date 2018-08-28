@@ -1,14 +1,17 @@
-const numberValue = '-*\\d+[,.]*\\d*';
-const stringValue = '';
-
 export default {
-  numbers: {
-    smallerThan: `^<(${numberValue}$)`,
-    biggerThan: `^>(${numberValue}$)`,
-    equalTo: `^=(${numberValue}$)`,
+  operators: {
+    smallerThan: '<',
+    biggerThan: '>',
+    equalTo: '=',
+    notEqualTo: '!=',
   },
-  string: {
-    equalTo: '',
-    notEqualTo: '',
+  numbers: {
+    real: /-?\d+[,.]*\d*$/,
+    // science: /^-?\d.?\d?e[+-]?\d+$/,
+    infinity: /^-?Infinity$/,
+    nan: /^-?NaN$/,
+  },
+  misc: {
+    comma: ',',
   },
 };

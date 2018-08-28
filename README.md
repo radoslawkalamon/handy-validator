@@ -66,8 +66,8 @@ Use example: `isEqualTo|Value1|Value2|Value3`
 - [x] Null
 - [x] Boolean
 - [ ] String
-- [ ] Number
-- [ ] Array
+- [x] Number
+- [x] Array
 - [x] Object
 - [ ] isEqualTo special type
 
@@ -88,3 +88,8 @@ Use example: `isEqualTo|Value1|Value2|Value3`
   - [ ] `<=[Number]` / `=<[Number]` - Array have exactly or less than [Number] elements
   - [ ] `>=[Number]` / `=>[Number]` - Array have exactly or more than [Number] elements
 - [ ] Groups
+- [ ] Numbers handling
+  - [ ] Scientific notation number
+  - [ ] Handling `,` as `.` in Float numbers
+- [ ] Strings handling
+  - [ ] Escaping of `'` character

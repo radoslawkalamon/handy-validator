@@ -3,10 +3,12 @@
 
 import handyValidator from '../../src/handy-validator';
 
-it('should throw error if value is not passed by user', () => {
-  // const validator = 'String';
-  // expect(() => {
-  //   handyValidator(validator);
-  // }).toThrowError(/^ARGUMENTS_VALUE_NOT_PASSED/);
-  expect(true).toEqual(true);
+describe('ARGUMENTS: value', () => {
+  it('should throw error if value is not passed by user', () => {
+    // const validator = 'String';
+    // expect(() => {
+    //   handyValidator(validator);
+    // }).toThrowError(/^ARGUMENTS_VALUE_NOT_PASSED/);
+    expect(true).toEqual(true);
+  });
 });
