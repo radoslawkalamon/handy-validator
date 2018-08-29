@@ -1,4 +1,4 @@
-# Handy Value Validator
+# Handy Value Validator 1.0.0
 
 ## Use cases:
 
@@ -59,17 +59,6 @@ Use example: `Boolean`
 - `isEqualTo` - checks if value is equal to one of provided elements (in v1: only strings)
 
 Use example: `isEqualTo|'123'|'String'|'Value3'`
-
-## Roadmap:
-
-- [x] Undefined
-- [x] Null
-- [x] Boolean
-- [x] String
-- [x] Number
-- [x] Array
-- [x] Object
-- [x] isEqualTo special type
 
 ## Plan for v2:
 

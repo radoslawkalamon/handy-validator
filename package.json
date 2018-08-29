@@ -7,9 +7,9 @@
     "test": "tests"
   },
   "scripts": {
-    "rollup": "rollup ./src/handy-validator.js --file ./dist/handy-validator.bundle.js --format umd --name \"handy-validator\"",
+    "rollup": "rollup ./src/handy-validator.js --file ./dist/handy-validator.bundle.js --format cjs",
     "babel": "npx babel ./dist/handy-validator.bundle.js --out-file ./dist/handy-validator.babel.js --source-map",
-    "uglify": "uglifyjs --output ./dist/handy-validator.min.js --compress --mangle -- ./dist/handy-validator.babel.js ",
+    "uglify": "uglifyjs --output ./dist/handy-validator.min.js --compress --mangle -- ./dist/handy-validator.babel.js",
     "build": "npm run rollup & npm run babel & npm run uglify",
     "test": "jest"
   },
@@ -21,7 +21,7 @@
     "validator",
     "javascript"
   ],
-  "author": "Radosław Kuświk (@radoslawkuswik)",
+  "author": "Radosław Kuświk <kontakt@radoslawkuswik.pl> (https://radoslawkuswik.pl)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/radoslawkuswik/handy-validator/issues"
