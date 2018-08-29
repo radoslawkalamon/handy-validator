@@ -1,6 +1,6 @@
 {
   "name": "handy-validator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Handy value validator",
   "main": "./dist/handy-validator.min.js",
   "directories": {

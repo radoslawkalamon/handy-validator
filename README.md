@@ -1,4 +1,4 @@
-# Handy Value Validator 1.0.0
+# Handy Value Validator 1.0.1
 
 ## Use cases:
 
