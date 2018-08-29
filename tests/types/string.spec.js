@@ -78,14 +78,12 @@ describe('TYPE: String', () => {
         const validator = "String|='Some string|HelloWorld!'";
         const value = 'Some string|HelloWorld!';
         expect(handyValidator(validator, value)).toEqual(true);
-        // console.warn should not be called!
       });
 
       it("should return false if passed value is 'Some string123|HelloWorld!' [VAL: String|='Some string123|HelloWorld!']", () => {
         const validator = "String|='Some string123|HelloWorld!'";
         const value = 'Some string|HelloWorld!';
-        expect(handyValidator(validator, value)).toEqual(true);
-        // console.warn should not be called!
+        expect(handyValidator(validator, value)).toEqual(false);
       });
     });
 
@@ -106,14 +104,12 @@ describe('TYPE: String', () => {
         const validator = "String|!='Some string123|HelloWorld!'";
         const value = 'Some string|HelloWorld!';
         expect(handyValidator(validator, value)).toEqual(true);
-        // console.warn should not be called!
       });
 
-      it("should return false if passed value is 'Some string123|HelloWorld!' [VAL: String|!='Some string123|HelloWorld!']", () => {
+      it("should return true if passed value is 'Some string|HelloWorld!' [VAL: String|!='Some string123|HelloWorld!']", () => {
         const validator = "String|!='Some string123|HelloWorld!'";
-        const value = 'Some string123|HelloWorld!';
+        const value = 'Some string|HelloWorld!';
         expect(handyValidator(validator, value)).toEqual(true);
-        // console.warn should not be called!
       });
     });
   });

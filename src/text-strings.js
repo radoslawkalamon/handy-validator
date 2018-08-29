@@ -1,7 +1,6 @@
 export default {
   ARGUMENTS: {
     VALIDATOR: {
-      IS_UNDEFINED: 'ARGUMENTS_VALIDATOR_IS_UNDEFINED | [...]',
       IS_NOT_A_STRING: 'ARGUMENTS_VALIDATOR_IS_NOT_A_STRING | [...]',
       IS_EMPTY: 'ARGUMENTS_VALIDATOR_IS_EMPTY | [...]',
       ERROR: 'ARGUMENTS_VALIDATOR_ERROR | [...]',
@@ -10,5 +9,11 @@ export default {
   VALIDATOR: {
     UNKNOWN: 'VALIDATOR_UNKNOWN | %s | [...]',
     RETHINK: 'VALIDATOR_RETHINK | [...]',
+  },
+  STRING: {
+    NO_APOSTROPHES: 'STRING_NO_APOSTROPHES | [...]',
+  },
+  ISEQUALTO: {
+    NO_VALUES_PASSED: 'ISEQUALTO_NO_VALUES_PASSED | [...]',
   },
 };

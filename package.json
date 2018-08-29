@@ -2,12 +2,15 @@
   "name": "handy-validator",
   "version": "1.0.0",
   "description": "Handy value validator",
-  "main": "handy-validator.min.js",
+  "main": "./dist/handy-validator.min.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "build": "npx babel ./src/handy-validator.js --out-file ./dist/handy-validator.js --source-maps",
+    "rollup": "rollup ./src/handy-validator.js --file ./dist/handy-validator.bundle.js --format umd --name \"handy-validator\"",
+    "babel": "npx babel ./dist/handy-validator.bundle.js --out-file ./dist/handy-validator.babel.js --source-map",
+    "uglify": "uglifyjs --output ./dist/handy-validator.min.js --compress --mangle -- ./dist/handy-validator.babel.js ",
+    "build": "npm run rollup & npm run babel & npm run uglify",
     "test": "jest"
   },
   "repository": {
@@ -31,6 +34,8 @@
     "eslint": "^5.4.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
-    "jest": "^23.5.0"
+    "jest": "^23.5.0",
+    "rollup": "^0.65.0",
+    "uglify-js": "^3.4.8"
   }
 }

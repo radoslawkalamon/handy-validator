@@ -56,20 +56,20 @@ Use example: `Boolean`
 
 ### `isEqualTo` special type:
 
-- `isEqualTo` - checks if value is equal to one of provided elements
+- `isEqualTo` - checks if value is equal to one of provided elements (in v1: only strings)
 
-Use example: `isEqualTo|Value1|Value2|Value3`
+Use example: `isEqualTo|'123'|'String'|'Value3'`
 
 ## Roadmap:
 
 - [x] Undefined
 - [x] Null
 - [x] Boolean
-- [ ] String
+- [x] String
 - [x] Number
 - [x] Array
 - [x] Object
-- [ ] isEqualTo special type
+- [x] isEqualTo special type
 
 ## Plan for v2:
 
@@ -92,4 +92,7 @@ Use example: `isEqualTo|Value1|Value2|Value3`
   - [ ] Scientific notation number
   - [ ] Handling `,` as `.` in Float numbers
 - [ ] Strings handling
+  - [ ] Throw Error if string is not escaped with apostrophes
   - [ ] Escaping of `'` character
+- [ ] isEqualTo handling
+  - [ ] More values types compatibility

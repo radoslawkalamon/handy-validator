@@ -13,5 +13,6 @@ export default {
   },
   misc: {
     comma: ',',
+    textInApostrophe: /'(.*?)'/g,
   },
 };

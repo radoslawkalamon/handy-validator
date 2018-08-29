@@ -7,7 +7,7 @@ describe('ARGUMENTS: validator', () => {
   it('should throw error if no validator passed', () => {
     expect(() => {
       handyValidator();
-    }).toThrowError(/^ARGUMENTS_VALIDATOR_IS_UNDEFINED/);
+    }).toThrowError(/^ARGUMENTS_VALIDATOR_ERROR/);
   });
 
   it('should throw error if !=String validator passed (Number)', () => {
@@ -28,7 +28,7 @@ describe('ARGUMENTS: validator', () => {
     const validator = '';
     expect(() => {
       handyValidator(validator);
-    }).toThrowError(/^ARGUMENTS_VALIDATOR_IS_EMPTY/);
+    }).toThrowError(/^ARGUMENTS_VALIDATOR_ERROR/);
   });
 
   it('should throw error if unknown validator passed', () => {

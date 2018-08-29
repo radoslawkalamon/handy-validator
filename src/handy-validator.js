@@ -19,10 +19,6 @@ import validatorUndefined from './typeFunction/undefined';
  */
 
 export default function(_validator, _value, _falseOnObject = false) {
-  if (typeof _validator === 'undefined') throw new Error(txt.ARGUMENTS.VALIDATOR.IS_UNDEFINED);
-  if (typeof _validator !== 'string') throw new Error(txt.ARGUMENTS.VALIDATOR.IS_NOT_A_STRING);
-  if (_validator === '') throw new Error(txt.ARGUMENTS.VALIDATOR.IS_EMPTY);
-
   const validator = createValidator(_validator);
 
   switch (validator[0].toLowerCase()) {
