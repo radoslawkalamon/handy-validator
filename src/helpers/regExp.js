@@ -1,6 +1,8 @@
 export default {
   operators: {
+    smallerThanOrEqual: '<=',
     smallerThan: '<',
+    biggerThanOrEqual: '>=',
     biggerThan: '>',
     equalTo: '=',
     notEqualTo: '!=',

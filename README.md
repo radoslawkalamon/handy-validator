@@ -1,4 +1,4 @@
-# Handy Value Validator 1.0.1
+# Handy Value Validator 1.1.0
 
 ## Use cases:
 
@@ -13,7 +13,9 @@ Use example: `String|!='Hello'|='World'`
 ### `Number` type:
 
 - `Number` - value is Number
+- `<=[Number]` - value is equal or smaller than [Number]
 - `<[Number]` - value is smaller than [Number]
+- `>=[Number]` - value is equal or bigger than [Number]
 - `>[Number]` - value is bigger than [Number]
 - `=[Number]` - value equals to [Number]
 
@@ -60,6 +62,13 @@ Use example: `Boolean`
 
 Use example: `isEqualTo|'123'|'String'|'Value3'`
 
+## Changelog:
+
+- 1.1.0:
+  - Added new `Number` validators:
+    - `<=[Number]` - value is equal or smaller than [Number]
+    - `>=[Number]` - value is equal or bigger than [Number]
+
 ## Plan for v2:
 
 - [ ] New String validators
@@ -70,12 +79,9 @@ Use example: `isEqualTo|'123'|'String'|'Value3'`
   - [ ] `!^'[String]'` - value do not starts with [String]
   - [ ] `$'[String]'` - value ends with [String]
   - [ ] `!$'[String]'` - value do not ends with [String]
-- [ ] New Number validators
-  - [ ] `<=[Number]` / `=<[Number]` - value is equal or smaller than [Number]
-  - [ ] `>=[Number]` / `=>[Number]` - value is equal or bigger than [Number]
 - [ ] New Array validators
-  - [ ] `<=[Number]` / `=<[Number]` - Array have exactly or less than [Number] elements
-  - [ ] `>=[Number]` / `=>[Number]` - Array have exactly or more than [Number] elements
+  - [ ] `<=[Number]` - Array have exactly or less than [Number] elements
+  - [ ] `>=[Number]` - Array have exactly or more than [Number] elements
 - [ ] Groups
 - [ ] Numbers handling
   - [ ] Scientific notation number
