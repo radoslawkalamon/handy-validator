@@ -1,4 +1,4 @@
-# Handy Value Validator 1.1.0
+# Handy Value Validator 1.1.1
 
 Standalone validator module from **writr** - https://github.com/radoslawkuswik/writr
 
