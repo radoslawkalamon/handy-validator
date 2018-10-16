@@ -64,12 +64,20 @@ Use example: `Boolean`
 
 Use example: `isEqualTo|'123'|'String'|'Value3'`
 
+### Special function **getIsEqualToValues**
+
+`import { getIsEqualToValues } from 'handy-validator'` - return Array with values from isEqualTo validator
+
+Use example : `getIsEqualToValues("isEqualTo|'123'|'String'|'Value3'") => ['123', 'String', 'Value3']`
+
 ## Changelog:
 
 - 1.1.0:
   - Added new `Number` validators:
     - `<=[Number]` - value is equal or smaller than [Number]
     - `>=[Number]` - value is equal or bigger than [Number]
+- 1.2.0:
+  - Added `getIsEqualToValues` function
 
 ## Plan for v2:
 

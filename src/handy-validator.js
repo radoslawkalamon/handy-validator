@@ -1,14 +1,15 @@
 import txt from './text-strings';
-import createValidator from './helpers/createValidatorArray';
+import createValidatorArray from './helpers/createValidatorArray';
+import stripApostropheFromString from './helpers/stripApostropheFromString';
 
-import validatorArray from './typeFunction/array';
-import validatorBoolean from './typeFunction/boolean';
-import validatorIsEqualTo from './typeFunction/isequalto';
-import validatorNumber from './typeFunction/number';
-import validatorNull from './typeFunction/null';
-import validatorObject from './typeFunction/object';
-import validatorString from './typeFunction/string';
-import validatorUndefined from './typeFunction/undefined';
+import validateArray from './typeFunction/array';
+import validateBoolean from './typeFunction/boolean';
+import validateIsEqualTo from './typeFunction/isequalto';
+import validateNumber from './typeFunction/number';
+import validateNull from './typeFunction/null';
+import validateObject from './typeFunction/object';
+import validateString from './typeFunction/string';
+import validateUndefined from './typeFunction/undefined';
 
 /**
  * Run validator against value
@@ -18,33 +19,51 @@ import validatorUndefined from './typeFunction/undefined';
  * @returns {Boolean}
  */
 
-export default function(_validator, _value, _falseOnObject = false) {
-  const validator = createValidator(_validator);
+export default function (_validator, _value, _falseOnObject = false) {
+  const validator = createValidatorArray(_validator);
 
   switch (validator[0].toLowerCase()) {
     case 'string': {
-      return validatorString(validator, _value);
+      return validateString(validator, _value);
     }
     case 'number': {
-      return validatorNumber(validator, _value);
+      return validateNumber(validator, _value);
     }
     case 'array': {
-      return validatorArray(validator, _value);
+      return validateArray(validator, _value);
     }
     case 'object': {
-      return _falseOnObject === true ? false : validatorObject(validator, _value);
+      return _falseOnObject === true ? false : validateObject(validator, _value);
     }
     case 'undefined': {
-      return validatorUndefined(validator, _value);
+      return validateUndefined(validator, _value);
     }
     case 'null': {
-      return validatorNull(validator, _value);
+      return validateNull(validator, _value);
     }
     case 'boolean': {
-      return validatorBoolean(validator, _value);
+      return validateBoolean(validator, _value);
     }
     case 'isequalto': {
-      return validatorIsEqualTo(validator, _value);
+      return validateIsEqualTo(validator, _value);
+    }
+    default: {
+      throw new Error(txt.ARGUMENTS.VALIDATOR.ERROR);
+    }
+  }
+}
+
+/**
+ * Return values from isEqualTo validator
+ * @param {String} _validator
+ * @returns {Array}
+ */
+export function getIsEqualToValues(_validator) {
+  const validator = createValidatorArray(_validator);
+
+  switch (validator[0].toLowerCase()) {
+    case 'isequalto': {
+      return validator.slice(1).map(stripApostropheFromString);
     }
     default: {
       throw new Error(txt.ARGUMENTS.VALIDATOR.ERROR);

@@ -1,6 +1,3 @@
 {
-  "extends": "airbnb-base",
-  "rules": {
-    "space-before-function-paren": ["error", "never"]
-  }
+  "extends": "airbnb-base"
 }

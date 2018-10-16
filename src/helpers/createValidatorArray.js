@@ -7,7 +7,7 @@ import regExp from './regExp';
  * @returns {Array}
  */
 
-export default function(_validator = '') {
+export default function (_validator = '') {
   if (typeof _validator !== 'string') throw new Error(txt.ARGUMENTS.VALIDATOR.IS_NOT_A_STRING);
 
   const escapedStringText = 'VALIDATOR_ESC_HANDY_VALIDATOR_';

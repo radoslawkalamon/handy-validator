@@ -8,7 +8,6 @@ export default {
   },
   VALIDATOR: {
     UNKNOWN: 'VALIDATOR_UNKNOWN | %s | [...]',
-    RETHINK: 'VALIDATOR_RETHINK | [...]',
   },
   STRING: {
     NO_APOSTROPHES: 'STRING_NO_APOSTROPHES | [...]',
