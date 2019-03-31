@@ -1,6 +1,6 @@
 {
   "name": "handy-validator",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Handy value validator",
   "main": "./dist/handy-validator.min.js",
   "directories": {
@@ -28,14 +28,14 @@
   },
   "homepage": "https://github.com/radoslawkuswik/handy-validator#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-jest": "^23.4.2",
+    "@babel/cli": "^7.2.3",
+    "babel-jest": "^24.5.0",
     "babel-preset-env": "^1.7.0",
-    "eslint": "^5.4.0",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0",
-    "jest": "^23.5.0",
-    "rollup": "^0.65.0",
-    "uglify-js": "^3.4.8"
+    "eslint-plugin-import": "^2.16.0",
+    "jest": "^24.5.0",
+    "rollup": "^1.7.4",
+    "uglify-js": "^3.5.2"
   }
 }

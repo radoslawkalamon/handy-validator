@@ -1,4 +1,4 @@
-# Handy Value Validator 1.2.0
+# Handy Value Validator 1.2.1
 
 Standalone validator module from **writr** - https://github.com/radoslawkuswik/writr
 
@@ -78,7 +78,9 @@ Use example : `getIsEqualToValues("isEqualTo|'123'|'String'|'Value3'") => ['123'
     - `>=[Number]` - value is equal or bigger than [Number]
 - 1.2.0:
   - Added `getIsEqualToValues` function
-
+- 1.2.1:
+  - Dependencies update
+  
 ## Plan for v2:
 
 - [ ] New String validators
