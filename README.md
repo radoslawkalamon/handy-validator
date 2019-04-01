@@ -1,4 +1,4 @@
-# Handy Value Validator 1.2.1
+# Handy Value Validator 1.2.2
 
 Standalone validator module from **writr** - https://github.com/radoslawkuswik/writr
 
@@ -80,6 +80,8 @@ Use example : `getIsEqualToValues("isEqualTo|'123'|'String'|'Value3'") => ['123'
   - Added `getIsEqualToValues` function
 - 1.2.1:
   - Dependencies update
+- 1.2.2:
+  - Resolved babel `typeof` issue
   
 ## Plan for v2:
 

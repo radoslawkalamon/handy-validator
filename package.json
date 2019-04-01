@@ -1,17 +1,17 @@
 {
   "name": "handy-validator",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Handy value validator",
   "main": "./dist/handy-validator.min.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "rollup": "rollup ./src/handy-validator.js --file ./dist/handy-validator.bundle.js --format cjs",
-    "babel": "npx babel ./dist/handy-validator.bundle.js --out-file ./dist/handy-validator.babel.js --source-map",
-    "uglify": "uglifyjs --output ./dist/handy-validator.min.js --compress --mangle -- ./dist/handy-validator.babel.js",
+    "rollup": "npx rollup ./src/handy-validator.js --file ./dist/handy-validator.bundle.js --format cjs",
+    "babel": "npx babel ./dist/handy-validator.bundle.js --out-file ./dist/handy-validator.babel.js",
+    "uglify": "npx uglifyjs --output ./dist/handy-validator.min.js --compress --mangle -- ./dist/handy-validator.babel.js",
     "build": "npm run rollup & npm run babel & npm run uglify",
-    "test": "jest"
+    "test": "npx jest"
   },
   "repository": {
     "type": "git",
@@ -29,13 +29,14 @@
   "homepage": "https://github.com/radoslawkuswik/handy-validator#readme",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
     "babel-jest": "^24.5.0",
-    "babel-preset-env": "^1.7.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
     "jest": "^24.5.0",
     "rollup": "^1.7.4",
-    "uglify-js": "^3.5.2"
+    "uglify-js": "^3.5.3"
   }
 }

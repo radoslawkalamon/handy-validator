@@ -1,6 +1,6 @@
 'use strict';
 
-function _typeof(obj) { if (typeof Symbol === "function" && _typeof(Symbol.iterator) === "symbol") { _typeof = function (_typeof2) { function _typeof(_x4) { return _typeof2.apply(this, arguments); } _typeof.toString = function () { return _typeof2.toString(); }; return _typeof; }(function (obj) { return typeof obj === "undefined" ? "undefined" : _typeof(obj); }); } else { _typeof = function (_typeof3) { function _typeof(_x5) { return _typeof3.apply(this, arguments); } _typeof.toString = function () { return _typeof3.toString(); }; return _typeof; }(function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj); }); } return _typeof(obj); }
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 Object.defineProperty(exports, '__esModule', {
   value: true
@@ -61,12 +61,12 @@ function createValidatorArray() {
   if (textToEsc !== null) {
     var validator = _validator;
     textToEsc.forEach(function (element, index) {
-      validator = validator.replace(element, "" + escapedStringText + index);
+      validator = validator.replace(element, "".concat(escapedStringText).concat(index));
     });
     var validatorArray = validator.split(delimiter);
     textToEsc.forEach(function (elementToEsc, indexToEsc) {
       validatorArray = validatorArray.map(function (validatorArrayEl) {
-        return validatorArrayEl.replace("" + escapedStringText + indexToEsc, elementToEsc);
+        return validatorArrayEl.replace("".concat(escapedStringText).concat(indexToEsc), elementToEsc);
       });
     });
     return validatorArray;
@@ -315,7 +315,7 @@ function validateNumber(_validatorArray, _value) {
 
 
 function validateNull(_validatorArray, _value) {
-  return _value === null && (typeof _value === "undefined" ? "undefined" : _typeof(_value)) === 'object';
+  return _value === null && _typeof(_value) === 'object';
 }
 /**
  * Object validator
@@ -326,7 +326,7 @@ function validateNull(_validatorArray, _value) {
 
 
 function validateObject(_validatorArray, _value) {
-  return _value !== null && !Array.isArray(_value) && (typeof _value === "undefined" ? "undefined" : _typeof(_value)) === 'object';
+  return _value !== null && !Array.isArray(_value) && _typeof(_value) === 'object';
 }
 /**
  * String validator
