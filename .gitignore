@@ -1,3 +1,3 @@
 node_modules
-dist/handy-validator.babel.js
-dist/handy-validator.bundle.js
+.vscode
+dist
