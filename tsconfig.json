@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["es5"],
+    "target": "es2015",
+    "lib": ["es2015"],
     "outDir": "./dist/",
     "strict": true,
     "esModuleInterop": true,
@@ -11,6 +11,6 @@
   ],
   "exclude": [
     "node_modules",
-    "**/tests/*"
+    "./tests/*"
   ]
 }
