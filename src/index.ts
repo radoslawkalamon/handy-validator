@@ -8,13 +8,13 @@ import stringValidator from './validators/string';
 import undefinedValidator from './validators/undefined';
 
 interface HandyValidator {
-  validatorCallback: Record<string, ValidatorCallback>;
+  loadedValidators: Record<string, ValidatorCallback>;
   addValidator(name: string, callback: ValidatorCallback): boolean;
   checkValidator(name: string): boolean;
   getValidator(name: string): ValidatorCallback|boolean;
-  validate(name: string, ...args: any): boolean;
+  validate(name: string, value: any, validationArguments?: any[]): boolean;
 }
-type ValidatorCallback = (...args: any) => boolean;
+type ValidatorCallback = (value: any, validationArguments: any[]) => boolean;
 
 /**
  * Handy Validator
@@ -22,7 +22,7 @@ type ValidatorCallback = (...args: any) => boolean;
  * @constructor
  */
 class HandyValidator {
-  validatorCallback: Record<string, ValidatorCallback> = {};
+  loadedValidators: Record<string, ValidatorCallback> = {};
 
   /**
    * Init Handy Validator
@@ -61,11 +61,11 @@ class HandyValidator {
       throw new Error('HV_ADD_VALIDATOR_CALLBACK_NOT_FUNCTION');
     }
 
-    if (typeof this.validatorCallback[name] === 'function') {
+    if (typeof this.loadedValidators[name] === 'function') {
       throw new Error('HV_ADD_VALIDATOR_ALREADY_LOADED');
     }
 
-    this.validatorCallback[name] = callback;
+    this.loadedValidators[name] = callback;
     return true;
   }
 
@@ -83,11 +83,11 @@ class HandyValidator {
       throw new Error('HV_REMOVE_VALIDATOR_NAME_EMPTY');
     }
 
-    if (typeof this.validatorCallback[name] !== 'function') {
+    if (typeof this.loadedValidators[name] !== 'function') {
       throw new Error('HV_REMOVE_VALIDATOR_VALIDATOR_NOT_DEFINED');
     }
 
-    delete this.validatorCallback[name];
+    delete this.loadedValidators[name];
 
     return true;
   }
@@ -97,7 +97,7 @@ class HandyValidator {
    * @param name
    */
   checkValidator(name: string): boolean {
-    return typeof this.validatorCallback[name] === 'function';
+    return typeof this.loadedValidators[name] === 'function';
   }
 
   /**
@@ -106,21 +106,22 @@ class HandyValidator {
    * @returns {ValidatorCallback|boolean}
    */
   getValidator(name: string): ValidatorCallback|boolean {
-    return this.validatorCallback[name] || false;
+    return this.loadedValidators[name] || false;
   }
 
   /**
    * Validates using validator
    * @param {string} name
-   * @param {...any} args
+   * @param {any} value
+   * @param {any[]} validationArguments
    * @return {boolean}
    */
-  validate(name: string, ...args: any): boolean {
-    if (typeof this.validatorCallback[name] !== 'function') {
+  validate(name: string, value: any, validationArguments?: any[]): boolean {
+    if (typeof this.loadedValidators[name] !== 'function') {
       throw new Error('HV_VALIDATE_VALIDATOR_NOT_LOADED');
     }
 
-    return this.validatorCallback[name](...args);
+    return this.loadedValidators[name](value, validationArguments || []);
   }
 }
 
