@@ -1,14 +1,14 @@
 // Core components
-import errors from './errors';
+import errors from './index.errors';
 // Built-in Validators
-import arrayValidator from './validators/array/index';
-import booleanValidator from './validators/boolean/index';
-import equalToValidator from './validators/equalTo/index';
-import nullValidator from './validators/null/index';
-import numberValidator from './validators/number/index';
-import objectValidator from './validators/object/index';
-import stringValidator from './validators/string/index';
-import undefinedValidator from './validators/undefined/index';
+import arrayValidator from './validators/array/array';
+import booleanValidator from './validators/boolean/boolean';
+import equalToValidator from './validators/equalTo/equalTo';
+import nullValidator from './validators/null/null';
+import numberValidator from './validators/number/number';
+import objectValidator from './validators/object/object';
+import stringValidator from './validators/string/string';
+import undefinedValidator from './validators/undefined/undefined';
 
 interface HandyValidator {
   loadedValidators: Record<string, ValidatorCallback>;
