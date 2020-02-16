@@ -12,6 +12,9 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/indent': [2, 2],
+    '@typescript-eslint/no-explicit-any': 0,
+    'import/extensions': 0,
+    'max-len': [1, { 'code': 160 }],
   },
   globals: {
     describe: false,
