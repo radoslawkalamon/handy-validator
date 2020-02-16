@@ -1,3 +1,6 @@
+// Core components
+import errorNames from './errorNames';
+// Built-in Validators
 import arrayValidator from './validators/array';
 import booleanValidator from './validators/boolean';
 import equalToValidator from './validators/equalTo';
@@ -50,19 +53,19 @@ class HandyValidator {
    */
   addValidator(name: string, callback: ValidatorCallback): boolean {
     if (typeof name !== 'string') {
-      throw new Error('HV_ADD_VALIDATOR_NAME_NOT_STRING');
+      throw new Error(errorNames.addValidator.nameNotString);
     }
 
     if (name === '') {
-      throw new Error('HV_ADD_VALIDATOR_NAME_EMPTY');
+      throw new Error(errorNames.addValidator.nameEmpty);
     }
 
     if (typeof callback !== 'function') {
-      throw new Error('HV_ADD_VALIDATOR_CALLBACK_NOT_FUNCTION');
+      throw new Error(errorNames.addValidator.callbackNotFunction);
     }
 
     if (typeof this.loadedValidators[name] === 'function') {
-      throw new Error('HV_ADD_VALIDATOR_ALREADY_LOADED');
+      throw new Error(errorNames.addValidator.alreadyLoaded);
     }
 
     this.loadedValidators[name] = callback;
@@ -76,15 +79,15 @@ class HandyValidator {
    */
   removeValidator(name: string): boolean {
     if (typeof name !== 'string') {
-      throw new Error('HV_REMOVE_VALIDATOR_NAME_NOT_STRING');
+      throw new Error(errorNames.removeValidator.nameNotString);
     }
 
     if (name === '') {
-      throw new Error('HV_REMOVE_VALIDATOR_NAME_EMPTY');
+      throw new Error(errorNames.removeValidator.nameEmpty);
     }
 
     if (typeof this.loadedValidators[name] !== 'function') {
-      throw new Error('HV_REMOVE_VALIDATOR_VALIDATOR_NOT_DEFINED');
+      throw new Error(errorNames.removeValidator.validatorNotDefined);
     }
 
     delete this.loadedValidators[name];
@@ -118,7 +121,7 @@ class HandyValidator {
    */
   validate(name: string, value: any, validationArguments?: any[]): boolean {
     if (typeof this.loadedValidators[name] !== 'function') {
-      throw new Error('HV_VALIDATE_VALIDATOR_NOT_LOADED');
+      throw new Error(errorNames.validate.validatorNotLoaded);
     }
 
     return this.loadedValidators[name](value, validationArguments || []);
