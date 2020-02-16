@@ -1,14 +1,14 @@
 // Core components
-import errorNames from './errorNames';
+import errors from './errors';
 // Built-in Validators
-import arrayValidator from './validators/array';
-import booleanValidator from './validators/boolean';
-import equalToValidator from './validators/equalTo';
-import nullValidator from './validators/null';
-import numberValidator from './validators/number';
-import objectValidator from './validators/object';
-import stringValidator from './validators/string';
-import undefinedValidator from './validators/undefined';
+import arrayValidator from './validators/array/index';
+import booleanValidator from './validators/boolean/index';
+import equalToValidator from './validators/equalTo/index';
+import nullValidator from './validators/null/index';
+import numberValidator from './validators/number/index';
+import objectValidator from './validators/object/index';
+import stringValidator from './validators/string/index';
+import undefinedValidator from './validators/undefined/index';
 
 interface HandyValidator {
   loadedValidators: Record<string, ValidatorCallback>;
@@ -53,19 +53,19 @@ class HandyValidator {
    */
   addValidator(name: string, callback: ValidatorCallback): boolean {
     if (typeof name !== 'string') {
-      throw new Error(errorNames.addValidator.nameNotString);
+      throw new Error(errors.addValidator.nameNotString);
     }
 
     if (name === '') {
-      throw new Error(errorNames.addValidator.nameEmpty);
+      throw new Error(errors.addValidator.nameEmpty);
     }
 
     if (typeof callback !== 'function') {
-      throw new Error(errorNames.addValidator.callbackNotFunction);
+      throw new Error(errors.addValidator.callbackNotFunction);
     }
 
     if (typeof this.loadedValidators[name] === 'function') {
-      throw new Error(errorNames.addValidator.alreadyLoaded);
+      throw new Error(errors.addValidator.alreadyLoaded);
     }
 
     this.loadedValidators[name] = callback;
@@ -79,15 +79,15 @@ class HandyValidator {
    */
   removeValidator(name: string): boolean {
     if (typeof name !== 'string') {
-      throw new Error(errorNames.removeValidator.nameNotString);
+      throw new Error(errors.removeValidator.nameNotString);
     }
 
     if (name === '') {
-      throw new Error(errorNames.removeValidator.nameEmpty);
+      throw new Error(errors.removeValidator.nameEmpty);
     }
 
     if (typeof this.loadedValidators[name] !== 'function') {
-      throw new Error(errorNames.removeValidator.validatorNotDefined);
+      throw new Error(errors.removeValidator.validatorNotDefined);
     }
 
     delete this.loadedValidators[name];
@@ -121,7 +121,7 @@ class HandyValidator {
    */
   validate(name: string, value: any, validationArguments?: any[]): boolean {
     if (typeof this.loadedValidators[name] !== 'function') {
-      throw new Error(errorNames.validate.validatorNotLoaded);
+      throw new Error(errors.validate.validatorNotLoaded);
     }
 
     return this.loadedValidators[name](value, validationArguments || []);
