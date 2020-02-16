@@ -6,7 +6,7 @@ beforeAll(() => {
   HandyVal = new HandyValidator();
 });
 
-describe('TYPE: Null', () => {
+describe('Null validator tests', () => {
   it('should return false if passed value is a Boolean', () => {
     const validator = 'null';
     const value = true;
