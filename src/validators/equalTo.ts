@@ -5,4 +5,4 @@
  * @param {any[]} arrayOfElements
  * @returns {boolean}
  */
-export default (value: any, arrayOfElements: any[]): boolean => arrayOfElements.indexOf(value) > -1;
+export default (value: any, arrayOfElements: any[]): boolean => arrayOfElements.includes(value);

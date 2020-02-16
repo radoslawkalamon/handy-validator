@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es2015",
-    "lib": ["es2015"],
+    "target": "es2016",
+    "lib": ["es2016"],
     "outDir": "./dist/",
     "strict": true,
-    "esModuleInterop": true,
+    "esModuleInterop": true
   },
   "include": [
     "./src/index.ts"
