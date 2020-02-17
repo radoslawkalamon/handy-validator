@@ -14,7 +14,7 @@ interface HandyValidator {
   loadedValidators: Record<string, ValidatorCallback>;
   addValidator(name: string, callback: ValidatorCallback): boolean;
   checkValidator(name: string): boolean;
-  getValidator(name: string): ValidatorCallback|boolean;
+  getValidator(name: string): ValidatorCallback | boolean;
   validate(name: string, value: any, ...args: any): boolean;
 }
 type ValidatorCallback = (value: any, ...args: any) => boolean;
@@ -108,7 +108,7 @@ class HandyValidator {
    * @param name
    * @returns {ValidatorCallback|boolean}
    */
-  getValidator(name: string): ValidatorCallback|boolean {
+  getValidator(name: string): ValidatorCallback | boolean {
     return this.loadedValidators[name] || false;
   }
 
