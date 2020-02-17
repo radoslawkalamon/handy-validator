@@ -18,7 +18,7 @@ export default (validatorArray: any): [string, number] => {
   }
 
   const [validatorType, validatorValue] = validatorArray;
-  if (typeof validatorType !== 'string' && typeof validatorValue !== 'number') {
+  if (typeof validatorType !== 'string' || typeof validatorValue !== 'number') {
     throw new Error(errors.validatorArrayItemError);
   }
 

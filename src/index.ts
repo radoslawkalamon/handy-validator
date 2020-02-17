@@ -15,9 +15,9 @@ interface HandyValidator {
   addValidator(name: string, callback: ValidatorCallback): boolean;
   checkValidator(name: string): boolean;
   getValidator(name: string): ValidatorCallback|boolean;
-  validate(name: string, value: any, validationArguments?: any[]): boolean;
+  validate(name: string, value: any, ...args: any): boolean;
 }
-type ValidatorCallback = (value: any, validationArguments: any[]) => boolean;
+type ValidatorCallback = (value: any, ...args: any) => boolean;
 
 /**
  * Handy Validator
@@ -119,12 +119,12 @@ class HandyValidator {
    * @param {any[]} validationArguments
    * @return {boolean}
    */
-  validate(name: string, value: any, validationArguments?: any[]): boolean {
+  validate(name: string, value: any, ...args: any): boolean {
     if (typeof this.loadedValidators[name] !== 'function') {
       throw new Error(errors.validate.validatorNotLoaded);
     }
 
-    return this.loadedValidators[name](value, validationArguments || []);
+    return this.loadedValidators[name](value, ...args);
   }
 }
 
