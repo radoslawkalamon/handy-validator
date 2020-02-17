@@ -1,4 +1,4 @@
-import HandyValidator from '../../src/index';
+import HandyValidator from '../../../src/index';
 
 let HandyVal: HandyValidator;
 
