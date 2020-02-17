@@ -17,6 +17,7 @@ module.exports = {
     'max-len': [1, { 'code': 160 }],
   },
   globals: {
+    jest: false,
     beforeAll: false,
     describe: false,
     it: false,
