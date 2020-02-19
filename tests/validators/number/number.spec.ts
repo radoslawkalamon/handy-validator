@@ -1,5 +1,5 @@
 import HandyValidator from '../../../src/index';
-import NumberErrors from '../../../src/validators/number/number.errors';
+import numberErrors from '../../../src/validators/number/number.errors';
 
 let HandyVal: HandyValidator;
 
@@ -70,31 +70,40 @@ describe('Number validator tests', () => {
     });
   });
 
-  describe('ValidatorArrayGroup is not an Array', () => {
-    let HandyValidatorResult: boolean;
+  describe('validatorArrayGroup problems', () => {
     let jestSpy: jest.SpyInstance;
 
     beforeAll(() => {
       jestSpy = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
+    });
 
+    it('Malformed validatorArrayGroup - not an array', () => {
       const validator = 'number';
       const value = 34.20;
       const validationArguments = 'Hemlo!';
       // @ts-ignore
-      HandyValidatorResult = HandyVal.validate(validator, value, validationArguments);
+      expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
     });
 
-    it('should Handy Validator Result be false', () => {
-      expect(HandyValidatorResult).toEqual(false);
+    it('Malformed validatorArrayItem - not an array', () => {
+      const validator = 'number';
+      const value = 122;
+      const validationArguments = [null];
+      expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
     });
 
-    it('should call console.error once', () => {
-      expect(jestSpy.mock.calls.length).toBe(1);
+    it('Malformed validatorArrayItem - bad length', () => {
+      const validator = 'number';
+      const value = 122;
+      const validationArguments = [[1, 2, 3]];
+      expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
     });
 
-    it('should console.error message be validatorArrayGroupNotAnArray', () => {
-      const mockError = new Error(NumberErrors.validatorArrayGroupNotAnArray);
-      expect(jestSpy.mock.calls[0][0]).toEqual(mockError);
+    it('Malformed validatorArrayItem - bad types', () => {
+      const validator = 'number';
+      const value = 122;
+      const validationArguments = [[323, '<=']];
+      expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
     });
 
     afterAll(() => {
@@ -102,102 +111,7 @@ describe('Number validator tests', () => {
     });
   });
 
-  describe('Check Validator Array', () => {
-    describe('validatorArrayNotAnArray Error', () => {
-      let HandyValidatorResult: boolean;
-      let jestSpy: jest.SpyInstance;
-
-      beforeAll(() => {
-        jestSpy = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
-
-        const validator = 'number';
-        const value = 122;
-        const validationArguments = [null];
-        HandyValidatorResult = HandyVal.validate(validator, value, validationArguments);
-      });
-
-      it('should Handy Validator Result be false', () => {
-        expect(HandyValidatorResult).toEqual(false);
-      });
-
-      it('should call console.error once', () => {
-        expect(jestSpy.mock.calls.length).toBe(1);
-      });
-
-      it('should console.error message be validatorArrayNotAnArray', () => {
-        const mockError = new Error(NumberErrors.validatorArrayNotAnArray);
-        expect(jestSpy.mock.calls[0][0]).toEqual(mockError);
-      });
-
-      afterAll(() => {
-        jestSpy.mockRestore();
-      });
-    });
-
-    describe('validatorArrayLengthError Error', () => {
-      let HandyValidatorResult: boolean;
-      let jestSpy: jest.SpyInstance;
-
-      beforeAll(() => {
-        jestSpy = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
-
-        const validator = 'number';
-        const value = 122;
-        const validationArguments = [[1, 2, 3]];
-        HandyValidatorResult = HandyVal.validate(validator, value, validationArguments);
-      });
-
-      it('should Handy Validator Result be false', () => {
-        expect(HandyValidatorResult).toEqual(false);
-      });
-
-      it('should call console.error once', () => {
-        expect(jestSpy.mock.calls.length).toBe(1);
-      });
-
-      it('should console.error message be validatorArrayLengthError', () => {
-        const mockError = new Error(NumberErrors.validatorArrayLengthError);
-        expect(jestSpy.mock.calls[0][0]).toEqual(mockError);
-      });
-
-      afterAll(() => {
-        jestSpy.mockRestore();
-      });
-    });
-
-    describe('validatorArrayItemError Error', () => {
-      let HandyValidatorResult: boolean;
-      let jestSpy: jest.SpyInstance;
-
-      beforeAll(() => {
-        jestSpy = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
-
-        const validator = 'number';
-        const value = 122;
-        const validationArguments = [[323, '<=']];
-        HandyValidatorResult = HandyVal.validate(validator, value, validationArguments);
-      });
-
-      it('should Handy Validator Result be false', () => {
-        expect(HandyValidatorResult).toEqual(false);
-      });
-
-      it('should call console.error once', () => {
-        expect(jestSpy.mock.calls.length).toBe(1);
-      });
-
-      it('should console.error message be validatorArrayItemError', () => {
-        const mockError = new Error(NumberErrors.validatorArrayItemError);
-        expect(jestSpy.mock.calls[0][0]).toEqual(mockError);
-      });
-
-      afterAll(() => {
-        jestSpy.mockRestore();
-      });
-    });
-  });
-
-  describe('Validator Unknown error', () => {
+  describe('Validator Unknown error / console.error try..catch test', () => {
     let HandyValidatorResult: boolean;
     let jestSpy: jest.SpyInstance;
 
@@ -219,8 +133,34 @@ describe('Number validator tests', () => {
     });
 
     it('should console.error message be errors.unknownOperator', () => {
-      const mockError = new Error(NumberErrors.unknownOperator);
+      const mockError = new Error(numberErrors.unknownOperator);
       expect(jestSpy.mock.calls[0][0]).toEqual(mockError);
+    });
+
+    afterAll(() => {
+      jestSpy.mockRestore();
+    });
+  });
+
+  describe('Validator failed / no console.error on normal fail', () => {
+    let HandyValidatorResult: boolean;
+    let jestSpy: jest.SpyInstance;
+
+    beforeAll(() => {
+      jestSpy = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
+
+      const validator = 'number';
+      const value = 34.20;
+      const validationArguments = [['<', 10.22]];
+      HandyValidatorResult = HandyVal.validate(validator, value, validationArguments);
+    });
+
+    it('should Handy Validator Result be false', () => {
+      expect(HandyValidatorResult).toEqual(false);
+    });
+
+    it('should call console.error zero times', () => {
+      expect(jestSpy.mock.calls.length).toBe(0);
     });
 
     afterAll(() => {
