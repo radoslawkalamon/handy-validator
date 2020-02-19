@@ -17,17 +17,15 @@ export default (value: any, validatorArrayGroup: [string, number][] = [], valida
   }
 
   try {
-    checkValidatorArrayGroup(validatorArrayGroup, ['string', 'number']);
+    checkValidatorArrayGroup(validatorArrayGroup);
 
     validationResultArray = validatorArrayGroup.map((validatorArray) => {
       const [validatorType, validatorValue] = validatorArray;
       const operatorToUse = strategies[validatorType];
 
+      // Move to checkValidatorArrayGroup?
       const isOperatorUndefined = !operatorToUse;
       if (isOperatorUndefined) {
-        if (validateSome) {
-          return false;
-        }
         throw new Error(errors.unknownOperator);
       }
 
@@ -38,6 +36,7 @@ export default (value: any, validatorArrayGroup: [string, number][] = [], valida
         }
         throw new Error();
       }
+
       return true;
     });
   } catch (e) {

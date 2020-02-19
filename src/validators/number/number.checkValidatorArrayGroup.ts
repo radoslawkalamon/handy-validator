@@ -1,11 +1,14 @@
 import errors from './number.errors';
+import operators from './number.operators';
+
+const validatorTypesArray: string[] = ['string', 'number'];
+const operatorsPermitted: string[] = Object.values(operators);
 
 /**
  * @param {any[][]} validatorArrayGroup
- * @param {string[]} validatorTypesArray
  * @returns validatorArray
  */
-export default (validatorArrayGroup: any[][], validatorTypesArray: string[]): boolean => {
+export default (validatorArrayGroup: any[][]): boolean => {
   if (validatorArrayGroup && !Array.isArray(validatorArrayGroup)) {
     throw new Error(errors.parentNotAnArray);
   }
@@ -15,7 +18,7 @@ export default (validatorArrayGroup: any[][], validatorTypesArray: string[]): bo
       throw new Error(errors.itemNotAnArray);
     }
 
-    if (validatorArray.length !== validatorTypesArray.length) {
+    if (validatorArray.length !== 2) {
       throw new Error(errors.itemLengthError);
     }
 
@@ -23,6 +26,10 @@ export default (validatorArrayGroup: any[][], validatorTypesArray: string[]): bo
       // eslint-disable-next-line valid-typeof
       if (typeof validatorItem !== validatorTypesArray[index]) {
         throw new Error(errors.itemTypesError);
+      }
+
+      if (index === 0 && !operatorsPermitted.includes(validatorItem)) {
+        throw new Error(errors.unknownOperator);
       }
     });
   });

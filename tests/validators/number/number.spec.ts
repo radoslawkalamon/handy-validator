@@ -71,12 +71,6 @@ describe('Number validator tests', () => {
   });
 
   describe('validatorArrayGroup problems', () => {
-    let jestSpy: jest.SpyInstance;
-
-    beforeAll(() => {
-      jestSpy = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
-    });
-
     it('Malformed validatorArrayGroup - not an array', () => {
       const validator = 'number';
       const value = 34.20;
@@ -106,12 +100,15 @@ describe('Number validator tests', () => {
       expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
     });
 
-    afterAll(() => {
-      jestSpy.mockRestore();
+    it('Malformed validatorArrayItem - bad types one of from group', () => {
+      const validator = 'number';
+      const value = 122;
+      const validationArguments = [[323, '<='], [12, 12]];
+      expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
     });
   });
 
-  describe('Validator Unknown error / console.error try..catch test', () => {
+  describe('Console.error try..catch test', () => {
     let HandyValidatorResult: boolean;
     let jestSpy: jest.SpyInstance;
 
@@ -319,6 +316,22 @@ describe('Number validator tests', () => {
       const validator = 'number';
       const value = 132;
       const validationArguments = [['=>', 1000], ['<=', 100]];
+      const validateSome = true;
+      expect(HandyVal.validate(validator, value, validationArguments, validateSome)).toEqual(false);
+    });
+
+    it('should return false if value is 132 and is validated against =>1000, <=100', () => {
+      const validator = 'number';
+      const value = 132;
+      const validationArguments = [['=>', 1000], ['<=', 100]];
+      const validateSome = true;
+      expect(HandyVal.validate(validator, value, validationArguments, validateSome)).toEqual(false);
+    });
+
+    it('should return false if value is 132 and is validated against <1000 and malformed validator', () => {
+      const validator = 'number';
+      const value = 132;
+      const validationArguments = [['<', 1000], ['string', 'string']];
       const validateSome = true;
       expect(HandyVal.validate(validator, value, validationArguments, validateSome)).toEqual(false);
     });
