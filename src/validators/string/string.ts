@@ -1,35 +1,26 @@
-import errors from './string.errors';
 import strategies from './string.strategies';
-import checkValidatorArrayGroup from './string.checkValidatorArrayGroup';
+import validatorArrayGroupTypeGuard from './string.validatorArrayGroup.typeGuard';
 
 /**
  * Number validator
  * @version 1.0.0
  * @param {any} value
- * @param {string, string][]} validatorArrayGroup
+ * @param {[string, string | number][]} validatorArrayGroup
  * @param {boolean} validateSome
  * @returns {boolean}
  */
-export default (value: any, validatorArrayGroup: [string, string][] = [], validateSome = false): boolean => {
+export default (value: any, validatorArrayGroup: [string, string | number][] = [], validateSome = false): boolean => {
   let validationResultArray;
   if (typeof value !== 'string') {
     return false;
   }
 
   try {
-    checkValidatorArrayGroup(validatorArrayGroup, ['string', 'string']);
+    validatorArrayGroupTypeGuard(validatorArrayGroup);
 
     validationResultArray = validatorArrayGroup.map((validatorArray) => {
-      const [validatorType, validatorValue] = validatorArray;
-      const operatorToUse = strategies[validatorType];
-
-      const isOperatorUndefined = !operatorToUse;
-      if (isOperatorUndefined) {
-        if (validateSome) {
-          return false;
-        }
-        throw new Error(errors.unknownOperator);
-      }
+      const [validatorOperator, validatorValue] = validatorArray;
+      const operatorToUse = strategies[validatorOperator].fn;
 
       const validationResult = operatorToUse(value, validatorValue);
       if (validationResult === false) {
@@ -38,6 +29,7 @@ export default (value: any, validatorArrayGroup: [string, string][] = [], valida
         }
         throw new Error();
       }
+
       return true;
     });
   } catch (e) {
