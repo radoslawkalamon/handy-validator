@@ -1,10 +1,9 @@
-import errors from './number.errors';
 import strategies from './number.strategies';
-import checkValidatorArrayGroup from './number.checkValidatorArrayGroup';
+import validatorArrayGroupTypeGuard from './number.validatorArrayGroup.typeGuard';
 
 /**
  * Number validator
- * @version 1.0.0
+ * @version 1.2.0
  * @param {any} value
  * @param {string, number][]} validatorArrayGroup
  * @param {boolean} validateSome
@@ -17,17 +16,11 @@ export default (value: any, validatorArrayGroup: [string, number][] = [], valida
   }
 
   try {
-    checkValidatorArrayGroup(validatorArrayGroup);
+    validatorArrayGroupTypeGuard(validatorArrayGroup);
 
     validationResultArray = validatorArrayGroup.map((validatorArray) => {
-      const [validatorType, validatorValue] = validatorArray;
-      const operatorToUse = strategies[validatorType];
-
-      // Move to checkValidatorArrayGroup?
-      const isOperatorUndefined = !operatorToUse;
-      if (isOperatorUndefined) {
-        throw new Error(errors.unknownOperator);
-      }
+      const [validatorOperator, validatorValue] = validatorArray;
+      const operatorToUse = strategies[validatorOperator];
 
       const validationResult = operatorToUse(value, validatorValue);
       if (validationResult === false) {
