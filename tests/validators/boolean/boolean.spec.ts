@@ -1,12 +1,13 @@
+// @ts-nocheck
 import HandyValidator from '../../../src/index';
 
-let HandyVal: HandyValidator;
-
-beforeAll(() => {
-  HandyVal = new HandyValidator();
-});
-
 describe('Boolean validator tests', () => {
+  let HandyVal: HandyValidator;
+
+  beforeAll(() => {
+    HandyVal = new HandyValidator();
+  });
+
   it('should return true if passed value is a Boolean', () => {
     const validator = 'boolean';
     const value = false;

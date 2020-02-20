@@ -1,13 +1,14 @@
+// @ts-nocheck
 import HandyValidator from '../../../src/index';
 import equalToErrors from '../../../src/validators/equalTo/equalTo.errors';
 
-let HandyVal: HandyValidator;
-
-beforeAll(() => {
-  HandyVal = new HandyValidator();
-});
-
 describe('equalTo validator tests', () => {
+  let HandyVal: HandyValidator;
+
+  beforeAll(() => {
+    HandyVal = new HandyValidator();
+  });
+
   describe('arrayOfElementsNotAnArray Error', () => {
     let HandyValidatorResult: boolean;
     let jestSpy: jest.SpyInstance;

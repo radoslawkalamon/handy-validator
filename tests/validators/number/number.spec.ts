@@ -1,13 +1,14 @@
+// @ts-nocheck
 import HandyValidator from '../../../src/index';
 import numberErrors from '../../../src/validators/number/number.errors';
 
-let HandyVal: HandyValidator;
-
-beforeAll(() => {
-  HandyVal = new HandyValidator();
-});
-
 describe('Number validator tests', () => {
+  let HandyVal: HandyValidator;
+
+  beforeAll(() => {
+    HandyVal = new HandyValidator();
+  });
+
   describe('Type validator', () => {
     it('should return false if passed value is a Boolean', () => {
       const validator = 'number';
@@ -59,13 +60,13 @@ describe('Number validator tests', () => {
 
     it('should return false if passed value is a Function returning number', () => {
       const validator = 'number';
-      const value = (): number => 3;
+      const value = () => 3;
       expect(HandyVal.validate(validator, value)).toEqual(false);
     });
 
     it('should return false if passed value is an Array', () => {
       const validator = 'number';
-      const value: any[] = [];
+      const value = [];
       expect(HandyVal.validate(validator, value)).toEqual(false);
     });
   });
