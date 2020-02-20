@@ -3,7 +3,7 @@ import validatorArrayGroupTypeGuard from './number.validatorArrayGroup.typeGuard
 
 /**
  * Number validator
- * @version 1.2.0
+ * @version 1.2.1
  * @param {any} value
  * @param {string, number][]} validatorArrayGroup
  * @param {boolean} validateSome

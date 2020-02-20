@@ -3,11 +3,11 @@ interface Strategies {
 }
 
 const strategies: Strategies = {
-  '=': (x: number, y: number): boolean => x === y,
-  '>': (x: number, y: number): boolean => x > y,
-  '>=': (x: number, y: number): boolean => x >= y,
-  '<': (x: number, y: number): boolean => x < y,
-  '<=': (x: number, y: number): boolean => x <= y,
+  '=': (x, y) => x === y,
+  '>': (x, y) => x > y,
+  '>=': (x, y) => x >= y,
+  '<': (x, y) => x < y,
+  '<=': (x, y) => x <= y,
 };
 
 export default strategies;
