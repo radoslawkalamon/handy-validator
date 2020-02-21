@@ -16,18 +16,18 @@ export default (validatorArrayGroup: [string, number][]): boolean => {
       throw new Error(errors.itemNotAnArray);
     }
 
-    if (validatorArray.length !== 2) {
-      throw new Error(errors.itemLengthError);
-    }
-
     const [validatorOperator, validatorValue] = validatorArray;
-
-    if (typeof validatorOperator !== 'string' || typeof validatorValue !== 'number') {
-      throw new Error(errors.itemTypesError);
-    }
 
     if (!operatorsPermitted.includes(validatorOperator)) {
       throw new Error(errors.unknownOperator);
+    }
+
+    if (validatorArray.length !== strategies[validatorOperator].length) {
+      throw new Error(errors.itemLengthError);
+    }
+
+    if (typeof validatorOperator !== 'string' || typeof validatorValue !== 'number') {
+      throw new Error(errors.itemTypesError);
     }
   });
 
