@@ -52,7 +52,7 @@ describe('Number validator tests', () => {
       expect(HandyVal.validate(validator, value)).toEqual(false);
     });
 
-    it('should return false if passed value is a Object', () => {
+    it('should return false if passed value is an Object', () => {
       const validator = 'number';
       const value = {};
       expect(HandyVal.validate(validator, value)).toEqual(false);
