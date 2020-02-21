@@ -1,13 +1,12 @@
 import errors from './string.errors';
 import strategies from './string.strategies';
 
-const operatorsPermitted = Object.keys(strategies);
-
+const operatorsPermitted: string[] = Object.keys(strategies);
 /**
- * @param {[string, (string | number)][]} validatorArrayGroup
+ * @param {string[][]} validatorArrayGroup
  * @returns validatorArray
  */
-export default (validatorArrayGroup: [string, (string | number)][]): boolean => {
+export default (validatorArrayGroup: string[][]): boolean => {
   if (validatorArrayGroup && !Array.isArray(validatorArrayGroup)) {
     throw new Error(errors.parentNotAnArray);
   }
@@ -17,21 +16,17 @@ export default (validatorArrayGroup: [string, (string | number)][]): boolean => 
       throw new Error(errors.itemNotAnArray);
     }
 
-    if (validatorArray.length !== 2) {
-      throw new Error(errors.itemLengthError);
-    }
-
-    const [validatorOperator, validatorValue] = validatorArray;
-
-    if (typeof validatorOperator !== 'string') {
-      throw new Error(errors.itemTypesError);
-    }
+    const [validatorOperator] = validatorArray;
 
     if (!operatorsPermitted.includes(validatorOperator)) {
       throw new Error(errors.unknownOperator);
     }
-    // eslint-disable-next-line valid-typeof
-    if (typeof validatorValue !== strategies[validatorOperator].argumentType) {
+
+    if (validatorArray.length !== strategies[validatorOperator].length) {
+      throw new Error(errors.itemLengthError);
+    }
+
+    if (validatorArray.some((x) => typeof x !== 'string')) {
       throw new Error(errors.itemTypesError);
     }
   });

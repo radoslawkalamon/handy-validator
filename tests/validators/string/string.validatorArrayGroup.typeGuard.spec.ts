@@ -26,20 +26,27 @@ describe('CheckValidatorArrayGroup tests', () => {
 
   it('should throw itemTypesError if validatorArray is not equal to prefered types', () => {
     expect(() => {
-      const validatorArrayGroup = [[123, '<'], [undefined, {}]];
+      const validatorArrayGroup = [['=', '<'], ['$', {}]];
       validatorArrayGroupTypeGuard(validatorArrayGroup);
     }).toThrow(errors.itemTypesError);
   });
 
-  it('should throw itemTypesError if validatorArray is not equal to strategy types', () => {
+  it('should throw unknownOperator if validatorArray have unknown operator', () => {
     expect(() => {
-      const validatorArrayGroup = [['!=', 'stringstring'], ['!=', 5]];
+      const validatorArrayGroup = [[null, 'Hello']];
       validatorArrayGroupTypeGuard(validatorArrayGroup);
-    }).toThrow(errors.itemTypesError);
+    }).toThrow(errors.unknownOperator);
+  });
+
+  it('should throw unknownOperator if validatorArray have unknown operator', () => {
+    expect(() => {
+      const validatorArrayGroup = [['UNKNOWN_OPER', 'Hello']];
+      validatorArrayGroupTypeGuard(validatorArrayGroup);
+    }).toThrow(errors.unknownOperator);
   });
 
   it('should return true if everything is okey', () => {
-    const validatorArrayGroup = [['!=', 'stringstring'], ['len=', 5]];
+    const validatorArrayGroup = [['!=', 'stringstring'], ['!$', 'Hello']];
     expect(validatorArrayGroupTypeGuard(validatorArrayGroup)).toEqual(true);
   });
 });

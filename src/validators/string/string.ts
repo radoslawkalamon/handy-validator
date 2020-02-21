@@ -5,11 +5,11 @@ import validatorArrayGroupTypeGuard from './string.validatorArrayGroup.typeGuard
  * Number validator
  * @version 1.0.0
  * @param {any} value
- * @param {[string, string | number][]} validatorArrayGroup
+ * @param {string[][]} validatorArrayGroup
  * @param {boolean} validateSome
  * @returns {boolean}
  */
-export default (value: any, validatorArrayGroup: [string, string | number][] = [], validateSome = false): boolean => {
+export default (value: any, validatorArrayGroup: string[][] = [], validateSome = false): boolean => {
   let validationResultArray;
   if (typeof value !== 'string') {
     return false;
@@ -20,7 +20,7 @@ export default (value: any, validatorArrayGroup: [string, string | number][] = [
 
     validationResultArray = validatorArrayGroup.map((validatorArray) => {
       const [validatorOperator, validatorValue] = validatorArray;
-      const operatorToUse = strategies[validatorOperator].fn;
+      const operatorToUse = strategies[validatorOperator];
 
       const validationResult = operatorToUse(value, validatorValue);
       if (validationResult === false) {
