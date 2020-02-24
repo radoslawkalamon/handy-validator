@@ -270,6 +270,12 @@ describe('String validator tests', () => {
         const validationArguments = [[operator, 'helllo']];
         expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
       });
+
+      it('should return true if value is "Hello planet earth, you are a great planet" and is validated against "planet"', () => {
+        const value = 'Hello planet earth, you are a great planet';
+        const validationArguments = [[operator, 'planet']];
+        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+      });
     });
 
     describe('[!$] validator', () => {
@@ -292,10 +298,39 @@ describe('String validator tests', () => {
         const validationArguments = [[operator, 'helllo']];
         expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
       });
+
+      it('should return false if value is "Hello planet earth, you are a great planet" and is validated against "planet"', () => {
+        const value = 'Hello planet earth, you are a great planet';
+        const validationArguments = [[operator, 'planet']];
+        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
+      });
     });
   });
 
   describe('Groups', () => {
+    it('should return true if value is "Hello" and is validated against =Hello, !=Bye, ~ell', () => {
+      const value = 'Hello';
+      const validationArguments = [['=', 'Hello'], ['!=', 'Bye'], ['~', 'ell']];
+      expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+    });
 
+    it('should return true if value is "This is very tasty string!" and is validated against ^This is, $string!, !~big tasty', () => {
+      const value = 'This is very tasty string!';
+      const validationArguments = [['^', 'This is'], ['$', 'string!'], ['!~', 'big tasty']];
+      expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+    });
+
+    it('should return false if value is "This is very tasty string!" and is validated against $This is, ^string!, ~big tasty', () => {
+      const value = 'This is very tasty string!';
+      const validationArguments = [['$', 'This is'], ['^', 'string!'], ['~', 'big tasty']];
+      expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
+    });
+
+    it('should return true if value is "This is very tasty string!" and is validated some against $This is, ~big tasty', () => {
+      const value = 'This is very tasty string!';
+      const validationArguments = [['$', 'This is'], ['~', 'tasty']];
+      const validateSome = true;
+      expect(HandyVal.validate(validator, value, validationArguments, validateSome)).toEqual(true);
+    });
   });
 });
