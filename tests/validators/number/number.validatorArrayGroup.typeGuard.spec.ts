@@ -24,11 +24,11 @@ describe('CheckValidatorArrayGroup tests', () => {
     }).toThrow(errors.itemLengthError);
   });
 
-  it('should throw itemTypesError if validatorArray is not equal to validatorTypesArray types', () => {
+  it('should throw unknownOperator if validatorArray have unknown operator', () => {
     expect(() => {
       const validatorArrayGroup = [[123, '<'], [undefined, {}]];
       validatorArrayGroupTypeGuard(validatorArrayGroup);
-    }).toThrow(errors.itemTypesError);
+    }).toThrow(errors.unknownOperator);
   });
 
   it('should throw unknownOperator if validatorArray have unknown operator', () => {
