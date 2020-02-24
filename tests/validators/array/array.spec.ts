@@ -4,6 +4,7 @@ import arrayErrors from '../../../src/validators/array/array.errors';
 
 describe('Array validator tests', () => {
   let HandyVal: HandyValidator;
+  const validator = 'array';
 
   beforeAll(() => {
     HandyVal = new HandyValidator();
@@ -11,61 +12,51 @@ describe('Array validator tests', () => {
 
   describe('Type validator', () => {
     it('should return false if passed value is a Boolean', () => {
-      const validator = 'array';
       const value = true;
       expect(HandyVal.validate(validator, value)).toEqual(false);
     });
 
     it('should return false if passed value is a Null', () => {
-      const validator = 'array';
       const value = null;
       expect(HandyVal.validate(validator, value)).toEqual(false);
     });
 
     it('should return false if passed value is an Undefined', () => {
-      const validator = 'array';
       const value = undefined;
       expect(HandyVal.validate(validator, value)).toEqual(false);
     });
 
     it('should return false if passed value is a Number', () => {
-      const validator = 'array';
       const value = 1;
       expect(HandyVal.validate(validator, value)).toEqual(false);
     });
 
     it('should return false if passed value is a NaN', () => {
-      const validator = 'array';
       const value = NaN;
       expect(HandyVal.validate(validator, value)).toEqual(false);
     });
 
     it('should return false if passed value is a String', () => {
-      const validator = 'array';
       const value = '';
       expect(HandyVal.validate(validator, value)).toEqual(false);
     });
 
     it('should return false if passed value is a Symbol', () => {
-      const validator = 'array';
       const value = Symbol('Symbol description');
       expect(HandyVal.validate(validator, value)).toEqual(false);
     });
 
     it('should return false if passed value is an Object', () => {
-      const validator = 'array';
       const value = {};
       expect(HandyVal.validate(validator, value)).toEqual(false);
     });
 
     it('should return false if passed value is a Function returning Array', () => {
-      const validator = 'array';
       const value = () => [];
       expect(HandyVal.validate(validator, value)).toEqual(false);
     });
 
     it('should return true if passed value is an Array', () => {
-      const validator = 'array';
       const value = [];
       expect(HandyVal.validate(validator, value)).toEqual(true);
     });
@@ -78,7 +69,6 @@ describe('Array validator tests', () => {
     beforeAll(() => {
       jestSpy = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
 
-      const validator = 'array';
       const value = [1, 2, 3];
       const validationArguments = [['THIS_IS_UNKNOWN_VALIDATOR', 10.22]];
       HandyValidatorResult = HandyVal.validate(validator, value, validationArguments);
@@ -109,7 +99,6 @@ describe('Array validator tests', () => {
     beforeAll(() => {
       jestSpy = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
 
-      const validator = 'array';
       const value = [1, 2, 3, 4];
       const validationArguments = [['=', 3]];
       HandyValidatorResult = HandyVal.validate(validator, value, validationArguments);
@@ -129,10 +118,120 @@ describe('Array validator tests', () => {
   });
 
   describe('Value validators', () => {
-    describe('[=] validator', () => { });
-    describe('[>] validator', () => { });
-    describe('[>=] validator', () => { });
-    describe('[<] validator', () => { });
-    describe('[<=] validator', () => { });
+    describe('[=] validator', () => {
+      const operator = '=';
+
+      it('should return true', () => {
+        const value = [1, 2, 3];
+        const validationArguments = [[operator, 3]];
+        expect(HandyVal.validate(validator, value, validationArguments)).toBeTruthy();
+      });
+
+      it('should return false', () => {
+        const value = [1, 2, 3, 4];
+        const validationArguments = [[operator, 8]];
+        expect(HandyVal.validate(validator, value, validationArguments)).toBeFalsy();
+      });
+    });
+    describe('[>] validator', () => {
+      const operator = '>';
+
+      it('should return true', () => {
+        const value = [1, 2, 3, undefined, 12, 333];
+        const validationArguments = [[operator, 2]];
+        expect(HandyVal.validate(validator, value, validationArguments)).toBeTruthy();
+      });
+
+      it('should return false', () => {
+        const value = [1, 'string', null, undefined];
+        const validationArguments = [[operator, 12]];
+        expect(HandyVal.validate(validator, value, validationArguments)).toBeFalsy();
+      });
+    });
+    describe('[>=] validator', () => {
+      const operator = '>=';
+
+      it('should return true', () => {
+        const value = [1, 2, 3, undefined, 12, 333];
+        const validationArguments = [[operator, 6]];
+        expect(HandyVal.validate(validator, value, validationArguments)).toBeTruthy();
+      });
+
+      it('should return true', () => {
+        const value = [1, 2, 3, undefined, 12, 333];
+        const validationArguments = [[operator, 2]];
+        expect(HandyVal.validate(validator, value, validationArguments)).toBeTruthy();
+      });
+
+      it('should return false', () => {
+        const value = [1, 'string', null, undefined];
+        const validationArguments = [[operator, 12]];
+        expect(HandyVal.validate(validator, value, validationArguments)).toBeFalsy();
+      });
+    });
+    describe('[<] validator', () => {
+      const operator = '<';
+
+      it('should return true', () => {
+        const value = [1, 2, 3, undefined, 12, 333];
+        const validationArguments = [[operator, 12]];
+        expect(HandyVal.validate(validator, value, validationArguments)).toBeTruthy();
+      });
+
+      it('should return false', () => {
+        const value = [1, 2, 3, undefined, 12, 333];
+        const validationArguments = [[operator, 5]];
+        expect(HandyVal.validate(validator, value, validationArguments)).toBeFalsy();
+      });
+    });
+    describe('[<=] validator', () => {
+      const operator = '<=';
+
+      it('should return true', () => {
+        const value = [1, 2, 3, undefined, 12, 333];
+        const validationArguments = [[operator, 12]];
+        expect(HandyVal.validate(validator, value, validationArguments)).toBeTruthy();
+      });
+
+      it('should return true', () => {
+        const value = [1, 2, 3, undefined, 12, 333];
+        const validationArguments = [[operator, 6]];
+        expect(HandyVal.validate(validator, value, validationArguments)).toBeTruthy();
+      });
+
+      it('should return false', () => {
+        const value = [1, 2, 3, undefined, 12, 333];
+        const validationArguments = [[operator, 5]];
+        expect(HandyVal.validate(validator, value, validationArguments)).toBeFalsy();
+      });
+    });
+  });
+
+  describe('Groups', () => {
+    it('should return true', () => {
+      const value = [1, 2, 3, undefined, 12, 333];
+      const validationArguments = [['>', 5], ['<', 10], ['=', 6]];
+      expect(HandyVal.validate(validator, value, validationArguments)).toBeTruthy();
+    });
+
+    it('should return true', () => {
+      const value = [1, 'string', null, undefined];
+      const validationArguments = [['>', 5], ['<', 10], ['=', 6]];
+      const validateSome = true;
+      expect(HandyVal.validate(validator, value, validationArguments, validateSome)).toBeTruthy();
+    });
+
+    it('should return false', () => {
+      const value = [1, 'string', null, undefined];
+      const validationArguments = [['>', 5], ['<', 10], ['=', 6]];
+      expect(HandyVal.validate(validator, value, validationArguments)).toBeFalsy();
+    });
+
+    it('should return false', () => {
+      const value = [1, 2, 3, 12, 333];
+      const validationArguments = [['>=', 6], ['<=', 4], ['<', 3]];
+      const validateSome = true;
+      expect(HandyVal.validate(validator, value, validationArguments, validateSome)).toBeFalsy();
+    });
   });
 });

@@ -26,7 +26,7 @@ export default (validatorArrayGroup: [string, number][]): boolean => {
       throw new Error(errors.itemLengthError);
     }
 
-    if (typeof validatorOperator !== 'string' || typeof validatorValue !== 'number') {
+    if (!Number.isInteger(validatorValue) || validatorValue <= -1) {
       throw new Error(errors.itemTypesError);
     }
   });
