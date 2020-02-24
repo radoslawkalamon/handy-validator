@@ -1,0 +1,25 @@
+# Array Validator (Built-in)
+
+## Operators
+- `=` - Array length is equal to
+- `>` - Array length is bigger than
+- `>=` - Array length is bigger than or equal to
+- `<` - Array length is smaller than
+- `<=` - Array length is smaller than or equal to
+
+## Usage
+```
+const myArray = [1,2,3,4];
+const validatorArray1 = ['=', 6];
+const validatorArray2 = ['<=', 3];
+const validatorArrayGroup = [validatorArray1, validatorArray2];
+
+HandyValidator.validate('array', validatorArrayGroup);
+```
+
+## Can throw errors
+- `HV_VAL_ARRAY_CHECK_VALIDATOR_ARRAY_GROUP_PARENT_NOT_AN_ARRAY` - validatorArrayGroup is not an Array,
+- `HV_VAL_ARRAY_CHECK_VALIDATOR_ARRAY_GROUP_ITEM_NOT_AN_ARRAY` - One of validatorArray is not an Array,
+- `HV_VAL_ARRAY_CHECK_VALIDATOR_ARRAY_GROUP_ITEM_LENGTH_ERROR` - One of validatorArray length is not equal to 2,
+- `HV_VAL_ARRAY_CHECK_VALIDATOR_ARRAY_GROUP_ITEM_TYPES_ERROR` - Second argument of one of validatorArray is not an Integer or is not bigger than -1,
+- `HV_VAL_ARRAY_UNKNOWN_OPERATOR` - Unknown operator is passed,
