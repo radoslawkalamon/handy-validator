@@ -7,10 +7,19 @@ import punctuationRegEx from './palindrome.punctuation';
  * @returns {boolean}
  */
 export default (value: any): boolean => {
-  if (typeof value !== 'string') {
+  const permittedTypes = ['string', 'number'];
+  const valueType = typeof value;
+
+  if (!permittedTypes.includes(valueType)) {
     return false;
   }
 
-  const valueArray = value.toLocaleLowerCase().replace(punctuationRegEx, '').replace(/\s+/g, '').split('');
+  const valueArray = value
+    .toString()
+    .toLocaleLowerCase()
+    .replace(punctuationRegEx, '')
+    .replace(/\s+/g, '')
+    .split('');
+
   return valueArray.length !== 0 && valueArray.join('') === valueArray.reverse().join('');
 };

@@ -1,3 +1,77 @@
+// @ts-nocheck
+import HandyValidator from '../../../src/index';
+// REMOVE THIS WHEN WORKS ON VERSION 3.2.0 STARTS
+import palindromeValidator from '../../../src/validators/palindrome/palindrome';
+
+describe('Palindrome validator tests', () => {
+  let HandyVal: HandyValidator;
+  const validator = 'palindrome';
+
+  beforeAll(() => {
+    HandyVal = new HandyValidator();
+    // REMOVE THIS WHEN WORKS ON VERSION 3.2.0 STARTS
+    HandyVal.addValidator('palindrome', palindromeValidator);
+  });
+
+  describe('Type validator', () => {
+    it('should return false if passed value is a Boolean', () => {
+      const value = true;
+      expect(HandyVal.validate(validator, value)).toEqual(false);
+    });
+
+    it('should return false if passed value is a Null', () => {
+      const value = null;
+      expect(HandyVal.validate(validator, value)).toEqual(false);
+    });
+
+    it('should return false if passed value is an Undefined', () => {
+      const value = undefined;
+      expect(HandyVal.validate(validator, value)).toEqual(false);
+    });
+
+    it('should return true if passed value is a Number', () => {
+      const value = 121;
+      expect(HandyVal.validate(validator, value)).toEqual(true);
+    });
+
+    it('should return true if passed value is a NaN', () => {
+      const value = NaN;
+      expect(HandyVal.validate(validator, value)).toEqual(true);
+    });
+
+    it('should return true if passed value is a String', () => {
+      const value = 'LOL';
+      expect(HandyVal.validate(validator, value)).toEqual(true);
+    });
+
+    it('should return false if passed value is a Symbol', () => {
+      const value = Symbol('Symbol description');
+      expect(HandyVal.validate(validator, value)).toEqual(false);
+    });
+
+    it('should return false if passed value is an Object', () => {
+      const value = {};
+      expect(HandyVal.validate(validator, value)).toEqual(false);
+    });
+
+    it('should return false if passed value is a Function returning string', () => {
+      const value = () => 'LOL';
+      expect(HandyVal.validate(validator, value)).toEqual(false);
+    });
+
+    it('should return false if passed value is a Function returning number', () => {
+      const value = () => 121;
+      expect(HandyVal.validate(validator, value)).toEqual(false);
+    });
+
+    it('should return false if passed value is an Array', () => {
+      const value = [];
+      expect(HandyVal.validate(validator, value)).toEqual(false);
+    });
+  });
+});
+
+
 // describe('[><] validator', () => {
 //   const operator = '><';
 //   const validationArguments = [[operator]];
