@@ -2,8 +2,9 @@
 import HandyValidator from '../../../src/index';
 import equalToErrors from '../../../src/validators/equalTo/equalTo.errors';
 
-describe('equalTo validator tests', () => {
+describe('equalTo validator', () => {
   let HandyVal: HandyValidator;
+  const validator = 'equalTo';
 
   beforeAll(() => {
     HandyVal = new HandyValidator();
@@ -16,7 +17,6 @@ describe('equalTo validator tests', () => {
     beforeAll(() => {
       jestSpy = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
 
-      const validator = 'equalTo';
       const value = 'Value';
       const validationArguments = 'Hemlo!';
       // @ts-ignore
@@ -42,29 +42,25 @@ describe('equalTo validator tests', () => {
   });
 
   describe('Validator tests', () => {
-    it('should return true if passed value is equal to one of validationArguments Array', () => {
-      const validator = 'equalTo';
+    it('should return true', () => {
       const value = 'Good_value';
       const validationArguments = ['Good_value', 'Bad_Value'];
       expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
     });
 
-    it('should return true if NaN is equal to one of validationArguments Array', () => {
-      const validator = 'equalTo';
+    it('should return true', () => {
       const value = NaN;
       const validationArguments = ['Good_value', NaN, 'Bad_Value'];
       expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
     });
 
-    it('should return false if passed value is not equal to one of validationArguments Array', () => {
-      const validator = 'equalTo';
+    it('should return false', () => {
       const value = 'Good_value';
       const validationArguments = ['Bad_value_1', 'Bad_value_2', NaN];
       expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
     });
 
-    it('should return false if no validationArguments passed', () => {
-      const validator = 'equalTo';
+    it('should return false', () => {
       const value = 'Good_value';
       expect(HandyVal.validate(validator, value)).toEqual(false);
     });

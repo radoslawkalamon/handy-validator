@@ -2,10 +2,7 @@ import errors from './equalTo.errors';
 
 /**
  * equalTo validator
- * @version 1.1.0
- * @param {any} value
- * @param {any[]} arrayOfElements
- * @returns {boolean}
+ * @version 1.0.0
  */
 export default (value: any, arrayOfElements: any[] = []): boolean => {
   try {
