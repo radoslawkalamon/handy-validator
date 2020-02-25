@@ -1,64 +1,61 @@
 // @ts-nocheck
 import HandyValidator from '../../../src/index';
 
-describe('Undefined validator tests', () => {
+describe('Undefined validator', () => {
   let HandyVal: HandyValidator;
+  const validator = 'undefined';
 
   beforeAll(() => {
     HandyVal = new HandyValidator();
   });
 
-  it('should return false if passed value is a Boolean', () => {
-    const validator = 'undefined';
+  it('Boolean passed - should return false', () => {
     const value = true;
-    expect(HandyVal.validate(validator, value)).toEqual(false);
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 
-  it('should return false if passed value is a Null', () => {
-    const validator = 'undefined';
+  it('Null passed - should return false', () => {
     const value = null;
-    expect(HandyVal.validate(validator, value)).toEqual(false);
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 
-  it('should return true if passed value is an Undefined', () => {
-    const validator = 'undefined';
+  it('Undefined passed - should return true', () => {
     const value = undefined;
-    expect(HandyVal.validate(validator, value)).toEqual(true);
+    expect(HandyVal.validate(validator, value)).toBeTruthy();
   });
 
-  it('should return false if passed value is a Number', () => {
-    const validator = 'undefined';
+  it('Number passed - should return false', () => {
     const value = 1;
-    expect(HandyVal.validate(validator, value)).toEqual(false);
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 
-  it('should return false if passed value is a String', () => {
-    const validator = 'undefined';
+  it('String passed - should return false', () => {
     const value = '';
-    expect(HandyVal.validate(validator, value)).toEqual(false);
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 
-  it('should return false if passed value is a Symbol', () => {
-    const validator = 'undefined';
+  it('"Undefined" String passed - should return false', () => {
+    const value = 'undefined';
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
+  });
+
+  it('Symbol passed - should return false', () => {
     const value = Symbol('Symbol description');
-    expect(HandyVal.validate(validator, value)).toEqual(false);
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 
-  it('should return false if passed value is a Object', () => {
-    const validator = 'undefined';
+  it('Object passed - should return false', () => {
     const value = {};
-    expect(HandyVal.validate(validator, value)).toEqual(false);
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 
-  it('should return false if passed value is a Function returning undefined', () => {
-    const validator = 'undefined';
+  it('Function returning undefined passed - should return false', () => {
     const value = (): undefined => undefined;
-    expect(HandyVal.validate(validator, value)).toEqual(false);
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 
-  it('should return false if passed value is an Array', () => {
-    const validator = 'undefined';
+  it('Array passed - should return false', () => {
     const value: any[] = [];
-    expect(HandyVal.validate(validator, value)).toEqual(false);
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 });
