@@ -1,64 +1,56 @@
 // @ts-nocheck
 import HandyValidator from '../../../src/index';
 
-describe('Object validator tests', () => {
+describe('Object validator', () => {
   let HandyVal: HandyValidator;
+  const validator = 'object';
 
   beforeAll(() => {
     HandyVal = new HandyValidator();
   });
 
-  it('should return false if passed value is a Boolean', () => {
-    const validator = 'object';
+  it('Boolean passed - should return false', () => {
     const value = true;
-    expect(HandyVal.validate(validator, value)).toEqual(false);
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 
-  it('should return false if passed value is a Null', () => {
-    const validator = 'object';
+  it('Null passed - should return false', () => {
     const value = null;
-    expect(HandyVal.validate(validator, value)).toEqual(false);
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 
-  it('should return false if passed value is an Undefined', () => {
-    const validator = 'object';
+  it('Undefined passed - should return false', () => {
     const value = undefined;
-    expect(HandyVal.validate(validator, value)).toEqual(false);
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 
-  it('should return false if passed value is a Number', () => {
-    const validator = 'object';
+  it('Number passed - should return false', () => {
     const value = 1;
-    expect(HandyVal.validate(validator, value)).toEqual(false);
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 
-  it('should return false if passed value is a String', () => {
-    const validator = 'object';
+  it('String passed - should return false', () => {
     const value = '';
-    expect(HandyVal.validate(validator, value)).toEqual(false);
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 
-  it('should return false if passed value is a Symbol', () => {
-    const validator = 'object';
+  it('Symbol passed - should return false', () => {
     const value = Symbol('Symbol description');
-    expect(HandyVal.validate(validator, value)).toEqual(false);
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 
-  it('should return true if passed value is a Object', () => {
-    const validator = 'object';
+  it('Object passed - should return true', () => {
     const value = {};
-    expect(HandyVal.validate(validator, value)).toEqual(true);
+    expect(HandyVal.validate(validator, value)).toBeTruthy();
   });
 
-  it('should return false if passed value is a Function returning object', () => {
-    const validator = 'object';
+  it('Function returning Object passed - should return false', () => {
     const value = (): object => ({});
-    expect(HandyVal.validate(validator, value)).toEqual(false);
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 
-  it('should return false if passed value is an Array', () => {
-    const validator = 'object';
+  it('Array passed - should return false', () => {
     const value: any[] = [];
-    expect(HandyVal.validate(validator, value)).toEqual(false);
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 });
