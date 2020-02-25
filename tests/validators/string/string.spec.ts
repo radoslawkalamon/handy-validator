@@ -373,7 +373,7 @@ describe('String validator', () => {
 
     it('should return false (validateSome)', () => {
       const value = 'This is very tasty string!';
-      const validatorArrayGroup = [['$', 'This not'], ['~', 'tasty']];
+      const validatorArrayGroup = [['$', 'This not'], ['!~', 'tasty']];
       const validateSome = true;
       expect(HandyVal.validate(validator, value, validatorArrayGroup, validateSome)).toBeFalsy();
     });
