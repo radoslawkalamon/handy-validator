@@ -26,7 +26,7 @@ type ValidatorCallback = (value: any, ...args: any) => boolean;
  * @constructor
  */
 class HandyValidator {
-  loadedValidators: Record<string, ValidatorCallback> = {};
+  public loadedValidators: Record<string, ValidatorCallback> = {};
 
   /**
    * Init Handy Validator
@@ -49,9 +49,6 @@ class HandyValidator {
 
   /**
    * Adds validator plugin
-   * @param {string} name
-   * @param {Function} callback
-   * @return {boolean}
    */
   addValidator(name: string, callback: ValidatorCallback): boolean {
     if (typeof name !== 'string') {
@@ -76,8 +73,6 @@ class HandyValidator {
 
   /**
    * Removes validator plugin
-   * @param {string} name
-   * @returns {boolean}
    */
   removeValidator(name: string): boolean {
     if (typeof name !== 'string') {
@@ -97,7 +92,6 @@ class HandyValidator {
 
   /**
    * Checks if validator is defined
-   * @param name
    */
   checkValidator(name: string): boolean {
     return typeof this.loadedValidators[name] === 'function';
@@ -105,8 +99,6 @@ class HandyValidator {
 
   /**
    * Returns validator if defined
-   * @param name
-   * @returns {ValidatorCallback|boolean}
    */
   getValidator(name: string): ValidatorCallback | boolean {
     return this.loadedValidators[name] || false;
@@ -114,10 +106,6 @@ class HandyValidator {
 
   /**
    * Validates using validator
-   * @param {string} name
-   * @param {any} value
-   * @param {any[]} validationArguments
-   * @return {boolean}
    */
   validate(name: string, value: any, ...args: any): boolean {
     if (typeof this.loadedValidators[name] !== 'function') {
