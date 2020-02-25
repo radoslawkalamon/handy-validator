@@ -1,11 +1,11 @@
 # Number Validator (Built-in)
 
 ## Operators
-- `=` - Number is equal to
-- `>` - Number is bigger than
-- `>=` - Number is bigger than or equal to
-- `<` - Number is smaller than
-- `<=` - Number is smaller than or equal to
+- `=` - Number equal to
+- `>` - Number bigger than
+- `>=` - Number bigger than or equal to
+- `<` - Number smaller than
+- `<=` - Number smaller than or equal to
 
 ## Usage
 ```

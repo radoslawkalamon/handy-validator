@@ -1,11 +1,11 @@
 # Array Validator (Built-in)
 
 ## Operators
-- `=` - Array length is equal to
-- `>` - Array length is bigger than
-- `>=` - Array length is bigger than or equal to
-- `<` - Array length is smaller than
-- `<=` - Array length is smaller than or equal to
+- `=` - Array length equal to
+- `>` - Array length bigger than
+- `>=` - Array length bigger than or equal to
+- `<` - Array length smaller than
+- `<=` - Array length smaller than or equal to
 
 ## Usage
 ```
