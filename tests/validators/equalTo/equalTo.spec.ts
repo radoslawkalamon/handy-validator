@@ -24,7 +24,7 @@ describe('equalTo validator', () => {
     });
 
     it('should Handy Validator Result be false', () => {
-      expect(HandyValidatorResult).toEqual(false);
+      expect(HandyValidatorResult).toBeFalsy();
     });
 
     it('should call console.error once', () => {
@@ -45,24 +45,24 @@ describe('equalTo validator', () => {
     it('should return true', () => {
       const value = 'Good_value';
       const validationArguments = ['Good_value', 'Bad_Value'];
-      expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+      expect(HandyVal.validate(validator, value, validationArguments)).toBeTruthy();
     });
 
     it('should return true', () => {
       const value = NaN;
       const validationArguments = ['Good_value', NaN, 'Bad_Value'];
-      expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+      expect(HandyVal.validate(validator, value, validationArguments)).toBeTruthy();
     });
 
     it('should return false', () => {
       const value = 'Good_value';
       const validationArguments = ['Bad_value_1', 'Bad_value_2', NaN];
-      expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
+      expect(HandyVal.validate(validator, value, validationArguments)).toBeFalsy();
     });
 
     it('should return false', () => {
       const value = 'Good_value';
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
   });
 });
