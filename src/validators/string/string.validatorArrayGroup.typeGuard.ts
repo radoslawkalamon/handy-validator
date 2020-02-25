@@ -3,8 +3,7 @@ import strategies from './string.strategies';
 
 const operatorsPermitted: string[] = Object.keys(strategies);
 /**
- * @param {string[][]} validatorArrayGroup
- * @returns validatorArray
+ * Validate validatorArrayGroup for String validator
  */
 export default (validatorArrayGroup: string[][]): boolean => {
   if (validatorArrayGroup && !Array.isArray(validatorArrayGroup)) {

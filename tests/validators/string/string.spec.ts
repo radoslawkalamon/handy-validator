@@ -2,7 +2,7 @@
 import HandyValidator from '../../../src/index';
 import stringErrors from '../../../src/validators/string/string.errors';
 
-describe('String validator tests', () => {
+describe('String validator', () => {
   let HandyVal: HandyValidator;
   const validator = 'string';
 
@@ -11,54 +11,86 @@ describe('String validator tests', () => {
   });
 
   describe('Type validator', () => {
-    it('should return false if passed value is a Boolean', () => {
+    it('Boolean passed - should return false', () => {
       const value = true;
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
-    it('should return false if passed value is a Null', () => {
+    it('Null passed - should return false', () => {
       const value = null;
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
-    it('should return false if passed value is an Undefined', () => {
+    it('Undefined passed - should return false', () => {
       const value = undefined;
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
-    it('should return false if passed value is a Number', () => {
+    it('Number passed - should return false', () => {
       const value = 1;
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
-    it('should return false if passed value is a NaN', () => {
+    it('NaN passed - should return false', () => {
       const value = NaN;
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
-    it('should return true if passed value is a String', () => {
+    it('String passed - should return true', () => {
       const value = '';
-      expect(HandyVal.validate(validator, value)).toEqual(true);
+      expect(HandyVal.validate(validator, value)).toBeTruthy();
     });
 
-    it('should return false if passed value is a Symbol', () => {
+    it('Symbol passed - should return false', () => {
       const value = Symbol('Symbol description');
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
-    it('should return false if passed value is an Object', () => {
+    it('Object passed - should return false', () => {
       const value = {};
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
-    it('should return false if passed value is a Function returning string', () => {
+    it('Function returning String passed - should return false', () => {
       const value = () => 'This is my string';
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
-    it('should return false if passed value is an Array', () => {
+    it('Array passed - should return false', () => {
       const value = [];
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
+    });
+  });
+
+  describe('validatorArrayGroup problems', () => {
+    it('validatorArrayGroup is not an Array - should return false', () => {
+      const value = 'My string!';
+      const validatorArrayGroup = 213;
+      expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
+    });
+
+    it('validatorArray is not an Array - should throw itemNotAnArray', () => {
+      const value = 'My string!';
+      const validatorArrayGroup = [['=', 'string'], 'str'];
+      expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
+    });
+
+    it('validatorArray length is not equal to operator function args length - should throw itemLengthError', () => {
+      const value = 'My string!';
+      const validatorArrayGroup = [['!=', 123, 123], ['$', 123]];
+      expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
+    });
+
+    it('validatorArray types is not equal to string - should throw itemTypesError', () => {
+      const value = 'My string!';
+      const validatorArrayGroup = [['=', '<'], ['$', {}]];
+      expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
+    });
+
+    it('validatorArray have unknown operator - should throw unknownOperator', () => {
+      const value = 'My string!';
+      const validatorArrayGroup = [[null, 'Hello']];
+      expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
     });
   });
 
@@ -70,12 +102,12 @@ describe('String validator tests', () => {
       jestSpy = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
 
       const value = 'This is my string';
-      const validationArguments = [['THIS_IS_UNKNOWN_VALIDATOR', 10.22]];
-      HandyValidatorResult = HandyVal.validate(validator, value, validationArguments);
+      const validatorArrayGroup = [['THIS_IS_UNKNOWN_VALIDATOR', 10.22]];
+      HandyValidatorResult = HandyVal.validate(validator, value, validatorArrayGroup);
     });
 
     it('should Handy Validator Result be false', () => {
-      expect(HandyValidatorResult).toEqual(false);
+      expect(HandyValidatorResult).toBeFalsy();
     });
 
     it('should call console.error once', () => {
@@ -100,12 +132,12 @@ describe('String validator tests', () => {
       jestSpy = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
 
       const value = 'This is my string';
-      const validationArguments = [['=', 'This is not my string']];
-      HandyValidatorResult = HandyVal.validate(validator, value, validationArguments);
+      const validatorArrayGroup = [['=', 'This is not my string']];
+      HandyValidatorResult = HandyVal.validate(validator, value, validatorArrayGroup);
     });
 
     it('should Handy Validator Result be false', () => {
-      expect(HandyValidatorResult).toEqual(false);
+      expect(HandyValidatorResult).toBeFalsy();
     });
 
     it('should call console.error zero times', () => {
@@ -121,216 +153,236 @@ describe('String validator tests', () => {
     describe('[=] validator', () => {
       const operator = '=';
 
-      it('should return true if value is "This is my string" and is validated against "This is my string"', () => {
+      it('should return true', () => {
         const value = 'This is my string';
-        const validationArguments = [[operator, 'This is my string']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+        const validatorArrayGroup = [[operator, 'This is my string']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
       });
 
-      it('should return true if value is "我的中文不好" and is validated against "我的中文不好"', () => {
+      it('should return true', () => {
         const value = '我的中文不好';
-        const validationArguments = [[operator, '我的中文不好']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+        const validatorArrayGroup = [[operator, '我的中文不好']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
       });
 
-      it('should return true if value is "我的中文不好" and is validated against "\u6211\u7684\u4E2D\u6587\u4E0D\u597D" [Unicode]', () => {
+      it('should return true [Unicode]', () => {
         const value = '我的中文不好';
-        const validationArguments = [[operator, '\u6211\u7684\u4E2D\u6587\u4E0D\u597D']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+        const validatorArrayGroup = [[operator, '\u6211\u7684\u4E2D\u6587\u4E0D\u597D']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
       });
 
-      it('should return false if value is "我的中文不好" and is validated against "我的中文很好"', () => {
+      it('should return false', () => {
         const value = '我的中文不好';
-        const validationArguments = [[operator, '我的中文很好']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
+        const validatorArrayGroup = [[operator, '我的中文很好']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
       });
 
-      it('should return false if value is "That\'s cool" and is validated against "That\'s not cool"', () => {
+      it('should return false', () => {
         const value = 'That\'s cool';
-        const validationArguments = [[operator, 'That\'s not cool']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
+        const validatorArrayGroup = [[operator, 'That\'s not cool']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
       });
     });
 
     describe('[!=] validator', () => {
       const operator = '!=';
 
-      it('should return false if value is "This is my string" and is validated against "This is my string"', () => {
+      it('should return false', () => {
         const value = 'This is my string';
-        const validationArguments = [[operator, 'This is my string']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
+        const validatorArrayGroup = [[operator, 'This is my string']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
       });
 
-      it('should return false if value is "我的中文不好" and is validated against "我的中文不好"', () => {
+      it('should return false', () => {
         const value = '我的中文不好';
-        const validationArguments = [[operator, '我的中文不好']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
+        const validatorArrayGroup = [[operator, '我的中文不好']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
       });
 
-      it('should return false if value is "我的中文不好" and is validated against "\u6211\u7684\u4E2D\u6587\u4E0D\u597D" [Unicode]', () => {
+      it('should return false [Unicode]', () => {
         const value = '我的中文不好';
-        const validationArguments = [[operator, '\u6211\u7684\u4E2D\u6587\u4E0D\u597D']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
+        const validatorArrayGroup = [[operator, '\u6211\u7684\u4E2D\u6587\u4E0D\u597D']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
       });
 
-      it('should return true if value is "我的中文不好" and is validated against "我的中文很好"', () => {
+      it('should return true', () => {
         const value = '我的中文不好';
-        const validationArguments = [[operator, '我的中文很好']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+        const validatorArrayGroup = [[operator, '我的中文很好']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
       });
 
-      it('should return true if value is "That\'s cool" and is validated against "That\'s not cool"', () => {
+      it('should return true', () => {
         const value = 'That\'s cool';
-        const validationArguments = [[operator, 'That\'s not cool']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+        const validatorArrayGroup = [[operator, 'That\'s not cool']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
       });
     });
 
     describe('[~] validator', () => {
       const operator = '~';
 
-      it('should return true if value is "This is my string" and is validated against "my str"', () => {
+      it('should return true', () => {
         const value = 'This is my string';
-        const validationArguments = [[operator, 'my str']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+        const validatorArrayGroup = [[operator, 'my str']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
       });
 
-      it('should return false if value is "This is my string" and is validated against "my rts"', () => {
+      it('should return false', () => {
         const value = 'This is my string';
-        const validationArguments = [[operator, 'my rts']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
+        const validatorArrayGroup = [[operator, 'my rts']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
       });
     });
 
     describe('[!~] validator', () => {
       const operator = '!~';
 
-      it('should return false if value is "This is my string" and is validated against "my str"', () => {
+      it('should return false', () => {
         const value = 'This is my string';
-        const validationArguments = [[operator, 'my str']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
+        const validatorArrayGroup = [[operator, 'my str']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
       });
 
-      it('should return true if value is "This is my string" and is validated against "my rts"', () => {
+      it('should return true', () => {
         const value = 'This is my string';
-        const validationArguments = [[operator, 'my rts']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+        const validatorArrayGroup = [[operator, 'my rts']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
       });
     });
 
     describe('[^] validator', () => {
       const operator = '^';
 
-      it('should return true if value is "This is my string!" and is validated against "This is"', () => {
+      it('should return true', () => {
         const value = 'This is my string!';
-        const validationArguments = [[operator, 'This is']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+        const validatorArrayGroup = [[operator, 'This is']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
       });
 
-      it('should return false if value is "This is my string!" and is validated against "This not"', () => {
+      it('should return false', () => {
         const value = 'This is my string!';
-        const validationArguments = [[operator, 'This not']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
+        const validatorArrayGroup = [[operator, 'This not']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
       });
     });
 
     describe('[!^] validator', () => {
       const operator = '!^';
 
-      it('should return false if value is "This is my string!" and is validated against "This is"', () => {
+      it('should return false', () => {
         const value = 'This is my string!';
-        const validationArguments = [[operator, 'This is']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
+        const validatorArrayGroup = [[operator, 'This is']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
       });
 
-      it('should return true if value is "This is my string!" and is validated against "This not"', () => {
+      it('should return true', () => {
         const value = 'This is my string!';
-        const validationArguments = [[operator, 'This not']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+        const validatorArrayGroup = [[operator, 'This not']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
       });
     });
 
     describe('[$] validator', () => {
       const operator = '$';
 
-      it('should return true if value is "This is my string!" and is validated against "my string!"', () => {
+      it('should return true', () => {
         const value = 'This is my string!';
-        const validationArguments = [[operator, 'my string!']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+        const validatorArrayGroup = [[operator, 'my string!']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
       });
 
-      it('should return false if value is "This is my string!" and is validated against "not string!"', () => {
+      it('should return false', () => {
         const value = 'This is my string!';
-        const validationArguments = [[operator, 'not string!']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
+        const validatorArrayGroup = [[operator, 'not string!']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
       });
 
-      it('should return false if value is "hello" and is validated against "helllo" [-1 / length test]', () => {
+      it('should return false [-1 / length test]', () => {
         const value = 'hello';
-        const validationArguments = [[operator, 'helllo']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
+        const validatorArrayGroup = [[operator, 'helllo']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
       });
 
-      it('should return true if value is "Hello planet earth, you are a great planet" and is validated against "planet"', () => {
+      it('should return true [2 planets tests]', () => {
         const value = 'Hello planet earth, you are a great planet';
-        const validationArguments = [[operator, 'planet']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+        const validatorArrayGroup = [[operator, 'planet']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
       });
     });
 
     describe('[!$] validator', () => {
       const operator = '!$';
 
-      it('should return false if value is "This is my string!" and is validated against "my string!"', () => {
+      it('should return false', () => {
         const value = 'This is my string!';
-        const validationArguments = [[operator, 'my string!']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
+        const validatorArrayGroup = [[operator, 'my string!']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
       });
 
-      it('should return true if value is "This is my string!" and is validated against "not string!"', () => {
+      it('should return true', () => {
         const value = 'This is my string!';
-        const validationArguments = [[operator, 'not string!']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+        const validatorArrayGroup = [[operator, 'not string!']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
       });
 
-      it('should return true if value is "hello" and is validated against "helllo" [-1 / length test]', () => {
+      it('should return true [-1 / length test]', () => {
         const value = 'hello';
-        const validationArguments = [[operator, 'helllo']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+        const validatorArrayGroup = [[operator, 'helllo']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
       });
 
-      it('should return false if value is "Hello planet earth, you are a great planet" and is validated against "planet"', () => {
+      it('should return false [2 planets tests]', () => {
         const value = 'Hello planet earth, you are a great planet';
-        const validationArguments = [[operator, 'planet']];
-        expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
+        const validatorArrayGroup = [[operator, 'planet']];
+        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
       });
     });
   });
 
   describe('Groups', () => {
-    it('should return true if value is "Hello" and is validated against =Hello, !=Bye, ~ell', () => {
+    it('should return true', () => {
       const value = 'Hello';
-      const validationArguments = [['=', 'Hello'], ['!=', 'Bye'], ['~', 'ell']];
-      expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+      const validatorArrayGroup = [['=', 'Hello'], ['!=', 'Bye'], ['~', 'ell']];
+      expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
     });
 
-    it('should return true if value is "This is very tasty string!" and is validated against ^This is, $string!, !~big tasty', () => {
+    it('should return true', () => {
       const value = 'This is very tasty string!';
-      const validationArguments = [['^', 'This is'], ['$', 'string!'], ['!~', 'big tasty']];
-      expect(HandyVal.validate(validator, value, validationArguments)).toEqual(true);
+      const validatorArrayGroup = [['^', 'This is'], ['$', 'string!'], ['!~', 'big tasty']];
+      expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
     });
 
-    it('should return false if value is "This is very tasty string!" and is validated against $This is, ^string!, ~big tasty', () => {
+    it('should return false', () => {
       const value = 'This is very tasty string!';
-      const validationArguments = [['$', 'This is'], ['^', 'string!'], ['~', 'big tasty']];
-      expect(HandyVal.validate(validator, value, validationArguments)).toEqual(false);
+      const validatorArrayGroup = [['$', 'This is'], ['^', 'string!'], ['~', 'big tasty']];
+      expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
     });
 
-    it('should return true if value is "This is very tasty string!" and is validated some against $This is, ~big tasty', () => {
+    it('should return false (malformed validatorArrayGroup)', () => {
       const value = 'This is very tasty string!';
-      const validationArguments = [['$', 'This is'], ['~', 'tasty']];
+      const validatorArrayGroup = [['$', 'This is'], ['^', null], ['~', 'tasty']];
+      expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
+    });
+
+    it('should return true (validateSome)', () => {
+      const value = 'This is very tasty string!';
+      const validatorArrayGroup = [['$', 'This is'], ['~', 'tasty']];
       const validateSome = true;
-      expect(HandyVal.validate(validator, value, validationArguments, validateSome)).toEqual(true);
+      expect(HandyVal.validate(validator, value, validatorArrayGroup, validateSome)).toBeTruthy();
+    });
+
+    it('should return false (validateSome)', () => {
+      const value = 'This is very tasty string!';
+      const validatorArrayGroup = [['$', 'This not'], ['~', 'tasty']];
+      const validateSome = true;
+      expect(HandyVal.validate(validator, value, validatorArrayGroup, validateSome)).toBeFalsy();
+    });
+
+    it('should return false (validateSome, malformed validatorArrayGroup)', () => {
+      const value = 'This is very tasty string!';
+      const validatorArrayGroup = [['$', 'This is'], ['~', 123]];
+      const validateSome = true;
+      expect(HandyVal.validate(validator, value, validatorArrayGroup, validateSome)).toBeFalsy();
     });
   });
 });

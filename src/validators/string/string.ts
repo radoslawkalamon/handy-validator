@@ -4,13 +4,10 @@ import validatorArrayGroupTypeGuard from './string.validatorArrayGroup.typeGuard
 /**
  * Number validator
  * @version 1.0.0
- * @param {any} value
- * @param {string[][]} validatorArrayGroup
- * @param {boolean} validateSome
- * @returns {boolean}
  */
 export default (value: any, validatorArrayGroup: string[][] = [], validateSome = false): boolean => {
   let validationResultArray;
+
   if (typeof value !== 'string') {
     return false;
   }
