@@ -34,6 +34,11 @@ describe('Null validator', () => {
     expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 
+  it('"null" String passed - should return false', () => {
+    const value = 'null';
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
+  });
+
   it('Symbol passed - should return false', () => {
     const value = Symbol('Symbol description');
     expect(HandyVal.validate(validator, value)).toBeFalsy();

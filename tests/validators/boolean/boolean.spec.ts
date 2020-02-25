@@ -25,12 +25,42 @@ describe('Boolean validator', () => {
   });
 
   it('Number passed - should return false', () => {
+    const value = 156;
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
+  });
+
+  it('"0" Number passed - should return false', () => {
+    const value = 0;
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
+  });
+
+  it('"1" Number passed - should return false', () => {
     const value = 1;
     expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 
   it('String passed - should return false', () => {
     const value = '';
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
+  });
+
+  it('"0" String passed - should return false', () => {
+    const value = '0';
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
+  });
+
+  it('"1" String passed - should return false', () => {
+    const value = '1';
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
+  });
+
+  it('"false" String passed - should return false', () => {
+    const value = 'false';
+    expect(HandyVal.validate(validator, value)).toBeFalsy();
+  });
+
+  it('"true" String passed - should return false', () => {
+    const value = 'true';
     expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 
