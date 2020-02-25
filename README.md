@@ -1,109 +1,19 @@
-# Handy Value Validator 1.2.3
+# Handy Validator v3.0.0
 
-Standalone validator module from **writr** - https://github.com/radoslawkuswik/writr
+Standalone validator module from **writr** - https://github.com/radoslawkalamon/writr
 
-## Use cases:
+For more information about usage and validators, please see README.md files!
 
-### `String` type:
+Built-in validators:
+- Array - [README.md](/src/validators/array/README.md)
+- Boolean - [README.md](/src/validators/boolean/README.md)
+- EqualTo - [README.md](/src/validators/eqaulto/README.md)
+- Null - [README.md](/src/validators/null/README.md)
+- Number - [README.md](/src/validators/number/README.md)
+- Object - [README.md](/src/validators/object/README.md)
+- String - [README.md](/src/validators/string/README.md)
+- Undefined - [README.md](/src/validators/undefined/README.md)
 
-- `String` - value is String
-- `='[String]'` - value equals to [String]
-- `!='[String]'` - value do not equal to [String]
-
-Use example: `String|!='Hello'|='World'`
-
-### `Number` type:
-
-- `Number` - value is Number
-- `<=[Number]` - value is equal or smaller than [Number]
-- `<[Number]` - value is smaller than [Number]
-- `>=[Number]` - value is equal or bigger than [Number]
-- `>[Number]` - value is bigger than [Number]
-- `=[Number]` - value equals to [Number]
-
-Use example: `Number|>15|<30`
-
-### `Array` type:
-
-- `Array` - value is Array
-- `<[Number]` - Array have less than [Number] elements
-- `>[Number]` - Array have more than [Number] elements
-- `=[Number]` - Array have exactly [Number] elements
-
-Use example: `Array|<10`
-
-### `Object` type:
-
-- `Object` - value is Object
-
-Use example: `Object`
-
-**IMPORTANT:** Always returns `false` if `_falseOnObject` is set to true!
-
-### `Undefined` type:
-
-- `Undefined` - value is Undefined
-
-Use example: `Undefined`
-
-### `Null` type:
-
-- `Null` - value is Null
-
-Use example: `Null`
-
-### `Boolean` type:
-
-- `Boolean` - value is Boolean
-
-Use example: `Boolean`
-
-### `isEqualTo` special type:
-
-- `isEqualTo` - checks if value is equal to one of provided elements (in v1: only strings)
-
-Use example: `isEqualTo|'123'|'String'|'Value3'`
-
-### Special function **getIsEqualToValues**
-
-`import { getIsEqualToValues } from 'handy-validator'` - return Array with values from isEqualTo validator
-
-Use example : `getIsEqualToValues("isEqualTo|'123'|'String'|'Value3'") => ['123', 'String', 'Value3']`
-
-## Changelog:
-
-- 1.1.0:
-  - Added new `Number` validators:
-    - `<=[Number]` - value is equal or smaller than [Number]
-    - `>=[Number]` - value is equal or bigger than [Number]
-- 1.2.0:
-  - Added `getIsEqualToValues` function
-- 1.2.1:
-  - Dependencies update
-- 1.2.2:
-  - Resolved babel `typeof` issue
-- 1.2.3:
-  - Dependencies update
-  
-## Plan for v2:
-
-- [ ] New String validators
-  - [ ] `=[Number]` - value length is equal to [Number]
-  - [ ] `~'[String]'` - value contains [String]
-  - [ ] `!~'[String]'` - value do not contains [String]
-  - [ ] `^'[String]'` - value starts with [String]
-  - [ ] `!^'[String]'` - value do not starts with [String]
-  - [ ] `$'[String]'` - value ends with [String]
-  - [ ] `!$'[String]'` - value do not ends with [String]
-- [ ] New Array validators
-  - [ ] `<=[Number]` - Array have exactly or less than [Number] elements
-  - [ ] `>=[Number]` - Array have exactly or more than [Number] elements
-- [ ] Groups
-- [ ] Numbers handling
-  - [ ] Scientific notation number
-  - [ ] Handling `,` as `.` in Float numbers
-- [ ] Strings handling
-  - [ ] Throw Error if string is not escaped with apostrophes
-  - [ ] Escaping of `'` character
-- [ ] isEqualTo handling
-  - [ ] More values types compatibility
+Plans:
+- v3.1.0 - Add more test cases
+- v3.2.0 - Palindrome validator
