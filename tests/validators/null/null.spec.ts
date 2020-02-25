@@ -1,7 +1,7 @@
 // @ts-nocheck
 import HandyValidator from '../../../src/index';
 
-describe('Null validator tests', () => {
+describe('Null validator', () => {
   let HandyVal: HandyValidator;
   const validator = 'null';
 
