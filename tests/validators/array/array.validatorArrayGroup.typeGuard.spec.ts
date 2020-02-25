@@ -38,7 +38,7 @@ describe('Array validator :: validatorArrayGroupTypeGuard', () => {
     }).toThrow(errors.itemTypesError);
   });
 
-  it('Sucess - should return true', () => {
+  it('Success - should return true', () => {
     const validatorArrayGroup = [['<', 123], ['<=', 123]];
     expect(validatorArrayGroupTypeGuard(validatorArrayGroup)).toBeTruthy();
   });

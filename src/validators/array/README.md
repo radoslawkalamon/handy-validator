@@ -13,8 +13,9 @@ const myArray = [1,2,3,4];
 const validatorArray1 = ['=', 6];
 const validatorArray2 = ['<=', 3];
 const validatorArrayGroup = [validatorArray1, validatorArray2];
+const validateSome = true;
 
-HandyValidator.validate('array', myArray, validatorArrayGroup);
+HandyValidator.validate('array', myArray, validatorArrayGroup, validateSome);
 ```
 
 ## Can throw errors
