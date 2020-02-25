@@ -18,8 +18,8 @@ HandyValidator.validate('array', myArray, validatorArrayGroup);
 ```
 
 ## Can throw errors
-- `HV_VAL_ARRAY_CHECK_VALIDATOR_ARRAY_GROUP_PARENT_NOT_AN_ARRAY` - validatorArrayGroup is not an Array,
-- `HV_VAL_ARRAY_CHECK_VALIDATOR_ARRAY_GROUP_ITEM_NOT_AN_ARRAY` - One of validatorArray is not an Array,
-- `HV_VAL_ARRAY_CHECK_VALIDATOR_ARRAY_GROUP_ITEM_LENGTH_ERROR` - One of validatorArray length is not equal to 2,
-- `HV_VAL_ARRAY_CHECK_VALIDATOR_ARRAY_GROUP_ITEM_TYPES_ERROR` - Second argument of one of validatorArray is not an Integer or is not bigger than -1,
-- `HV_VAL_ARRAY_UNKNOWN_OPERATOR` - Unknown operator is passed,
+- `HV_VAL_ARRAY_TYPE_GUARD_PARENT_NOT_AN_ARRAY` - validatorArrayGroup is not an Array,
+- `HV_VAL_ARRAY_TYPE_GUARD_ITEM_NOT_AN_ARRAY` - One of validatorArray is not an Array,
+- `HV_VAL_ARRAY_TYPE_GUARD_ITEM_LENGTH_ERROR` - One of validatorArray length is not equal to operator function arguments length,
+- `HV_VAL_ARRAY_TYPE_GUARD_ITEM_TYPES_ERROR` - Second argument of one of validatorArray is not an Integer,
+- `HV_VAL_ARRAY_TYPE_GUARD_UNKNOWN_OPERATOR` - Unknown operator is passed,

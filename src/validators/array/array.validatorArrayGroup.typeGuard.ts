@@ -3,8 +3,7 @@ import strategies from './array.strategies';
 
 const operatorsPermitted: string[] = Object.keys(strategies);
 /**
- * @param {[string, number][]} validatorArrayGroup
- * @returns validatorArray
+ * Validate validatorArrayGroup for Array validator
  */
 export default (validatorArrayGroup: [string, number][]): boolean => {
   if (validatorArrayGroup && !Array.isArray(validatorArrayGroup)) {
@@ -26,7 +25,7 @@ export default (validatorArrayGroup: [string, number][]): boolean => {
       throw new Error(errors.itemLengthError);
     }
 
-    if (!Number.isInteger(validatorValue) || validatorValue <= -1) {
+    if (!Number.isInteger(validatorValue)) {
       throw new Error(errors.itemTypesError);
     }
   });

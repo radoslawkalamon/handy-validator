@@ -1,8 +1,8 @@
 // @ts-nocheck
 import HandyValidator from '../../../src/index';
-import arrayErrors from '../../../src/validators/array/array.errors';
+import errors from '../../../src/validators/array/array.errors';
 
-describe('Array validator tests', () => {
+describe('Array validator', () => {
   let HandyVal: HandyValidator;
   const validator = 'array';
 
@@ -10,55 +10,55 @@ describe('Array validator tests', () => {
     HandyVal = new HandyValidator();
   });
 
-  describe('Type validator', () => {
+  describe('Type', () => {
     it('should return false if passed value is a Boolean', () => {
       const value = true;
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
     it('should return false if passed value is a Null', () => {
       const value = null;
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
     it('should return false if passed value is an Undefined', () => {
       const value = undefined;
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
     it('should return false if passed value is a Number', () => {
       const value = 1;
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
     it('should return false if passed value is a NaN', () => {
       const value = NaN;
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
     it('should return false if passed value is a String', () => {
       const value = '';
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
     it('should return false if passed value is a Symbol', () => {
       const value = Symbol('Symbol description');
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
     it('should return false if passed value is an Object', () => {
       const value = {};
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
     it('should return false if passed value is a Function returning Array', () => {
       const value = () => [];
-      expect(HandyVal.validate(validator, value)).toEqual(false);
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
     it('should return true if passed value is an Array', () => {
       const value = [];
-      expect(HandyVal.validate(validator, value)).toEqual(true);
+      expect(HandyVal.validate(validator, value)).toBeTruthy();
     });
   });
 
@@ -70,12 +70,12 @@ describe('Array validator tests', () => {
       jestSpy = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
 
       const value = [1, 2, 3];
-      const validationArguments = [['THIS_IS_UNKNOWN_VALIDATOR', 10.22]];
+      const validationArguments = [['THIS_IS_UNKNOWN_VALIDATOR', 10]];
       HandyValidatorResult = HandyVal.validate(validator, value, validationArguments);
     });
 
     it('should Handy Validator Result be false', () => {
-      expect(HandyValidatorResult).toEqual(false);
+      expect(HandyValidatorResult).toBeFalsy();
     });
 
     it('should call console.error once', () => {
@@ -83,7 +83,7 @@ describe('Array validator tests', () => {
     });
 
     it('should console.error message be errors.unknownOperator', () => {
-      const mockError = new Error(arrayErrors.unknownOperator);
+      const mockError = new Error(errors.unknownOperator);
       expect(jestSpy.mock.calls[0][0]).toEqual(mockError);
     });
 
@@ -105,7 +105,7 @@ describe('Array validator tests', () => {
     });
 
     it('should Handy Validator Result be false', () => {
-      expect(HandyValidatorResult).toEqual(false);
+      expect(HandyValidatorResult).toBeFalsy();
     });
 
     it('should call console.error zero times', () => {
@@ -133,6 +133,7 @@ describe('Array validator tests', () => {
         expect(HandyVal.validate(validator, value, validationArguments)).toBeFalsy();
       });
     });
+
     describe('[>] validator', () => {
       const operator = '>';
 
@@ -148,6 +149,7 @@ describe('Array validator tests', () => {
         expect(HandyVal.validate(validator, value, validationArguments)).toBeFalsy();
       });
     });
+
     describe('[>=] validator', () => {
       const operator = '>=';
 
@@ -169,6 +171,7 @@ describe('Array validator tests', () => {
         expect(HandyVal.validate(validator, value, validationArguments)).toBeFalsy();
       });
     });
+
     describe('[<] validator', () => {
       const operator = '<';
 
@@ -184,6 +187,7 @@ describe('Array validator tests', () => {
         expect(HandyVal.validate(validator, value, validationArguments)).toBeFalsy();
       });
     });
+
     describe('[<=] validator', () => {
       const operator = '<=';
 
