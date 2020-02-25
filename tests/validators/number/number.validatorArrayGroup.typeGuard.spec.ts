@@ -17,7 +17,7 @@ describe('CheckValidatorArrayGroup tests', () => {
     }).toThrow(errors.itemNotAnArray);
   });
 
-  it('validatorArray length is not equail to validatorTypesArray - should throw itemLengthError', () => {
+  it('validatorArray length is not equal to validatorTypesArray - should throw itemLengthError', () => {
     expect(() => {
       const validatorArrayGroup = [['>', 123, 123], ['<', 123]];
       validatorArrayGroupTypeGuard(validatorArrayGroup);
