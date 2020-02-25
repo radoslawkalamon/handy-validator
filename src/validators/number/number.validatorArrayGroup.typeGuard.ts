@@ -3,8 +3,7 @@ import strategies from './number.strategies';
 
 const operatorsPermitted: string[] = Object.keys(strategies);
 /**
- * @param {[string, number][]} validatorArrayGroup
- * @returns validatorArray
+ * Validate validatorArrayGroup for Number validator
  */
 export default (validatorArrayGroup: [string, number][]): boolean => {
   if (validatorArrayGroup && !Array.isArray(validatorArrayGroup)) {
