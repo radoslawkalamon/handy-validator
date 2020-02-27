@@ -22,7 +22,7 @@ type ValidatorCallback = (value: any, ...args: any) => boolean;
 
 /**
  * Handy Validator
- * @version 3.0.0
+ * @version 3.0.1
  * @constructor
  */
 class HandyValidator {

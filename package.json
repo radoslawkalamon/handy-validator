@@ -1,12 +1,13 @@
 {
   "name": "handy-validator",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Handy value validator",
-  "main": "./src/index.ts",
+  "main": "./dist/index.js",
   "directories": {
     "test": "tests"
   },
   "scripts": {
+    "prepare": "tsc",
     "build": "tsc",
     "test": "npx jest"
   },
