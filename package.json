@@ -1,6 +1,6 @@
 {
   "name": "handy-validator",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Handy value validator",
   "main": "./dist/index.js",
   "directories": {
@@ -26,15 +26,15 @@
   },
   "homepage": "https://github.com/radoslawkalamon/handy-validator#readme",
   "devDependencies": {
-    "@types/jest": "^26.0.4",
-    "@typescript-eslint/eslint-plugin": "^3.6.1",
-    "@typescript-eslint/parser": "^3.6.1",
-    "eslint": "^7.4.0",
+    "@types/jest": "^26.0.14",
+    "@typescript-eslint/eslint-plugin": "^4.2.0",
+    "@typescript-eslint/parser": "^4.2.0",
+    "eslint": "^7.9.0",
     "eslint-config-airbnb-base": "^14.2.0",
-    "eslint-import-resolver-typescript": "^2.0.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
     "eslint-plugin-import": "^2.22.0",
-    "jest": "^26.1.0",
-    "ts-jest": "^26.1.2",
-    "typescript": "^3.9.6"
+    "jest": "^26.4.2",
+    "ts-jest": "^26.4.0",
+    "typescript": "^4.0.3"
   }
 }
