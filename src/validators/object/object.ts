@@ -1,5 +1,5 @@
 /**
  * Object validator
- * @version 1.0.0
+ * @version 1.0.1
  */
-export default (value: any): boolean => value !== null && !Array.isArray(value) && typeof value === 'object';
+export default (value: unknown): boolean => value !== null && !Array.isArray(value) && typeof value === 'object';

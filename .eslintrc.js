@@ -15,7 +15,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/ban-ts-ignore': 0,
     'import/extensions': 0,
-    'max-len': [1, { 'code': 160 }],
+    'max-len': [1, { code: 160 }],
   },
   globals: {
     jest: false,
@@ -24,5 +24,5 @@ module.exports = {
     describe: false,
     it: false,
     expect: false,
-  }
+  },
 };

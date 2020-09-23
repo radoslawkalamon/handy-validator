@@ -3,9 +3,9 @@ import validatorArrayGroupTypeGuard from './number.validatorArrayGroup.typeGuard
 
 /**
  * Number validator
- * @version 1.0.0
+ * @version 1.0.1
  */
-export default (value: any, validatorArrayGroup: [string, number][] = [], validateSome = false): boolean => {
+export default (value: unknown, validatorArrayGroup: [string, number][] = [], validateSome = false): boolean => {
   let validationResultArray;
 
   if (typeof value !== 'number') {

@@ -22,7 +22,7 @@ type ValidatorCallback = (value: any, ...args: any) => boolean;
 
 /**
  * Handy Validator
- * @version 3.0.1
+ * @version 3.0.4
  * @constructor
  */
 class HandyValidator {
@@ -107,7 +107,7 @@ class HandyValidator {
   /**
    * Validates using validator
    */
-  validate(name: string, value: any, ...args: any): boolean {
+  validate(name: string, value: unknown, ...args: any): boolean {
     if (typeof this.loadedValidators[name] !== 'function') {
       throw new Error(errors.validate.validatorNotLoaded);
     }

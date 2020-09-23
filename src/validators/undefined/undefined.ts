@@ -1,5 +1,5 @@
 /**
  * Undefined validator
- * @version 1.0.0
+ * @version 1.0.1
  */
-export default (value: any): boolean => typeof value === 'undefined' && value === undefined;
+export default (value: unknown): boolean => typeof value === 'undefined' && value === undefined;

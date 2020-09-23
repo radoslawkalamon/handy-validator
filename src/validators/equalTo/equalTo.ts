@@ -2,9 +2,9 @@ import errors from './equalTo.errors';
 
 /**
  * equalTo validator
- * @version 1.0.0
+ * @version 1.0.1
  */
-export default (value: any, arrayOfElements: any[] = []): boolean => {
+export default (value: unknown, arrayOfElements: any[] = []): boolean => {
   try {
     if (!Array.isArray(arrayOfElements)) {
       throw new Error(errors.arrayOfElementsNotAnArray);

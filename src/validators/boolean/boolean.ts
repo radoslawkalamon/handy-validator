@@ -1,5 +1,5 @@
 /**
  * Boolean validator
- * @version 1.0.0
+ * @version 1.0.1
  */
-export default (value: any): boolean => typeof value === 'boolean';
+export default (value: unknown): boolean => typeof value === 'boolean';
