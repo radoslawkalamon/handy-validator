@@ -1,5 +1,5 @@
 // @ts-nocheck
-import HandyValidator from '../../../src/handyValidator';
+import { HandyValidator } from '../../../src/handyValidator';
 
 describe('Undefined validator', () => {
   let HandyVal: HandyValidator;
