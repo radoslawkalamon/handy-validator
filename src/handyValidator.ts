@@ -8,7 +8,7 @@ import errors from './handyValidator.errors';
 // import equalToValidator from './validators/equalTo/equalTo';
 // import nullValidator from './validators/null/null';
 // import numberValidator from './validators/number/number';
-// import objectValidator from './validators/object/object';
+import ObjectValidator from './validators/object';
 // // import palindromeValidator from './validators/palindrome/palindrome';
 // import stringValidator from './validators/string/string';
 import UndefinedValidator from './validators/undefined';
@@ -47,7 +47,7 @@ export class HandyValidator {
   }
 
   public validate(name: string, value: unknown, ...args: unknown[]): boolean {
-    this.validateValidation(name);
+    this.validateValidations(name);
 
     try {
       return this.plugins[name].validate(value, ...args);
@@ -68,7 +68,7 @@ export class HandyValidator {
     // this.addValidator('equalTo', equalToValidator);
     // this.addValidator('null', nullValidator);
     // this.addValidator('number', numberValidator);
-    // this.addValidator('object', objectValidator);
+    this.addPlugin('object', new ObjectValidator());
     // // this.addValidator('palindrome', palindromeValidator);
     // this.addValidator('string', stringValidator);
     this.addPlugin('undefined', new UndefinedValidator());
@@ -111,7 +111,7 @@ export class HandyValidator {
     this.processValidations(validations);
   }
 
-  private validateValidation(name: string) {
+  private validateValidations(name: string) {
     const validations: Validation[] = [
       {
         condition: this.isPluginLoaded(name),
