@@ -1,8 +1,8 @@
 {
   "name": "handy-validator",
-  "version": "3.0.4",
+  "version": "4.0.0",
   "description": "Handy value validator",
-  "main": "./dist/index.js",
+  "main": "./dist/handyValidator.js",
   "directories": {
     "test": "tests"
   },
