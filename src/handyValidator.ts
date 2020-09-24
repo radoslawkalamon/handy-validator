@@ -2,7 +2,7 @@ import { HandyValidatorPlugin } from './HandyValidatorPlugin';
 
 // import { ArrayValidator } from './validators/array';
 import { BooleanValidator } from './validators/boolean';
-// import { EqualToValidator } from './validators/equalTo';
+import { EqualToValidator } from './validators/equalTo';
 import { NullValidator } from './validators/null';
 // import { NumberValidator } from './validators/number';
 import { ObjectValidator } from './validators/object';
@@ -39,7 +39,6 @@ export class HandyValidator {
     },
     validate: {
       pluginUndefined: 'HV_VALIDATE_PLUGIN_UNDEFINED',
-      errorUndefined: 'HV_VALIDATE_ERROR_UNDEFINED',
     },
   };
 
@@ -61,25 +60,13 @@ export class HandyValidator {
 
   public validate(name: string, value: unknown, ...args: unknown[]): boolean {
     this.validateValidations(name);
-
-    try {
-      return this.plugins[name].validate(value, ...args);
-    } catch (e) {
-      switch (e.message) {
-        case 'HELLO_XD':
-          throw new Error(HandyValidator.errors.validate.errorUndefined);
-        default:
-          // eslint-disable-next-line no-console
-          console.error(e);
-          throw new Error(HandyValidator.errors.validate.errorUndefined);
-      }
-    }
+    return this.plugins[name].validate(value, ...args);
   }
 
   private loadStandardPlugins(): void {
     // this.addValidator('array', arrayValidator);
     this.addPlugin('boolean', new BooleanValidator());
-    // this.addValidator('equalTo', equalToValidator);
+    this.addPlugin('equalTo', new EqualToValidator());
     this.addPlugin('null', new NullValidator());
     // this.addValidator('number', numberValidator);
     this.addPlugin('object', new ObjectValidator());
@@ -89,7 +76,7 @@ export class HandyValidator {
   }
 
   private addPluginValidations(name: string, plugin: HandyValidatorPlugin) {
-    const validations: Validation[] = [
+    const validations = [
       {
         condition: this.isStringEmpty(name),
         assumption: true,
@@ -110,7 +97,7 @@ export class HandyValidator {
   }
 
   private removePluginValidations(name: string) {
-    const validations: Validation[] = [
+    const validations = [
       {
         condition: this.isStringEmpty(name),
         assumption: true,
@@ -126,7 +113,7 @@ export class HandyValidator {
   }
 
   private validateValidations(name: string) {
-    const validations: Validation[] = [
+    const validations = [
       {
         condition: this.isPluginLoaded(name),
         assumption: false,
