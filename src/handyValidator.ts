@@ -3,7 +3,7 @@ import { HandyValidatorPlugin } from './HandyValidatorPlugin';
 // import { ArrayValidator } from './validators/array';
 import { BooleanValidator } from './validators/boolean';
 // import { EqualToValidator } from './validators/equalTo';
-// import { NullValidator } from './validators/null/null';
+import { NullValidator } from './validators/null';
 // import { NumberValidator } from './validators/number';
 import { ObjectValidator } from './validators/object';
 // // import { PalindromeValidator } from './validators/palindrome';
@@ -80,7 +80,7 @@ export class HandyValidator {
     // this.addValidator('array', arrayValidator);
     this.addPlugin('boolean', new BooleanValidator());
     // this.addValidator('equalTo', equalToValidator);
-    // this.addValidator('null', nullValidator);
+    this.addPlugin('null', new NullValidator());
     // this.addValidator('number', numberValidator);
     this.addPlugin('object', new ObjectValidator());
     // // this.addValidator('palindrome', palindromeValidator);
