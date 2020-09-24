@@ -6,7 +6,7 @@ import { BooleanValidator } from './validators/boolean';
 import { NullValidator } from './validators/null';
 // import { NumberValidator } from './validators/number';
 import { ObjectValidator } from './validators/object';
-// // import { PalindromeValidator } from './validators/palindrome';
+// import { PalindromeValidator } from './validators/palindrome';
 // import { StringValidator } from './validators/string';
 import { UndefinedValidator } from './validators/undefined';
 
@@ -83,7 +83,7 @@ export class HandyValidator {
     this.addPlugin('null', new NullValidator());
     // this.addValidator('number', numberValidator);
     this.addPlugin('object', new ObjectValidator());
-    // // this.addValidator('palindrome', palindromeValidator);
+    // this.addValidator('palindrome', palindromeValidator);
     // this.addValidator('string', stringValidator);
     this.addPlugin('undefined', new UndefinedValidator());
   }
