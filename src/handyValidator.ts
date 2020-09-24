@@ -1,17 +1,14 @@
-/* eslint-disable no-console */
-import { HandyValidatorPlugin } from './handyValidatorPlugin';
-// Core components
-import errors from './handyValidator.errors';
-// Built-in Validators
-// import arrayValidator from './validators/array/array';
-import BooleanValidator from './validators/boolean';
-// import equalToValidator from './validators/equalTo/equalTo';
-// import nullValidator from './validators/null/null';
-// import numberValidator from './validators/number/number';
-import ObjectValidator from './validators/object';
-// // import palindromeValidator from './validators/palindrome/palindrome';
-// import stringValidator from './validators/string/string';
-import UndefinedValidator from './validators/undefined';
+import { HandyValidatorPlugin } from './HandyValidatorPlugin';
+
+// import { ArrayValidator } from './validators/array';
+import { BooleanValidator } from './validators/boolean';
+// import { EqualToValidator } from './validators/equalTo';
+// import { NullValidator } from './validators/null/null';
+// import { NumberValidator } from './validators/number';
+import { ObjectValidator } from './validators/object';
+// // import { PalindromeValidator } from './validators/palindrome';
+// import { StringValidator } from './validators/string';
+import { UndefinedValidator } from './validators/undefined';
 
 interface Validation {
   condition: boolean;
@@ -30,6 +27,22 @@ export interface HandyValidator {
  * @version 4.0.0
  */
 export class HandyValidator {
+  static errors = {
+    addPlugin: {
+      nameInvalid: 'HV_ADD_PLUGIN_NAME_INVALID',
+      pluginInvalid: 'HV_ADD_PLUGIN_PLUGIN_INVALID',
+      pluginAlreadyLoaded: 'HV_ADD_PLUGIN_PLUGIN_ALREADY_LOADED',
+    },
+    removePlugin: {
+      nameInvalid: 'HV_REMOVE_PLUGIN_NAME_INVALID',
+      pluginUndefined: 'HV_REMOVE_PLUGIN_PLUGIN_UNDEFINED',
+    },
+    validate: {
+      pluginUndefined: 'HV_VALIDATE_PLUGIN_UNDEFINED',
+      errorUndefined: 'HV_VALIDATE_ERROR_UNDEFINED',
+    },
+  };
+
   private plugins: Record<string, HandyValidatorPlugin> = {};
 
   constructor(loadStandardPlugins = true) {
@@ -54,10 +67,11 @@ export class HandyValidator {
     } catch (e) {
       switch (e.message) {
         case 'HELLO_XD':
-          throw new Error(errors.validate.errorUndefined);
+          throw new Error(HandyValidator.errors.validate.errorUndefined);
         default:
+          // eslint-disable-next-line no-console
           console.error(e);
-          throw new Error(errors.validate.errorUndefined);
+          throw new Error(HandyValidator.errors.validate.errorUndefined);
       }
     }
   }
@@ -79,17 +93,17 @@ export class HandyValidator {
       {
         condition: this.isStringEmpty(name),
         assumption: true,
-        error: errors.addPlugin.nameInvalid,
+        error: HandyValidator.errors.addPlugin.nameInvalid,
       },
       {
         condition: this.isPluginValid(plugin),
         assumption: false,
-        error: errors.addPlugin.pluginInvalid,
+        error: HandyValidator.errors.addPlugin.pluginInvalid,
       },
       {
         condition: this.isPluginLoaded(name),
         assumption: true,
-        error: errors.addPlugin.pluginAlreadyLoaded,
+        error: HandyValidator.errors.addPlugin.pluginAlreadyLoaded,
       },
     ];
     this.processValidations(validations);
@@ -100,12 +114,12 @@ export class HandyValidator {
       {
         condition: this.isStringEmpty(name),
         assumption: true,
-        error: errors.removePlugin.nameInvalid,
+        error: HandyValidator.errors.removePlugin.nameInvalid,
       },
       {
         condition: this.isPluginLoaded(name),
         assumption: false,
-        error: errors.removePlugin.pluginUndefined,
+        error: HandyValidator.errors.removePlugin.pluginUndefined,
       },
     ];
     this.processValidations(validations);
@@ -116,18 +130,16 @@ export class HandyValidator {
       {
         condition: this.isPluginLoaded(name),
         assumption: false,
-        error: errors.validate.pluginUndefined,
+        error: HandyValidator.errors.validate.pluginUndefined,
       },
     ];
     this.processValidations(validations);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   private isStringEmpty(string: unknown): boolean {
     return typeof string !== 'string' || string === '';
   }
 
-  // eslint-disable-next-line class-methods-use-this
   private isPluginValid(plugin: HandyValidatorPlugin): boolean {
     return plugin instanceof HandyValidatorPlugin;
   }
@@ -136,7 +148,6 @@ export class HandyValidator {
     return this.isPluginValid(this.plugins[name]);
   }
 
-  // eslint-disable-next-line class-methods-use-this
   private processValidations(validations: Validation[]) {
     validations.forEach((validation: Validation) => {
       if (validation.condition === validation.assumption) {

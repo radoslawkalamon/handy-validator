@@ -8,7 +8,7 @@
     "moduleResolution": "node"
   },
   "include": [
-    "src/handyValidator.ts"
+    "src/HandyValidator.ts"
   ],
   "exclude": [
     "node_modules",

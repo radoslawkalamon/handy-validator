@@ -1,11 +1,10 @@
-/* eslint-disable class-methods-use-this */
-import { HandyValidatorPlugin } from '../../handyValidatorPlugin';
+import { HandyValidatorPlugin } from '../../HandyValidatorPlugin';
 
 /**
  * Undefined validator
  * @version 2.0.0
  */
-export default class UndefinedValidator extends HandyValidatorPlugin {
+export class UndefinedValidator extends HandyValidatorPlugin {
   validate(value: unknown): boolean {
     return typeof value === 'undefined' && value === undefined;
   }

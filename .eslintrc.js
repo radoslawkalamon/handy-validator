@@ -15,6 +15,8 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/ban-ts-ignore': 0,
     'import/extensions': 0,
+    'import/prefer-default-export': 0,
+    'class-methods-use-this': 0,
     'max-len': [1, { code: 160 }],
   },
   globals: {
