@@ -1,5 +1,5 @@
 // @ts-nocheck
-import HandyValidator from '../../../src/index';
+import { HandyValidator } from '../../../src/handyValidator';
 
 describe('Boolean validator', () => {
   let HandyVal: HandyValidator;
@@ -9,8 +9,13 @@ describe('Boolean validator', () => {
     HandyVal = new HandyValidator();
   });
 
-  it('Boolean passed - should return true', () => {
+  it('Boolean [false] passed - should return true', () => {
     const value = false;
+    expect(HandyVal.validate(validator, value)).toBeTruthy();
+  });
+
+  it('Boolean [true] passed - should return true', () => {
+    const value = true;
     expect(HandyVal.validate(validator, value)).toBeTruthy();
   });
 

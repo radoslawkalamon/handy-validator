@@ -4,7 +4,7 @@ import { HandyValidatorPlugin } from './handyValidatorPlugin';
 import errors from './handyValidator.errors';
 // Built-in Validators
 // import arrayValidator from './validators/array/array';
-// import booleanValidator from './validators/boolean/boolean';
+import BooleanValidator from './validators/boolean';
 // import equalToValidator from './validators/equalTo/equalTo';
 // import nullValidator from './validators/null/null';
 // import numberValidator from './validators/number/number';
@@ -64,7 +64,7 @@ export class HandyValidator {
 
   private loadStandardPlugins(): void {
     // this.addValidator('array', arrayValidator);
-    // this.addValidator('boolean', booleanValidator);
+    this.addPlugin('boolean', new BooleanValidator());
     // this.addValidator('equalTo', equalToValidator);
     // this.addValidator('null', nullValidator);
     // this.addValidator('number', numberValidator);
