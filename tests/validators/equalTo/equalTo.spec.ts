@@ -16,7 +16,7 @@ describe('equalTo validator', () => {
         const value = 'Good_value';
         const validationArguments = 123;
         HandyVal.validate(validator, value, validationArguments);
-      }).toThrow(EqualToValidator.errors.elementsNotAnArray);
+      }).toThrow(EqualToValidator.errors.elementsNotArray);
     });
   });
 

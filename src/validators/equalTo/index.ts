@@ -6,7 +6,7 @@ import { HandyValidatorPlugin } from '../../HandyValidatorPlugin';
  */
 export class EqualToValidator extends HandyValidatorPlugin {
   static errors = {
-    elementsNotAnArray: 'HVP_EQUAL_TO_ELEMENTS_NOT_AN_ARRAY',
+    elementsNotArray: 'HVP_EQUAL_TO_ELEMENTS_NOT_ARRAY',
   };
 
   public validate(value: unknown, elements: unknown[] = []): boolean {
@@ -19,7 +19,7 @@ export class EqualToValidator extends HandyValidatorPlugin {
       {
         condition: Array.isArray(elements),
         assumption: false,
-        error: EqualToValidator.errors.elementsNotAnArray,
+        error: EqualToValidator.errors.elementsNotArray,
       },
     ];
     this.processValidations(validations);
