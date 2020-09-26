@@ -1,7 +1,7 @@
 /* eslint-disable class-methods-use-this */
-import { IValidation } from './interfaces';
+import { IHandyValidatorPlugin, IValidation } from './interfaces';
 
-export class HandyValidatorPlugin {
+export class HandyValidatorPlugin implements IHandyValidatorPlugin {
   validate(value: unknown, ...args: any[]): boolean {
     return false;
   }

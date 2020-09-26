@@ -1,4 +1,4 @@
-import { IValidation, IHandyValidatorPlugin } from './interfaces';
+import { IValidation, IHandyValidatorPlugin, IHandyValidator } from './interfaces';
 import { HandyValidatorPlugin } from './HandyValidatorPlugin';
 
 // import { ArrayValidator } from './validators/array';
@@ -15,7 +15,7 @@ import { UndefinedValidator } from './validators/undefined';
  * Handy Validator
  * @version 4.0.0
  */
-export class HandyValidator {
+export class HandyValidator implements IHandyValidator {
   static errors = {
     addPlugin: {
       nameInvalid: 'HV_ADD_PLUGIN_NAME_INVALID',
