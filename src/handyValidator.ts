@@ -1,3 +1,4 @@
+import { IValidation, IHandyValidatorPlugin } from './interfaces';
 import { HandyValidatorPlugin } from './HandyValidatorPlugin';
 
 // import { ArrayValidator } from './validators/array';
@@ -9,18 +10,6 @@ import { ObjectValidator } from './validators/object';
 // import { PalindromeValidator } from './validators/palindrome';
 // import { StringValidator } from './validators/string';
 import { UndefinedValidator } from './validators/undefined';
-
-interface Validation {
-  condition: boolean;
-  assumption: boolean;
-  error: string;
-}
-
-export interface HandyValidator {
-  addPlugin(name: string, plugin: HandyValidatorPlugin): void;
-  removePlugin(name: string): void;
-  validate(name: string, value: unknown, ...args: unknown[]): boolean;
-}
 
 /**
  * Handy Validator
@@ -42,24 +31,24 @@ export class HandyValidator {
     },
   };
 
-  private plugins: Record<string, HandyValidatorPlugin> = {};
+  private plugins: Record<string, IHandyValidatorPlugin> = {};
 
   constructor(loadStandardPlugins = true) {
     if (loadStandardPlugins === true) { this.loadStandardPlugins(); }
   }
 
-  public addPlugin(name: string, plugin: HandyValidatorPlugin): void {
-    this.addPluginValidations(name, plugin);
+  public addPlugin(name: string, plugin: IHandyValidatorPlugin): void {
+    this.validateAddPlugin(name, plugin);
     this.plugins[name] = plugin;
   }
 
   public removePlugin(name: string): void {
-    this.removePluginValidations(name);
+    this.validateRemovePlugin(name);
     delete this.plugins[name];
   }
 
   public validate(name: string, value: unknown, ...args: unknown[]): boolean {
-    this.validateValidations(name);
+    this.validateValidate(name);
     return this.plugins[name].validate(value, ...args);
   }
 
@@ -75,7 +64,7 @@ export class HandyValidator {
     this.addPlugin('undefined', new UndefinedValidator());
   }
 
-  private addPluginValidations(name: string, plugin: HandyValidatorPlugin) {
+  private validateAddPlugin(name: string, plugin: IHandyValidatorPlugin) {
     const validations = [
       {
         condition: this.isStringEmpty(name),
@@ -96,7 +85,7 @@ export class HandyValidator {
     this.processValidations(validations);
   }
 
-  private removePluginValidations(name: string) {
+  private validateRemovePlugin(name: string) {
     const validations = [
       {
         condition: this.isStringEmpty(name),
@@ -112,7 +101,7 @@ export class HandyValidator {
     this.processValidations(validations);
   }
 
-  private validateValidations(name: string) {
+  private validateValidate(name: string) {
     const validations = [
       {
         condition: this.isPluginLoaded(name),
@@ -127,7 +116,7 @@ export class HandyValidator {
     return typeof string !== 'string' || string === '';
   }
 
-  private isPluginValid(plugin: HandyValidatorPlugin): boolean {
+  private isPluginValid(plugin: IHandyValidatorPlugin): boolean {
     return plugin instanceof HandyValidatorPlugin;
   }
 
@@ -135,8 +124,8 @@ export class HandyValidator {
     return this.isPluginValid(this.plugins[name]);
   }
 
-  private processValidations(validations: Validation[]) {
-    validations.forEach((validation: Validation) => {
+  private processValidations(validations: IValidation[]) {
+    validations.forEach((validation: IValidation) => {
       if (validation.condition === validation.assumption) {
         throw new Error(validation.error);
       }
