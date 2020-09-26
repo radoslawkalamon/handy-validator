@@ -10,11 +10,11 @@ export class EqualToValidator extends HandyValidatorPlugin {
   };
 
   public validate(value: unknown, elements: unknown[] = []): boolean {
-    this.argsValidations(elements);
+    this.validateArgs(elements);
     return elements.includes(value);
   }
 
-  private argsValidations(elements: unknown[]) {
+  private validateArgs(elements: unknown[]) {
     const validations = [
       {
         condition: Array.isArray(elements),
