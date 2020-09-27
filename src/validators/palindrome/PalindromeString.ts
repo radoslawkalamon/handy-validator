@@ -1,7 +1,7 @@
 import { remove as removeDiacratics } from 'diacritics';
-import { IPalindromeValue } from './interfaces';
+import { IPalindrome } from './interfaces';
 
-export class PalindromeString implements IPalindromeValue {
+export class PalindromeString implements IPalindrome {
   value: string;
 
   constructor(value: string) {

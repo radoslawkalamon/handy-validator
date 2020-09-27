@@ -1,6 +1,6 @@
-import { IPalindromeValue } from './interfaces';
+import { IPalindrome } from './interfaces';
 
-export class PalindromeNumber implements IPalindromeValue {
+export class PalindromeNumber implements IPalindrome {
   static errors = {
     valueNaN: 'HVP_PALINDROME_VALUE_NAN',
   }

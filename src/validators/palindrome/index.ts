@@ -1,5 +1,5 @@
 import { HandyValidatorPlugin } from '../../HandyValidatorPlugin';
-import { IPalindromeValue } from './interfaces';
+import { IPalindrome } from './interfaces';
 import { PalindromeNumber } from './PalindromeNumber';
 import { PalindromeString } from './PalindromeString';
 
@@ -13,7 +13,7 @@ export class PalindromeValidator extends HandyValidatorPlugin {
   }
 
   public validate(value: unknown): boolean {
-    let palindrome: IPalindromeValue;
+    let palindrome: IPalindrome;
 
     switch (typeof value) {
       case 'string':
