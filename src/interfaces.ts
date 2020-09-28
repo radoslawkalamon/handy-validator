@@ -1,11 +1,11 @@
 export interface IValidation {
-  condition: boolean;
+  condition: () => boolean;
   assumption: boolean;
   error: string;
 }
 
 export interface IHandyValidatorPlugin {
-  validate(value: unknown, ...args: any[]): boolean;
+  validate(value: unknown, ...args: unknown[]): boolean;
 }
 
 export interface IHandyValidator {
