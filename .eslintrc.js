@@ -12,7 +12,6 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/indent': [2, 2],
-    '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/ban-ts-ignore': 0,
     'import/extensions': 0,
     'import/prefer-default-export': 0,

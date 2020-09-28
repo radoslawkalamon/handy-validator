@@ -1,7 +1,7 @@
 import { IValidation, IHandyValidatorPlugin, IHandyValidator } from './interfaces';
 import { HandyValidatorPlugin } from './HandyValidatorPlugin';
 
-// import { ArrayValidator } from './validators/array';
+import { ArrayValidator } from './validators/array';
 import { BooleanValidator } from './validators/boolean';
 import { EqualToValidator } from './validators/equalTo';
 import { NullValidator } from './validators/null';
@@ -38,22 +38,22 @@ export class HandyValidator implements IHandyValidator {
   }
 
   public addPlugin(name: string, plugin: IHandyValidatorPlugin): void {
-    this.validateAddPlugin(name, plugin);
+    this.validateAddPluginArguments(name, plugin);
     this.plugins[name] = plugin;
   }
 
   public removePlugin(name: string): void {
-    this.validateRemovePlugin(name);
+    this.validateRemovePluginArguments(name);
     delete this.plugins[name];
   }
 
   public validate(name: string, value: unknown, ...args: unknown[]): boolean {
-    this.validateValidate(name);
+    this.validateValidateArguments(name);
     return this.plugins[name].validate(value, ...args);
   }
 
   private loadStandardPlugins(): void {
-    // this.addValidator('array', arrayValidator);
+    this.addPlugin('array', new ArrayValidator());
     this.addPlugin('boolean', new BooleanValidator());
     this.addPlugin('equalTo', new EqualToValidator());
     this.addPlugin('null', new NullValidator());
@@ -64,20 +64,20 @@ export class HandyValidator implements IHandyValidator {
     this.addPlugin('undefined', new UndefinedValidator());
   }
 
-  private validateAddPlugin(name: string, plugin: IHandyValidatorPlugin) {
+  private validateAddPluginArguments(name: string, plugin: IHandyValidatorPlugin) {
     const validations = [
       {
-        condition: this.isStringEmpty(name),
+        condition: () => this.isStringEmpty(name),
         assumption: true,
         error: HandyValidator.errors.addPlugin.nameInvalid,
       },
       {
-        condition: this.isPluginValid(plugin),
+        condition: () => this.isPluginValid(plugin),
         assumption: false,
         error: HandyValidator.errors.addPlugin.pluginInvalid,
       },
       {
-        condition: this.isPluginLoaded(name),
+        condition: () => this.isPluginLoaded(name),
         assumption: true,
         error: HandyValidator.errors.addPlugin.pluginAlreadyLoaded,
       },
@@ -85,15 +85,15 @@ export class HandyValidator implements IHandyValidator {
     this.processValidations(validations);
   }
 
-  private validateRemovePlugin(name: string) {
+  private validateRemovePluginArguments(name: string) {
     const validations = [
       {
-        condition: this.isStringEmpty(name),
+        condition: () => this.isStringEmpty(name),
         assumption: true,
         error: HandyValidator.errors.removePlugin.nameInvalid,
       },
       {
-        condition: this.isPluginLoaded(name),
+        condition: () => this.isPluginLoaded(name),
         assumption: false,
         error: HandyValidator.errors.removePlugin.pluginUndefined,
       },
@@ -101,10 +101,10 @@ export class HandyValidator implements IHandyValidator {
     this.processValidations(validations);
   }
 
-  private validateValidate(name: string) {
+  private validateValidateArguments(name: string) {
     const validations = [
       {
-        condition: this.isPluginLoaded(name),
+        condition: () => this.isPluginLoaded(name),
         assumption: false,
         error: HandyValidator.errors.validate.pluginUndefined,
       },
@@ -126,7 +126,7 @@ export class HandyValidator implements IHandyValidator {
 
   private processValidations(validations: IValidation[]) {
     validations.forEach((validation: IValidation) => {
-      if (validation.condition === validation.assumption) {
+      if (validation.condition() === validation.assumption) {
         throw new Error(validation.error);
       }
     });
