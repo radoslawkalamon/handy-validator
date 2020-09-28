@@ -9,19 +9,22 @@ export class EqualToValidator extends HandyValidatorPlugin {
     elementsNotArray: 'HVP_EQUAL_TO_ELEMENTS_NOT_ARRAY',
   };
 
-  public validate(value: unknown, elements: unknown[] = []): boolean {
-    this.validateArgs(elements);
-    return elements.includes(value);
+  public validate(value: unknown, elements: unknown): boolean {
+    if (this.validateArguments(elements)) {
+      return elements.includes(value);
+    }
+    return false;
   }
 
-  private validateArgs(elements: unknown[]) {
+  private validateArguments(elements: unknown): elements is unknown[] {
     const validations = [
       {
-        condition: Array.isArray(elements),
+        condition: () => Array.isArray(elements),
         assumption: false,
         error: EqualToValidator.errors.elementsNotArray,
       },
     ];
     this.processValidations(validations);
+    return true;
   }
 }
