@@ -92,7 +92,7 @@ describe.only('Core base tests', () => {
 
     it('Should throw error if undefined validator used', () => {
       expect(() => {
-        HandyVal.validate('null', 123);
+        HandyVal.validate('UNDEFINED_VALIDATOR', 123);
       }).toThrow(HandyValidator.errors.validate.pluginUndefined);
     });
 
