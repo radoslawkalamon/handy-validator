@@ -86,7 +86,7 @@ describe('Palindrome validator', () => {
     });
   });
 
-  describe.only('Palindrome validator - Strings', () => {
+  describe('Palindrome validator - Strings', () => {
     it('should return true on "Do geese see God?"', () => {
       const value = 'Do geese see God?';
       expect(HandyVal.validate(validator, value)).toBeTruthy();
