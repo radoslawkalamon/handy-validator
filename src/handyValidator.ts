@@ -5,7 +5,7 @@ import { ArrayValidator } from './validators/array';
 import { BooleanValidator } from './validators/boolean';
 import { EqualToValidator } from './validators/equalTo';
 import { NullValidator } from './validators/null';
-// import { NumberValidator } from './validators/number';
+import { NumberValidator } from './validators/number';
 import { ObjectValidator } from './validators/object';
 import { PalindromeValidator } from './validators/palindrome';
 // import { StringValidator } from './validators/string';
@@ -57,7 +57,7 @@ export class HandyValidator implements IHandyValidator {
     this.addPlugin('boolean', new BooleanValidator());
     this.addPlugin('equalTo', new EqualToValidator());
     this.addPlugin('null', new NullValidator());
-    // this.addValidator('number', numberValidator);
+    this.addPlugin('number', new NumberValidator());
     this.addPlugin('object', new ObjectValidator());
     this.addPlugin('palindrome', new PalindromeValidator());
     // this.addValidator('string', stringValidator);

@@ -1,6 +1,11 @@
 // @ts-nocheck
-import HandyValidator from '../../../src/index';
-import numberErrors from '../../../src/validators/number/number.errors';
+import { HandyValidator } from '../../../src/HandyValidator';
+import { NumberValidator } from '../../../src/validators/number';
+import { BiggerThanNumberOperator } from '../../../src/validators/number/operators/BiggerThan';
+import { BiggerThanEqualNumberOperator } from '../../../src/validators/number/operators/BiggerThanEqual';
+import { EqualToNumberOperator } from '../../../src/validators/number/operators/EqualTo';
+import { SmallerThanNumberOperator } from '../../../src/validators/number/operators/SmallerThan';
+import { SmallerThanEqualNumberOperator } from '../../../src/validators/number/operators/SmallerThanEqual';
 
 describe('Number validator', () => {
   let HandyVal: HandyValidator;
@@ -67,90 +72,21 @@ describe('Number validator', () => {
     });
   });
 
-  describe('validatorArrayGroup problems', () => {
-    it('validatorArrayGroup is not an Array - should return false', () => {
-      const value = 122;
-      const validatorArrayGroup = 213;
-      expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
+  describe('operatorArguments validations', () => {
+    it('operatorArguments is not an Array - should throw error', () => {
+      expect(() => {
+        const value = 15;
+        const operatorArguments = [['<', 123], 'str'];
+        HandyVal.validate(validator, value, ...operatorArguments);
+      }).toThrow(NumberValidator.errors.validationRuleNotArray);
     });
 
-    it('validatorArray is not an Array - should return false', () => {
-      const value = 122;
-      const validatorArrayGroup = [['<', 123], 'str'];
-      expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
-    });
-
-    it('validatorArray length is not equail to validatorTypesArray - should return false', () => {
-      const value = 122;
-      const validatorArrayGroup = [['>', 123, 123], ['<', 123]];
-      expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
-    });
-
-    it('validatorArray have unknown operator - should return false', () => {
-      const value = 122;
-      const validatorArrayGroup = [[123, '<'], [undefined, {}]];
-      expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
-    });
-
-    it('validatorArray second argument not a number - should return false', () => {
-      const value = 122;
-      const validatorArrayGroup = [['<', 123], ['<=', 'Hemlo!']];
-      expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
-    });
-  });
-
-  describe('Console.error try..catch test', () => {
-    let HandyValidatorResult: boolean;
-    let jestSpy: jest.SpyInstance;
-
-    beforeAll(() => {
-      jestSpy = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
-
-      const value = 34.20;
-      const validatorArrayGroup = [['THIS_IS_UNKNOWN_VALIDATOR', 10.22]];
-      HandyValidatorResult = HandyVal.validate(validator, value, validatorArrayGroup);
-    });
-
-    it('should Handy Validator Result be false', () => {
-      expect(HandyValidatorResult).toBeFalsy();
-    });
-
-    it('should call console.error once', () => {
-      expect(jestSpy.mock.calls.length).toBe(1);
-    });
-
-    it('should console.error message be errors.unknownOperator', () => {
-      const mockError = new Error(numberErrors.unknownOperator);
-      expect(jestSpy.mock.calls[0][0]).toEqual(mockError);
-    });
-
-    afterAll(() => {
-      jestSpy.mockRestore();
-    });
-  });
-
-  describe('Validator failed / no console.error on normal fail', () => {
-    let HandyValidatorResult: boolean;
-    let jestSpy: jest.SpyInstance;
-
-    beforeAll(() => {
-      jestSpy = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
-
-      const value = 34.20;
-      const validatorArrayGroup = [['<', 10.22]];
-      HandyValidatorResult = HandyVal.validate(validator, value, validatorArrayGroup);
-    });
-
-    it('should Handy Validator Result be false', () => {
-      expect(HandyValidatorResult).toBeFalsy();
-    });
-
-    it('should call console.error zero times', () => {
-      expect(jestSpy.mock.calls.length).toBe(0);
-    });
-
-    afterAll(() => {
-      jestSpy.mockRestore();
+    it('operatorArguments unknown operator - should throw error', () => {
+      expect(() => {
+        const value = 12.55;
+        const operatorArguments = [[123, '<'], [undefined, {}]];
+        HandyVal.validate(validator, value, ...operatorArguments);
+      }).toThrow(NumberValidator.errors.validationRuleUnknownOperator);
     });
   });
 
@@ -158,110 +94,210 @@ describe('Number validator', () => {
     describe('[>=] validator', () => {
       const operator = '>=';
 
-      it('should return true', () => {
-        const value = 34.20;
-        const validatorArrayGroup = [[operator, 10.22]];
-        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
+      describe('OperatorArguments validations', () => {
+        it('OperatorArguments length is not equal to operator callback args length - should throw error', () => {
+          expect(() => {
+            const value = 44;
+            const operatorArguments = [[operator, 123, 123], [operator, 123]];
+            HandyVal.validate(validator, value, ...operatorArguments);
+          }).toThrow(BiggerThanEqualNumberOperator.errors.operatorArgumentsLengthInvalid);
+        });
+
+        it('OperatorArguments not number - should throw error', () => {
+          expect(() => {
+            const value = 50.77;
+            const operatorArguments = [[operator, 'string']];
+            HandyVal.validate(validator, value, ...operatorArguments);
+          }).toThrow(BiggerThanEqualNumberOperator.errors.operatorArgumentsTypesError);
+        });
       });
 
-      it('should return true', () => {
-        const value = 367;
-        const validatorArrayGroup = [[operator, 367]];
-        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
-      });
+      describe('Validator tests', () => {
+        it('should return true', () => {
+          const value = 34.20;
+          const operatorArguments = [[operator, 10.22]];
+          expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeTruthy();
+        });
 
-      it('should return false', () => {
-        const value = 112.22;
-        const validatorArrayGroup = [[operator, 654.22]];
-        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
+        it('should return true', () => {
+          const value = 367;
+          const operatorArguments = [[operator, 367]];
+          expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeTruthy();
+        });
+
+        it('should return false', () => {
+          const value = 112.22;
+          const operatorArguments = [[operator, 654.22]];
+          expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeFalsy();
+        });
       });
     });
 
     describe('[<=] validator', () => {
       const operator = '<=';
 
-      it('should return true', () => {
-        const value = 31.20;
-        const validatorArrayGroup = [[operator, 4443.22]];
-        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
+      describe('OperatorArguments validations', () => {
+        it('OperatorArguments length is not equal to operator callback args length - should throw error', () => {
+          expect(() => {
+            const value = 44;
+            const operatorArguments = [[operator, 123, 123], [operator, 123]];
+            HandyVal.validate(validator, value, ...operatorArguments);
+          }).toThrow(SmallerThanEqualNumberOperator.errors.operatorArgumentsLengthInvalid);
+        });
+
+        it('OperatorArguments not number - should throw error', () => {
+          expect(() => {
+            const value = 50.77;
+            const operatorArguments = [[operator, 'string']];
+            HandyVal.validate(validator, value, ...operatorArguments);
+          }).toThrow(SmallerThanEqualNumberOperator.errors.operatorArgumentsTypesError);
+        });
       });
 
-      it('should return true', () => {
-        const value = 111;
-        const validatorArrayGroup = [[operator, 111]];
-        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
-      });
+      describe('Validator tests', () => {
+        it('should return true', () => {
+          const value = 31.20;
+          const operatorArguments = [[operator, 4443.22]];
+          expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeTruthy();
+        });
 
-      it('should return false', () => {
-        const value = 979653.11323213;
-        const validatorArrayGroup = [[operator, 5123]];
-        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
+        it('should return true', () => {
+          const value = 111;
+          const operatorArguments = [[operator, 111]];
+          expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeTruthy();
+        });
+
+        it('should return false', () => {
+          const value = 979653.11323213;
+          const operatorArguments = [[operator, 5123]];
+          expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeFalsy();
+        });
       });
     });
 
     describe('[<] validator', () => {
       const operator = '<';
 
-      it('should return true', () => {
-        const value = 11.22;
-        const validatorArrayGroup = [[operator, 22.333]];
-        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
+      describe('OperatorArguments validations', () => {
+        it('OperatorArguments length is not equal to operator callback args length - should throw error', () => {
+          expect(() => {
+            const value = 44;
+            const operatorArguments = [[operator, 123, 123], [operator, 123]];
+            HandyVal.validate(validator, value, ...operatorArguments);
+          }).toThrow(SmallerThanNumberOperator.errors.operatorArgumentsLengthInvalid);
+        });
+
+        it('OperatorArguments not number - should throw error', () => {
+          expect(() => {
+            const value = 50.77;
+            const operatorArguments = [[operator, 'string']];
+            HandyVal.validate(validator, value, ...operatorArguments);
+          }).toThrow(SmallerThanNumberOperator.errors.operatorArgumentsTypesError);
+        });
       });
 
-      it('should return false', () => {
-        const value = 6533;
-        const validatorArrayGroup = [[operator, 6533]];
-        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
-      });
+      describe('Validator tests', () => {
+        it('should return true', () => {
+          const value = 11.22;
+          const operatorArguments = [[operator, 22.333]];
+          expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeTruthy();
+        });
 
-      it('should return false', () => {
-        const value = 300;
-        const validatorArrayGroup = [[operator, 200]];
-        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
+        it('should return false', () => {
+          const value = 6533;
+          const operatorArguments = [[operator, 6533]];
+          expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeFalsy();
+        });
+
+        it('should return false', () => {
+          const value = 300;
+          const operatorArguments = [[operator, 200]];
+          expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeFalsy();
+        });
       });
     });
 
     describe('[>] validator', () => {
       const operator = '>';
 
-      it('should return true', () => {
-        const value = 10e5;
-        const validatorArrayGroup = [[operator, 256]];
-        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
+      describe('OperatorArguments validations', () => {
+        it('OperatorArguments length is not equal to operator callback args length - should throw error', () => {
+          expect(() => {
+            const value = 44;
+            const operatorArguments = [[operator, 123, 123], [operator, 123]];
+            HandyVal.validate(validator, value, ...operatorArguments);
+          }).toThrow(BiggerThanNumberOperator.errors.operatorArgumentsLengthInvalid);
+        });
+
+        it('OperatorArguments not number - should throw error', () => {
+          expect(() => {
+            const value = 50.77;
+            const operatorArguments = [[operator, 'string']];
+            HandyVal.validate(validator, value, ...operatorArguments);
+          }).toThrow(BiggerThanNumberOperator.errors.operatorArgumentsTypesError);
+        });
       });
 
-      it('should return false', () => {
-        const value = 34.12;
-        const validatorArrayGroup = [[operator, 34.12]];
-        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
-      });
+      describe('Validator tests', () => {
+        it('should return true', () => {
+          const value = 10e5;
+          const operatorArguments = [[operator, 256]];
+          expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeTruthy();
+        });
 
-      it('should return false', () => {
-        const value = -Infinity;
-        const validatorArrayGroup = [[operator, Infinity]];
-        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
+        it('should return false', () => {
+          const value = 34.12;
+          const operatorArguments = [[operator, 34.12]];
+          expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeFalsy();
+        });
+
+        it('should return false', () => {
+          const value = -Infinity;
+          const operatorArguments = [[operator, Infinity]];
+          expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeFalsy();
+        });
       });
     });
 
     describe('[=] validator', () => {
       const operator = '=';
 
-      it('should return true', () => {
-        const value = 612;
-        const validatorArrayGroup = [[operator, 612]];
-        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
+      describe('OperatorArguments validations', () => {
+        it('OperatorArguments length is not equal to operator callback args length - should throw error', () => {
+          expect(() => {
+            const value = 44;
+            const operatorArguments = [[operator, 123, 123], [operator, 123]];
+            HandyVal.validate(validator, value, ...operatorArguments);
+          }).toThrow(EqualToNumberOperator.errors.operatorArgumentsLengthInvalid);
+        });
+
+        it('OperatorArguments not number - should throw error', () => {
+          expect(() => {
+            const value = 50.77;
+            const operatorArguments = [[operator, 'string']];
+            HandyVal.validate(validator, value, ...operatorArguments);
+          }).toThrow(EqualToNumberOperator.errors.operatorArgumentsTypesError);
+        });
       });
 
-      it('should return false', () => {
-        const value = 1312;
-        const validatorArrayGroup = [[operator, 24134]];
-        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
-      });
+      describe('Validator tests', () => {
+        it('should return true', () => {
+          const value = 612;
+          const operatorArguments = [[operator, 612]];
+          expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeTruthy();
+        });
 
-      it('should return false', () => {
-        const value = 10e2;
-        const validatorArrayGroup = [[operator, 10e7]];
-        expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
+        it('should return false', () => {
+          const value = 1312;
+          const operatorArguments = [[operator, 24134]];
+          expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeFalsy();
+        });
+
+        it('should return false', () => {
+          const value = 10e2;
+          const operatorArguments = [[operator, 10e7]];
+          expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeFalsy();
+        });
       });
     });
   });
@@ -269,48 +305,20 @@ describe('Number validator', () => {
   describe('Groups', () => {
     it('should return true', () => {
       const value = 340;
-      const validatorArrayGroup = [['<', 10e7], ['>', 100], ['=', 340]];
-      expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeTruthy();
+      const operatorArguments = [['<', 10e7], ['>', 100], ['=', 340]];
+      expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeTruthy();
     });
 
     it('should return false', () => {
       const value = 44.3012;
-      const validatorArrayGroup = [['>', 70], ['<', 30], ['=', 111], ['=', 222]];
-      expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
+      const operatorArguments = [['>', 70], ['<', 30], ['=', 111], ['=', 222]];
+      expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeFalsy();
     });
 
     it('should return false', () => {
       const value = 100;
-      const validatorArrayGroup = [['>', 70], ['=', 50]];
-      expect(HandyVal.validate(validator, value, validatorArrayGroup)).toBeFalsy();
-    });
-
-    it('should return true (validateSome)', () => {
-      const value = 5423;
-      const validatorArrayGroup = [['<', 95], ['>', 1420], ['<=', 123]];
-      const validateSome = true;
-      expect(HandyVal.validate(validator, value, validatorArrayGroup, validateSome)).toBeTruthy();
-    });
-
-    it('should return false (validateSome)', () => {
-      const value = 132;
-      const validatorArrayGroup = [['=>', 1000], ['<=', 100]];
-      const validateSome = true;
-      expect(HandyVal.validate(validator, value, validatorArrayGroup, validateSome)).toBeFalsy();
-    });
-
-    it('should return false (validateSome)', () => {
-      const value = 132;
-      const validatorArrayGroup = [['=>', 1000], ['<=', 100]];
-      const validateSome = true;
-      expect(HandyVal.validate(validator, value, validatorArrayGroup, validateSome)).toBeFalsy();
-    });
-
-    it('should return false (validateSome, malformed validatorArrayGroup)', () => {
-      const value = 132;
-      const validatorArrayGroup = [['<', 1000], ['string', 'string']];
-      const validateSome = true;
-      expect(HandyVal.validate(validator, value, validatorArrayGroup, validateSome)).toBeFalsy();
+      const operatorArguments = [['>', 70], ['=', 50]];
+      expect(HandyVal.validate(validator, value, ...operatorArguments)).toBeFalsy();
     });
   });
 });
