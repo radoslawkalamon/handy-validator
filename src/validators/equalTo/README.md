@@ -3,10 +3,10 @@
 ## Usage
 ```
 const myValue = 'Value';
-const arrayOfElements = [1, 2, 3, 'Value'];
+const elements = [1, 2, 3, 'Value'];
 
-HandyValidator.validate('equalTo', myValue, arrayOfElements);
+HandyValidator.validate('equalTo', myValue, elements);
 ```
 
 ## Can throw errors
-- `HV_VAL_EQUALTO_ARRAY_OF_ELEMENTS_NOT_AN_ARRAY` - arrayOfElements is not an Array,
+- `HVP_EQUAL_TO_ELEMENTS_NOT_ARRAY` - elements is not an Array.

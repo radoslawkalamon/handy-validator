@@ -1,5 +1,5 @@
 // @ts-nocheck
-import HandyValidator from '../../../src/index';
+import { HandyValidator } from '../../../src/HandyValidator';
 
 describe('Object validator', () => {
   let HandyVal: HandyValidator;
@@ -45,7 +45,7 @@ describe('Object validator', () => {
   });
 
   it('Function returning Object passed - should return false', () => {
-    const value = (): object => ({});
+    const value = (): Record<string, unknown> => ({});
     expect(HandyVal.validate(validator, value)).toBeFalsy();
   });
 

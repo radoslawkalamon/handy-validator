@@ -13,17 +13,37 @@
 ## Usage
 ```
 const myString = 'This is my string';
-const validatorArray1 = ['~', 'my'];
-const validatorArray2 = ['$', 'string'];
-const validatorArrayGroup = [validatorArray1, validatorArray2];
-const validateSome = true;
+const operatorArguments1 = ['~', 'my'];
+const operatorArguments2 = ['$', 'string'];
 
-HandyValidator.validate('string', myString, validatorArrayGroup, validateSome);
+HandyValidator.validate('string', myString, operatorArguments1, operatorArguments2);
 ```
 
 ## Can throw errors
-- `HV_VAL_STRING_TYPE_GUARD_PARENT_NOT_AN_ARRAY` - validatorArrayGroup is not an Array,
-- `HV_VAL_STRING_TYPE_GUARD_ITEM_NOT_AN_ARRAY` - One of validatorArray is not an Array,
-- `HV_VAL_STRING_TYPE_GUARD_ITEM_LENGTH_ERROR` - One of validatorArray length is not equal to operator function arguments length,
-- `HV_VAL_STRING_TYPE_GUARD_ITEM_TYPES_ERROR` - Second argument of one of validatorArray is not a String,
-- `HV_VAL_STRING_TYPE_GUARD_UNKNOWN_OPERATOR` - Unknown operator is passed,
+### String Validator
+- `HVP_STRING_OPERATOR_ARGUMENTS_NOT_ARRAY` - operatorArguments is not an Array,
+- `HVP_STRING_OPERATOR_ARGUMENTS_UNKNOWN_OPERATOR` - Unknown operator is passed.
+### Equal To Operator
+- `HVP_STRING_OPERATOR_ARGUMENTS_LENGTH_INVALID` - operatorArguments length is not equal to 2,
+- `HVP_STRING_OPERATOR_ARGUMENTS_TYPES_ERROR` - Second argument of a operatorArguments is not a String.
+### Not Equal To Operator
+- `HVP_STRING_OPERATOR_ARGUMENTS_LENGTH_INVALID` - operatorArguments length is not equal to 2,
+- `HVP_STRING_OPERATOR_ARGUMENTS_TYPES_ERROR` - Second argument of a operatorArguments is not a String.
+### Contains Operator
+- `HVP_STRING_OPERATOR_ARGUMENTS_LENGTH_INVALID` - operatorArguments length is not equal to 2,
+- `HVP_STRING_OPERATOR_ARGUMENTS_TYPES_ERROR` - Second argument of a operatorArguments is not a String.
+### Not Contains Operator
+- `HVP_STRING_OPERATOR_ARGUMENTS_LENGTH_INVALID` - operatorArguments length is not equal to 2,
+- `HVP_STRING_OPERATOR_ARGUMENTS_TYPES_ERROR` - Second argument of a operatorArguments is not a String.
+### Starts With Operator
+- `HVP_STRING_OPERATOR_ARGUMENTS_LENGTH_INVALID` - operatorArguments length is not equal to 2,
+- `HVP_STRING_OPERATOR_ARGUMENTS_TYPES_ERROR` - Second argument of a operatorArguments is not a String.
+### Not Starts With Operator
+- `HVP_STRING_OPERATOR_ARGUMENTS_LENGTH_INVALID` - operatorArguments length is not equal to 2,
+- `HVP_STRING_OPERATOR_ARGUMENTS_TYPES_ERROR` - Second argument of a operatorArguments is not a String.
+### Ends With Operator
+- `HVP_STRING_OPERATOR_ARGUMENTS_LENGTH_INVALID` - operatorArguments length is not equal to 2,
+- `HVP_STRING_OPERATOR_ARGUMENTS_TYPES_ERROR` - Second argument of a operatorArguments is not a String.
+### Not Ends With Operator
+- `HVP_STRING_OPERATOR_ARGUMENTS_LENGTH_INVALID` - operatorArguments length is not equal to 2,
+- `HVP_STRING_OPERATOR_ARGUMENTS_TYPES_ERROR` - Second argument of a operatorArguments is not a String.

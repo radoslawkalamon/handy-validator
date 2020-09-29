@@ -1,43 +1,22 @@
 // @ts-nocheck
-import HandyValidator from '../../../src/index';
-import equalToErrors from '../../../src/validators/equalTo/equalTo.errors';
+import { HandyValidator } from '../../../src/HandyValidator';
+import { EqualToValidator } from '../../../src/validators/equalTo';
 
 describe('equalTo validator', () => {
   let HandyVal: HandyValidator;
   const validator = 'equalTo';
 
-  beforeAll(() => {
+  beforeEach(() => {
     HandyVal = new HandyValidator();
   });
 
-  describe('arrayOfElementsNotAnArray Error', () => {
-    let HandyValidatorResult: boolean;
-    let jestSpy: jest.SpyInstance;
-
-    beforeAll(() => {
-      jestSpy = jest.spyOn(console, 'error').mockImplementation(() => jest.fn());
-
-      const value = 'Value';
-      const validationArguments = 'Hemlo!';
-      // @ts-ignore
-      HandyValidatorResult = HandyVal.validate(validator, value, validationArguments);
-    });
-
-    it('should Handy Validator Result be false', () => {
-      expect(HandyValidatorResult).toBeFalsy();
-    });
-
-    it('should call console.error once', () => {
-      expect(jestSpy.mock.calls.length).toBe(1);
-    });
-
-    it('should console.error message be validatorArrayGroupNotAnArray', () => {
-      const mockError = new Error(equalToErrors.arrayOfElementsNotAnArray);
-      expect(jestSpy.mock.calls[0][0]).toEqual(mockError);
-    });
-
-    afterAll(() => {
-      jestSpy.mockRestore();
+  describe('elementsNotAnArray Error', () => {
+    it('should throw error', () => {
+      expect(() => {
+        const value = 'Good_value';
+        const validationArguments = 123;
+        HandyVal.validate(validator, value, validationArguments);
+      }).toThrow(EqualToValidator.errors.elementsNotArray);
     });
   });
 
