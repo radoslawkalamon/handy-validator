@@ -9,7 +9,7 @@ export class EqualToValidator extends HandyValidatorPlugin {
     elementsNotArray: 'HVP_EQUAL_TO_ELEMENTS_NOT_ARRAY',
   };
 
-  public validate(value: unknown, elements: unknown): boolean {
+  public validate(value: unknown, elements: unknown[] = []): boolean {
     if (this.validateArguments(elements)) {
       return elements.includes(value);
     }
