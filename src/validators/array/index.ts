@@ -56,7 +56,7 @@ export class ArrayValidator extends HandyValidatorPlugin {
           error: ArrayValidator.errors.operatorArgumentsNotArray,
         },
         {
-          condition: () => this.isOperatorPermitted((operatorArguments as IOperatorArguments)[0]),
+          condition: () => this.isOperatorPermitted(operatorArguments as IOperatorArguments),
           assumption: false,
           error: ArrayValidator.errors.operatorArgumentsUnknownOperator,
         },
@@ -67,7 +67,8 @@ export class ArrayValidator extends HandyValidatorPlugin {
     return true;
   }
 
-  private isOperatorPermitted(operator: string): boolean {
+  private isOperatorPermitted(operatorArguments: IOperatorArguments): boolean {
+    const operator = operatorArguments[0];
     const operatorsPermitted: string[] = Object.keys(ArrayValidator.operatorClasses);
     return operatorsPermitted.includes(operator);
   }
