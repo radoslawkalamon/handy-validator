@@ -131,6 +131,42 @@ describe('Palindrome validator', () => {
       const value = 'This is not a palindrome!';
       expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
+    
+    // test case in hindi
+    it('should return true on "दामाद"', () => {
+      const value = 'दामाद';
+      expect(HandyVal.validate(validator, value)).toBeTruthy();
+    });
+    
+    //test case in hindi
+    it('should return false on "माद"', () => {
+      const value = 'माद';
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
+    });
+    
+    //test case in hindi
+    it('should return true on "लाल"', () => {
+      const value = 'लाल';
+      expect(HandyVal.validate(validator, value)).toBeTruthy();
+    });
+    
+    //test case in hindi
+    it('should return true on "सरस"', () => {
+      const value = 'सरस';
+      expect(HandyVal.validate(validator, value)).toBeTruthy();
+    });
+    
+    //test case in hindi
+    it('should return true on "कनक"', () => {
+      const value = 'कनक';
+      expect(HandyVal.validate(validator, value)).toBeTruthy();
+    });
+    
+    //test case in hindi
+    it('should return false on "नक"', () => {
+      const value = 'नक';
+      expect(HandyVal.validate(validator, value)).toBeFalsy();
+    });
 
     // @TODO: Add more test language / edge cases string
     // @TODO: Add more false test with edge cases
