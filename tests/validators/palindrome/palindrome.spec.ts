@@ -132,27 +132,23 @@ describe('Palindrome validator', () => {
       expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
-    // Test case in spanish
-    it('should return true on "Amigo no gima"', () => {
-      const value = 'Amigo no gima';
+    it('should return true on "пуп пуп"', () => {
+      const value = 'пуп пуп';
       expect(HandyVal.validate(validator, value)).toBeTruthy();
     });
 
-    // Test case in spanish
-    it('should return true on "Amor a Roma"', () => {
-      const value = 'Amor a Roma';
+    it('should return true on "アジア"', () => {
+      const value = 'アジア';
       expect(HandyVal.validate(validator, value)).toBeTruthy();
     });
 
-    // Test case in spanish
-    it('should return true on "Ana mis ojos imana"', () => {
-      const value = 'Ana mis ojos imana';
+    it('should return true on "dåreråd"', () => {
+      const value = 'dåreråd';
       expect(HandyVal.validate(validator, value)).toBeTruthy();
     });
 
-    // Test case in spanish
-    it('should return true on "Ese bello sol le bese"', () => {
-      const value = 'Ese bello sol le bese';
+    it('should return true on "Eine güldne, gute Tugend: Lüge nie!"', () => {
+      const value = 'Eine güldne, gute Tugend: Lüge nie!';
       expect(HandyVal.validate(validator, value)).toBeTruthy();
     });
 
