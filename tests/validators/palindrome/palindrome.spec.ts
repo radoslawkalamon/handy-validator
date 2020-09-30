@@ -132,6 +132,26 @@ describe('Palindrome validator', () => {
       expect(HandyVal.validate(validator, value)).toBeFalsy();
     });
 
+    it('should return true on "пуп пуп"', () => {
+      const value = 'пуп пуп';
+      expect(HandyVal.validate(validator, value)).toBeTruthy();
+    });
+
+    it('should return true on "アジア"', () => {
+      const value = 'アジア';
+      expect(HandyVal.validate(validator, value)).toBeTruthy();
+    });
+
+    it('should return true on "dåreråd"', () => {
+      const value = 'dåreråd';
+      expect(HandyVal.validate(validator, value)).toBeTruthy();
+    });
+
+    it('should return true on "Eine güldne, gute Tugend: Lüge nie!"', () => {
+      const value = 'Eine güldne, gute Tugend: Lüge nie!';
+      expect(HandyVal.validate(validator, value)).toBeTruthy();
+    });
+
     // @TODO: Add more test language / edge cases string
     // @TODO: Add more false test with edge cases
   });
