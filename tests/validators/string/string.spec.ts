@@ -1,14 +1,14 @@
 // @ts-nocheck
-import { HandyValidator } from '../../../src/HandyValidator';
-import { StringValidator } from '../../../src/validators/string';
-import { EqualToStringOperator } from '../../../src/validators/string/operators/EqualTo';
-import { NotEqualToStringOperator } from '../../../src/validators/string/operators/NotEqualTo';
-import { ContainsStringOperator } from '../../../src/validators/string/operators/Contains';
-import { NotContainsStringOperator } from '../../../src/validators/string/operators/NotContains';
-import { StartsWithStringOperator } from '../../../src/validators/string/operators/StartsWith';
-import { NotStartsWithStringOperator } from '../../../src/validators/string/operators/NotStartsWith';
-import { EndsWithStringOperator } from '../../../src/validators/string/operators/EndsWith';
-import { NotEndsWithStringOperator } from '../../../src/validators/string/operators/NotEndsWith';
+import { HandyValidator } from '@src/HandyValidator';
+import { StringValidator } from '@validators/string';
+import { EqualToStringOperator } from '@validators/string/operators/EqualTo';
+import { NotEqualToStringOperator } from '@validators/string/operators/NotEqualTo';
+import { ContainsStringOperator } from '@validators/string/operators/Contains';
+import { NotContainsStringOperator } from '@validators/string/operators/NotContains';
+import { StartsWithStringOperator } from '@validators/string/operators/StartsWith';
+import { NotStartsWithStringOperator } from '@validators/string/operators/NotStartsWith';
+import { EndsWithStringOperator } from '@validators/string/operators/EndsWith';
+import { NotEndsWithStringOperator } from '@validators/string/operators/NotEndsWith';
 
 describe('String validator', () => {
   let HandyVal: HandyValidator;

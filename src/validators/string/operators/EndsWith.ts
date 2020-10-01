@@ -1,5 +1,5 @@
-import { IStringOperator, IOperatorArguments, IOperatorConditions } from '../interfaces';
-import { processOperatorArgumentsValidations } from '../utils';
+import { IStringOperator, IOperatorArguments, IOperatorConditions } from '@validators/string/interfaces';
+import { processOperatorArgumentsValidations } from '@validators/string/utils';
 
 export class EndsWithStringOperator implements IStringOperator {
   static errors = {

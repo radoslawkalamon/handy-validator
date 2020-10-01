@@ -1,14 +1,13 @@
 import { HandyValidatorPlugin } from '@src/HandyValidatorPlugin';
-import { IOperatorArguments, IOperatorClasses } from './interfaces';
-
-import { EqualToStringOperator } from './operators/EqualTo';
-import { NotEqualToStringOperator } from './operators/NotEqualTo';
-import { ContainsStringOperator } from './operators/Contains';
-import { NotContainsStringOperator } from './operators/NotContains';
-import { StartsWithStringOperator } from './operators/StartsWith';
-import { NotStartsWithStringOperator } from './operators/NotStartsWith';
-import { EndsWithStringOperator } from './operators/EndsWith';
-import { NotEndsWithStringOperator } from './operators/NotEndsWith';
+import { IOperatorArguments, IOperatorClasses } from '@validators/string/interfaces';
+import { EqualToStringOperator } from '@validators/string/operators/EqualTo';
+import { NotEqualToStringOperator } from '@validators/string/operators/NotEqualTo';
+import { ContainsStringOperator } from '@validators/string/operators/Contains';
+import { NotContainsStringOperator } from '@validators/string/operators/NotContains';
+import { StartsWithStringOperator } from '@validators/string/operators/StartsWith';
+import { NotStartsWithStringOperator } from '@validators/string/operators/NotStartsWith';
+import { EndsWithStringOperator } from '@validators/string/operators/EndsWith';
+import { NotEndsWithStringOperator } from '@validators/string/operators/NotEndsWith';
 
 /**
  * String validator

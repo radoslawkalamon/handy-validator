@@ -1,5 +1,5 @@
-import { INumberOperator, IOperatorArguments, IOperatorConditions } from '../interfaces';
-import { processOperatorArgumentsValidations } from '../utils';
+import { INumberOperator, IOperatorArguments, IOperatorConditions } from '@validators/number/interfaces';
+import { processOperatorArgumentsValidations } from '@validators/number/utils';
 
 export class BiggerThanEqualNumberOperator implements INumberOperator {
   static errors = {

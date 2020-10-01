@@ -1,4 +1,4 @@
-import { IPalindrome } from './interfaces';
+import { IPalindrome } from '@validators/palindrome/interfaces';
 
 export class PalindromeNumber implements IPalindrome {
   static errors = {

@@ -1,7 +1,7 @@
 // @ts-nocheck
-import { HandyValidator } from '../../../src/HandyValidator';
-import { PalindromeValidator } from '../../../src/validators/palindrome';
-import { PalindromeNumber } from '../../../src/validators/palindrome/PalindromeNumber';
+import { HandyValidator } from '@src/HandyValidator';
+import { PalindromeValidator } from '@validators/palindrome';
+import { PalindromeNumber } from '@validators/palindrome/PalindromeNumber';
 
 describe('Palindrome validator', () => {
   let HandyVal: HandyValidator;

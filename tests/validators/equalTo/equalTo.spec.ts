@@ -1,6 +1,6 @@
 // @ts-nocheck
-import { HandyValidator } from '../../../src/HandyValidator';
-import { EqualToValidator } from '../../../src/validators/equalTo';
+import { HandyValidator } from '@src/HandyValidator';
+import { EqualToValidator } from '@validators/equalTo';
 
 describe('equalTo validator', () => {
   let HandyVal: HandyValidator;

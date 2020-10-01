@@ -1,6 +1,6 @@
 // @ts-nocheck
-import { HandyValidator } from '../src/HandyValidator';
-import { UndefinedValidator } from '../src/validators/undefined';
+import { HandyValidator } from '@src/HandyValidator';
+import { UndefinedValidator } from '@validators/undefined';
 
 describe.only('Core base tests', () => {
   describe('constructor()', () => {

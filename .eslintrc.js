@@ -1,13 +1,19 @@
 module.exports = {
   extends: ['airbnb-base', 'plugin:@typescript-eslint/recommended'],
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
+  plugins: [
+    '@typescript-eslint',
+    'import',
+  ],
   settings: {
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts'],
     },
     'import/resolver': {
       typescript: {},
+      jest: {
+        jestConfigFile: './jest.config.js',
+      },
     },
   },
   rules: {

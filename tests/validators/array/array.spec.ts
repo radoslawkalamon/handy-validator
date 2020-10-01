@@ -1,11 +1,11 @@
 // @ts-nocheck
-import { HandyValidator } from '../../../src/HandyValidator';
-import { ArrayValidator } from '../../../src/validators/array';
-import { BiggerThanArrayOperator } from '../../../src/validators/array/operators/BiggerThan';
-import { BiggerThanEqualArrayOperator } from '../../../src/validators/array/operators/BiggerThanEqual';
-import { EqualToArrayOperator } from '../../../src/validators/array/operators/EqualTo';
-import { SmallerThanArrayOperator } from '../../../src/validators/array/operators/SmallerThan';
-import { SmallerThanEqualArrayOperator } from '../../../src/validators/array/operators/SmallerThanEqual';
+import { HandyValidator } from '@src/HandyValidator';
+import { ArrayValidator } from '@validators/array';
+import { BiggerThanArrayOperator } from '@validators/array/operators/BiggerThan';
+import { BiggerThanEqualArrayOperator } from '@validators/array/operators/BiggerThanEqual';
+import { EqualToArrayOperator } from '@validators/array/operators/EqualTo';
+import { SmallerThanArrayOperator } from '@validators/array/operators/SmallerThan';
+import { SmallerThanEqualArrayOperator } from '@validators/array/operators/SmallerThanEqual';
 
 describe('Array validator', () => {
   let HandyVal: HandyValidator;

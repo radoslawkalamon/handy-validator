@@ -1,5 +1,5 @@
-import { IArrayOperator, IOperatorArguments, IOperatorConditions } from '../interfaces';
-import { processOperatorArgumentsValidations } from '../utils';
+import { IArrayOperator, IOperatorArguments, IOperatorConditions } from '@validators/array/interfaces';
+import { processOperatorArgumentsValidations } from '@validators/array/utils';
 
 export class BiggerThanArrayOperator implements IArrayOperator {
   static errors = {

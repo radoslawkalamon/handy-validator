@@ -1,11 +1,10 @@
 import { HandyValidatorPlugin } from '@src/HandyValidatorPlugin';
-import { IOperatorArguments, IOperatorClasses } from './interfaces';
-
-import { EqualToArrayOperator } from './operators/EqualTo';
-import { BiggerThanArrayOperator } from './operators/BiggerThan';
-import { BiggerThanEqualArrayOperator } from './operators/BiggerThanEqual';
-import { SmallerThanArrayOperator } from './operators/SmallerThan';
-import { SmallerThanEqualArrayOperator } from './operators/SmallerThanEqual';
+import { IOperatorArguments, IOperatorClasses } from '@validators/array/interfaces';
+import { EqualToArrayOperator } from '@validators/array/operators/EqualTo';
+import { BiggerThanArrayOperator } from '@validators/array/operators/BiggerThan';
+import { BiggerThanEqualArrayOperator } from '@validators/array/operators/BiggerThanEqual';
+import { SmallerThanArrayOperator } from '@validators/array/operators/SmallerThan';
+import { SmallerThanEqualArrayOperator } from '@validators/array/operators/SmallerThanEqual';
 
 /**
  * Array validator

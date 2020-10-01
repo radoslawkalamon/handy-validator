@@ -1,4 +1,4 @@
-import { IOperatorArguments, IOperatorConditions } from './interfaces';
+import { IOperatorArguments, IOperatorConditions } from '@src/validators/string/interfaces';
 
 export const processOperatorArgumentsValidations = (operatorConditions: IOperatorConditions[], operatorArguments: IOperatorArguments): void => {
   operatorConditions.forEach((validation: IOperatorConditions) => {

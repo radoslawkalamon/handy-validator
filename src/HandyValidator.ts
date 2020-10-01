@@ -1,7 +1,6 @@
 import 'module-alias/register';
-import { IValidation, IHandyValidatorPlugin, IHandyValidator } from './interfaces';
-import { HandyValidatorPlugin } from './HandyValidatorPlugin';
-
+import { HandyValidatorPlugin } from '@src/HandyValidatorPlugin';
+import { IValidation, IHandyValidatorPlugin, IHandyValidator } from '@src/interfaces';
 import { ArrayValidator } from '@validators/array';
 import { BooleanValidator } from '@validators/boolean';
 import { EqualToValidator } from '@validators/equalTo';

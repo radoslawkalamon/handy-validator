@@ -1,5 +1,5 @@
 import { remove as removeDiacratics } from 'diacritics';
-import { IPalindrome } from './interfaces';
+import { IPalindrome } from '@validators/palindrome/interfaces';
 
 export class PalindromeString implements IPalindrome {
   value: string;

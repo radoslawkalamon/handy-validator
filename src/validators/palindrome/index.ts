@@ -1,7 +1,7 @@
 import { HandyValidatorPlugin } from '@src/HandyValidatorPlugin';
-import { IPalindrome } from './interfaces';
-import { PalindromeNumber } from './PalindromeNumber';
-import { PalindromeString } from './PalindromeString';
+import { IPalindrome } from '@validators/palindrome/interfaces';
+import { PalindromeNumber } from '@validators/palindrome/PalindromeNumber';
+import { PalindromeString } from '@validators/palindrome/PalindromeString';
 
 /**
  * Palindrome validator
