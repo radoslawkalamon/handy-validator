@@ -1,4 +1,4 @@
-import { HandyValidatorPlugin } from '../../HandyValidatorPlugin';
+import { HandyValidatorPlugin } from '@src/HandyValidatorPlugin';
 import { IOperatorArguments, IOperatorClasses } from './interfaces';
 
 import { EqualToArrayOperator } from './operators/EqualTo';

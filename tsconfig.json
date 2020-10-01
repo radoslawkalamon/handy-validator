@@ -5,7 +5,12 @@
     "strict": true,
     "esModuleInterop": true,
     "outDir": "dist",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+	"baseUrl": "./src",
+	"paths": {
+		"@validators/*": ["validators/*"],
+		"@src/*": ["*"]
+	}
   },
   "include": [
     "src/HandyValidator.ts"
