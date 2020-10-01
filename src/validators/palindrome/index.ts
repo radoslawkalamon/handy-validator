@@ -1,4 +1,4 @@
-import { HandyValidatorPlugin } from '../../HandyValidatorPlugin';
+import { HandyValidatorPlugin } from '@src/HandyValidatorPlugin';
 import { IPalindrome } from './interfaces';
 import { PalindromeNumber } from './PalindromeNumber';
 import { PalindromeString } from './PalindromeString';

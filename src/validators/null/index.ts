@@ -1,4 +1,4 @@
-import { HandyValidatorPlugin } from '../../HandyValidatorPlugin';
+import { HandyValidatorPlugin } from '@src/HandyValidatorPlugin';
 
 /**
  * Null validator
