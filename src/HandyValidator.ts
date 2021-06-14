@@ -11,10 +11,6 @@ import { PalindromeValidator } from '@validators/palindrome';
 import { StringValidator } from '@validators/string';
 import { UndefinedValidator } from '@validators/undefined';
 
-/**
- * Handy Validator
- * @version 4.0.0
- */
 export class HandyValidator implements IHandyValidator {
   static errors = {
     addPlugin: {
