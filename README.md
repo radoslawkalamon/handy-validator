@@ -1,4 +1,4 @@
-# Handy Validator v4.0.0
+# Handy Validator v4.0.1
 
 Standalone validator module from **writr** - https://github.com/radoslawkalamon/writr
 
@@ -14,6 +14,10 @@ Built-in validators:
 - Palindrome - [README.md](/src/validators/palindrome/README.md)
 - String - [README.md](/src/validators/string/README.md)
 - Undefined - [README.md](/src/validators/undefined/README.md)
+
+Changelog:
+- v4.0.0 - Initial release 🎉
+- v4.0.1 - Dependecies update
 
 Plans:
 - v4.1.0 - Add more test cases
