@@ -1,4 +1,4 @@
-# Handy Validator v4.0.2
+# Handy Validator v4.1.0
 
 Standalone validator module from **writr** - https://github.com/radoslawkalamon/writr
 
