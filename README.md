@@ -1,4 +1,4 @@
-# Handy Validator v4.0.2
+# Handy Validator v4.0.3
 
 Standalone validator module from **writr** - https://github.com/radoslawkalamon/writr
 
@@ -19,6 +19,7 @@ Changelog:
 - v4.0.0 - Initial release 🎉
 - v4.0.1 - Dependecies update
 - v4.0.2 - Dependecies update
+- v4.0.3 - Dependecies update + ESLint added
 
 Plans:
 - v4.1.0 - Add more test cases
