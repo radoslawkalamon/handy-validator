@@ -5,7 +5,7 @@ export class SmallerThanEqualArrayOperator implements IArrayOperator {
   static errors = {
     operatorArgumentsLengthInvalid: 'HVP_ARRAY_OPERATOR_ARGUMENTS_LENGTH_INVALID',
     operatorArgumentsTypesError: 'HVP_ARRAY_OPERATOR_ARGUMENTS_TYPES_ERROR',
-  }
+  };
 
   public callback = (x: unknown[], y: number): boolean => x.length <= y;
 

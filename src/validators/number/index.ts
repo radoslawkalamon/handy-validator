@@ -18,12 +18,12 @@ export class NumberValidator extends HandyValidatorPlugin {
     '>=': new BiggerThanEqualNumberOperator(),
     '<': new SmallerThanNumberOperator(),
     '<=': new SmallerThanEqualNumberOperator(),
-  }
+  };
 
   static errors = {
     operatorArgumentsNotArray: 'HVP_NUMBER_OPERATOR_ARGUMENTS_NOT_ARRAY',
     operatorArgumentsUnknownOperator: 'HVP_NUMBER_OPERATOR_ARGUMENTS_UNKNOWN_OPERATOR',
-  }
+  };
 
   public validate(value: unknown, ...operatorArgumentsGroup: unknown[]): boolean {
     if (!this.isNumber(value)) {
