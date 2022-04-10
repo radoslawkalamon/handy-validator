@@ -5,7 +5,7 @@ export class EndsWithStringOperator implements IStringOperator {
   static errors = {
     operatorArgumentsLengthInvalid: 'HVP_STRING_OPERATOR_ARGUMENTS_LENGTH_INVALID',
     operatorArgumentsTypesError: 'HVP_STRING_OPERATOR_ARGUMENTS_TYPES_ERROR',
-  }
+  };
 
   public callback = (x: string, y: string): boolean => ((x.length - y.length) < 0 ? false : x.lastIndexOf(y) === (x.length - y.length));
 

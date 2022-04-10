@@ -10,7 +10,7 @@ import { PalindromeString } from './PalindromeString';
 export class PalindromeValidator extends HandyValidatorPlugin {
   static errors = {
     valueNotStringOrNumber: 'HVP_PALINDROME_VALUE_NOT_STRING_OR_NUMBER',
-  }
+  };
 
   public validate(value: unknown): boolean {
     let palindrome: IPalindrome;

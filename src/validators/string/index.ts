@@ -24,12 +24,12 @@ export class StringValidator extends HandyValidatorPlugin {
     '!^': new NotStartsWithStringOperator(),
     $: new EndsWithStringOperator(),
     '!$': new NotEndsWithStringOperator(),
-  }
+  };
 
   static errors = {
     operatorArgumentsNotArray: 'HVP_STRING_OPERATOR_ARGUMENTS_NOT_ARRAY',
     operatorArgumentsUnknownOperator: 'HVP_STRING_OPERATOR_ARGUMENTS_UNKNOWN_OPERATOR',
-  }
+  };
 
   public validate(value: unknown, ...operatorArgumentsGroup: unknown[]): boolean {
     if (!this.isString(value)) {

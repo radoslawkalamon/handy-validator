@@ -5,7 +5,10 @@
     "strict": true,
     "esModuleInterop": true,
     "outDir": "dist",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "types": [
+      "@types/jest"
+    ],
   },
   "include": [
     "src/HandyValidator.ts"
